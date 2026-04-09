@@ -1,4 +1,5 @@
 # Colab / pip-only: PyTorch CUDA wheels (change URL if Colab's CUDA differs — see pytorch.org).
+# After `pip install -r` this file, install mujoco-py with MUJOCO_PY_MUJOCO_PATH set (see COLAB.md).
 --extra-index-url https://download.pytorch.org/whl/cu124
 torch==2.5.1
 torchvision==0.20.1
@@ -36,8 +37,8 @@ lxml==5.3.0
 markupsafe==2.1.5
 matplotlib==3.7.5
 mujoco
-mujoco-py==2.1.2.14
-numpy==1.24.4
+# mujoco-py is installed in a second Colab step (after MUJOCO_PY_MUJOCO_PATH); see COLAB.md
+numpy>=1.24.4,<2.0
 packaging
 pandas==2.0.3
 pettingzoo==1.24.3

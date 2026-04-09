@@ -13,7 +13,6 @@ from redq.utils.bias_utils import log_evaluation
 from redq.utils.logx import EpochLogger
 
 import customenvs
-import dmc2gym
 # register environments with truncated observations
 customenvs.register_mbpo_environments()
 # DM control suite
@@ -127,6 +126,7 @@ def pitod(env_name: str,
 
     # set up environment and seeding
     if env_name in dm_control_env:
+        import dmc2gym
         domain_name, task_name = env_name.split("-")[0], env_name.split("-")[1]
         env = dmc2gym.make(domain_name, task_name)
         test_env = dmc2gym.make(domain_name, task_name)
