@@ -126,15 +126,15 @@ def pitod(env_name: str,
     logger.save_config(locals())
 
     # set up environment and seeding
-    if args.env in dm_control_env:
-        domain_name, task_name = args.env.split("-")[0], args.env.split("-")[1]
+    if env_name in dm_control_env:
+        domain_name, task_name = env_name.split("-")[0], env_name.split("-")[1]
         env = dmc2gym.make(domain_name, task_name)
         test_env = dmc2gym.make(domain_name, task_name)
         bias_eval_env = dmc2gym.make(domain_name, task_name)
         if target_entropy == "mbpo":  # change target entropy mode to auto as mbpo is not supported for DMC cases
             target_entropy = 'auto'
     else:
-        env, test_env, bias_eval_env = gym.make(args.env), gym.make(args.env), gym.make(args.env)
+        env, test_env, bias_eval_env = gym.make(env_name), gym.make(env_name), gym.make(env_name)
 
     # seed torch and numpy
     torch.manual_seed(seed)
