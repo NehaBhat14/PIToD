@@ -142,7 +142,7 @@ pip install "setuptools>=64,<71" wheel
 pip install "mujoco-py==2.1.2.14" --no-build-isolation -v
 ```
 
-**Python 3.12 on Colab:** `pandas==2.0.3` has no prebuilt wheel, so pip tries to compile it and fails with “Getting requirements to build wheel”. [`requirements-colab.txt`](requirements-colab.txt) uses `pandas>=2.1.4,<3.0` instead; `git pull` your repo copy if you still see `2.0.3`.
+**Python 3.12 on Colab:** `pandas==2.0.3` has no prebuilt wheel, and `scipy==1.10.1` is not published for 3.12 (`Requires-Python <3.12`). [`requirements-colab.txt`](requirements-colab.txt) uses `pandas>=2.1.4,<3.0` and `scipy>=1.11.1,<2.0`; `git pull` if you still see older pins.
 
 ### 4. Run training
 
