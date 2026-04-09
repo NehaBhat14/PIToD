@@ -142,6 +142,8 @@ pip install "setuptools>=64,<71" wheel
 pip install "mujoco-py==2.1.2.14" --no-build-isolation -v
 ```
 
+**Python 3.12 on Colab:** `pandas==2.0.3` has no prebuilt wheel, so pip tries to compile it and fails with “Getting requirements to build wheel”. [`requirements-colab.txt`](requirements-colab.txt) uses `pandas>=2.1.4,<3.0` instead; `git pull` your repo copy if you still see `2.0.3`.
+
 ### 4. Run training
 
 `main-TH.py` requires **`-info`**. Set `PYTHONPATH` to the repo root so `redq` and `customenvs` import.

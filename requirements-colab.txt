@@ -40,7 +40,8 @@ mujoco
 # mujoco-py is installed in a second Colab step (after MUJOCO_PY_MUJOCO_PATH); see COLAB.md
 numpy>=1.24.4,<2.0
 packaging
-pandas==2.0.3
+# 2.0.3 has no cp312 wheels — pip builds from sdist and often fails on Colab
+pandas>=2.1.4,<3.0
 pettingzoo==1.24.3
 pillow==10.2.0
 protobuf==5.27.3
