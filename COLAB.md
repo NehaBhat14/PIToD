@@ -148,16 +148,25 @@ pip install "mujoco-py==2.1.2.14" --no-build-isolation -v
 
 `main-TH.py` requires **`-info`**. Set `PYTHONPATH` to the repo root so `redq` and `customenvs` import.
 
+**Seeing output in Colab:** Training logs go to **stdout**, but Python often **buffers** stdout when run under `%%bash`, so the cell can look empty for a long time. Use **unbuffered** mode so lines show up as they are printed:
+
 ```bash
 %%bash
 set -e
 cd /content/PIToD
 export PYTHONPATH="$PWD"
+export PYTHONUNBUFFERED=1
 export MUJOCO_PY_MUJOCO_PATH="$HOME/.mujoco/mujoco210"
 export LD_LIBRARY_PATH="$MUJOCO_PY_MUJOCO_PATH/bin:${LD_LIBRARY_PATH:-}"
 export MUJOCO_GL=osmesa
-python main-TH.py -env Hopper-v2 -info my_colab_run -seed 0 -gpu_id 0
+python -u main-TH.py -env Hopper-v2 -info my_colab_run -seed 0 -gpu_id 0
 ```
+
+(`python -u` and `PYTHONUNBUFFERED=1` do the same thing; either is fine.)
+
+- Do **not** use `%%capture` on that cell (it hides output on purpose).
+- While the cell runs, keep the **output panel expanded** (click the cell’s output area); Colab still captures everything there when the process prints.
+- Tables also land under `runs/<info>/...` on disk; open `progress.txt` or the run folder in the file browser if you want a file trail.
 
 ### 5. Optional: persist logs on Google Drive
 
