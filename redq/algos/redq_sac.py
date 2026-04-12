@@ -366,7 +366,17 @@ class REDQSACAgent(object):
 
         # if there is no update, store 0 to prevent logging problems.
         if num_update == 0:
-            logger.store(LossPi=0, LossQ1=0, LossAlpha=0, Q1Vals=0, Alpha=0, LogPi=0, PreTanh=0)
+            # Keep array-valued keys as arrays so EpochLogger can concatenate
+            # consistently when an epoch contains both no-update and update steps.
+            logger.store(
+                LossPi=0,
+                LossQ1=0,
+                LossAlpha=0,
+                Q1Vals=np.zeros(1, dtype=np.float32),
+                Alpha=0,
+                LogPi=np.zeros(1, dtype=np.float32),
+                PreTanh=np.zeros(1, dtype=np.float32),
+            )
 
     # reset parameters of Q and policy networks.
     def reset(self) -> None:
