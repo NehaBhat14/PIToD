@@ -4,6 +4,10 @@ Use a **GPU** runtime: Runtime → Change runtime type → GPU.
 
 For PyTorch’s CUDA index, run `!nvidia-smi` and match [`requirements-colab.txt`](requirements-colab.txt) (first line `--extra-index-url`) to [PyTorch’s install matrix](https://pytorch.org/get-started/locally/) if needed (e.g. `cu121`, `cu126`).
 
+**Dynamic PIToD on Colab (T4 / L4 / A100 / H100):** see [COLAB-DYNAMIC-PITOD.md](COLAB-DYNAMIC-PITOD.md) for pip + MuJoCo install, a CUDA sanity cell, and `dynamic-main-TH.py` commands.
+
+**Blackwell `sm_120` (e.g. RTX PRO 6000):** `torch==2.5.1+cu124` has no `sm_120` kernels — use [requirements-colab-blackwell.txt](requirements-colab-blackwell.txt) and [COLAB-DYNAMIC-PITOD.md](COLAB-DYNAMIC-PITOD.md) §1a.
+
 ### Git on Colab
 
 Use an **HTTPS** clone URL (e.g. `https://github.com/NehaBhat14/PIToD.git`). **Do not** use `git@github.com:...` unless you add SSH keys to the runtime; unauthenticated SSH clones fail with a non-zero exit status.
