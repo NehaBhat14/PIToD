@@ -1,4 +1,4 @@
-from typing import Dict, Tuple, Union, Any
+from typing import Dict, Optional, Tuple, Union, Any
 
 import gym
 import numpy as np
@@ -6,6 +6,8 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 from torch.distributions import Normal
+
+from redq.algos.sumtree import SumTree
 
 # following SAC authors' and OpenAI implementation
 LOG_SIG_MAX = 2
@@ -18,17 +20,45 @@ mbpo_epoches = {'Hopper-v2': 125, 'Walker2d-v2': 300, 'Ant-v2': 300, 'HalfCheeta
 
 class ReplayBuffer:
     """
-    A simple FIFO experience replay buffer
+    A FIFO experience replay buffer with optional prioritized sampling.
+
+    replay_mode:
+      - "uniform"       : legacy behavior (default)
+      - "static_pitod"  : alias of "uniform"; kept so experiment labeling is clean
+      - "per"           : Prioritized Experience Replay (Schaul et al. 2015).
+                          Training loop writes |TD|+eps back via update_priorities.
+      - "dynamic_pitod" : SumTree priorities managed externally by
+                          DynamicPIToDController (group-level rescoring).
     """
 
-    def __init__(self, obs_dim: int, act_dim: int, size: int, experience_group_size: int = 5000, mask_dim: int = 20) \
-            -> None:
+    def __init__(
+        self,
+        obs_dim: int,
+        act_dim: int,
+        size: int,
+        experience_group_size: int = 5000,
+        mask_dim: int = 20,
+        replay_mode: str = "uniform",
+        per_alpha: float = 0.6,
+        per_beta_start: float = 0.4,
+        per_beta_end: float = 1.0,
+        per_beta_anneal_steps: int = 1_000_000,
+        per_epsilon: float = 1e-6,
+        sumtree: Optional[SumTree] = None,
+    ) -> None:
         """
         :param obs_dim: size of observation
         :param act_dim: size of the action
         :param size: size of the buffer
         :param experience_group_size: size of experience group
         :param mask_dim: size of mask for turn-over dropout
+        :param replay_mode: sampling strategy (see class docstring)
+        :param per_alpha: PER priority exponent
+        :param per_beta_start: starting IS-weight exponent
+        :param per_beta_end: final IS-weight exponent
+        :param per_beta_anneal_steps: linear anneal horizon (in env steps)
+        :param per_epsilon: small constant added to PER priorities
+        :param sumtree: shared SumTree used by PER and Dynamic PIToD; owned externally
         """
 
         # init buffers as numpy arrays
@@ -45,6 +75,26 @@ class ReplayBuffer:
 
         self.experience_group_size = experience_group_size
         self.mask_dim = mask_dim
+
+        # --- prioritized-sampling state ---
+        self.replay_mode = replay_mode
+        self.sumtree = sumtree
+        self.per_alpha = float(per_alpha)
+        self.per_beta_start = float(per_beta_start)
+        self.per_beta_end = float(per_beta_end)
+        self.per_beta_anneal_steps = int(per_beta_anneal_steps)
+        self.per_epsilon = float(per_epsilon)
+        self._sample_rng = np.random.RandomState()
+        self._steps_seen = 0  # env-steps stored; used only for beta annealing
+
+        if replay_mode in ("per", "dynamic_pitod") and sumtree is None:
+            raise ValueError(f"replay_mode={replay_mode!r} requires a SumTree to be passed in")
+
+    def _current_beta(self) -> float:
+        if self.per_beta_anneal_steps <= 0:
+            return self.per_beta_end
+        frac = min(max(self._steps_seen / self.per_beta_anneal_steps, 0.0), 1.0)
+        return self.per_beta_start + frac * (self.per_beta_end - self.per_beta_start)
 
     def store(self, obs: np.ndarray, act: np.ndarray, rew: np.float64, next_obs: np.ndarray, done: bool) -> None:
         """
@@ -64,10 +114,15 @@ class ReplayBuffer:
         mask[self.ids_zero_elem] = 0.0
         self.masks_buf[self.ptr] = mask
 
+        # priority bookkeeping (new transitions get optimistic priority so they get sampled once)
+        if self.sumtree is not None:
+            self.sumtree.update(self.ptr, self.sumtree.max_priority)
+
         # move the pointer to store in next location in buffer
         self.ptr = (self.ptr + 1) % self.max_size
         # keep track of the current buffer size
         self.size = min(self.size + 1, self.max_size)
+        self._steps_seen += 1
 
     def sample_batch(self, batch_size: int = 32, idxs: Union[np.ndarray, None] = None) -> Dict:
         """
@@ -75,15 +130,40 @@ class ReplayBuffer:
         :param idxs: specify indexes if you want specific data points
         :return: mini-batch data as a dictionary
         """
-        if idxs is None:
+        is_weights: Optional[np.ndarray] = None
+        if idxs is not None:
+            # explicit indices path (used by bias_utils & dynamic rescoring) — always uniform weighting
+            pass
+        elif self.replay_mode in ("per", "dynamic_pitod") and self.sumtree is not None and self.sumtree.total() > 0:
+            idxs, priorities = self.sumtree.sample(batch_size, self._sample_rng)
+            total = self.sumtree.total()
+            probs = np.maximum(priorities, 1e-12) / total
+            beta = self._current_beta()
+            is_weights = (self.size * probs) ** (-beta)
+            is_weights = is_weights / is_weights.max()
+            is_weights = is_weights.astype(np.float32)
+        else:
             idxs = np.random.randint(0, self.size, size=batch_size)
+
+        if is_weights is None:
+            is_weights = np.ones(len(idxs), dtype=np.float32)
+
         return dict(obs1=self.obs1_buf[idxs],
                     obs2=self.obs2_buf[idxs],
                     acts=self.acts_buf[idxs],
                     rews=self.rews_buf[idxs],
                     done=self.done_buf[idxs],
                     masks=self.masks_buf[idxs],
-                    idxs=idxs)
+                    idxs=idxs,
+                    is_weights=is_weights)
+
+    def update_priorities(self, idxs: np.ndarray, priorities: np.ndarray) -> None:
+        """Write priorities back to the SumTree (PER writeback path)."""
+        if self.sumtree is None:
+            return
+        priorities = (np.abs(priorities) + self.per_epsilon) ** self.per_alpha
+        for data_idx, p in zip(np.asarray(idxs).reshape(-1), priorities.reshape(-1)):
+            self.sumtree.update(int(data_idx), float(p))
 
 
 class Mlp(nn.Module):

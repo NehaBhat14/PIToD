@@ -1,4 +1,4 @@
-from typing import Tuple, Union
+from typing import Optional, Tuple, Union
 
 import gym
 import numpy as np
@@ -10,6 +10,7 @@ import torch.optim as optim
 import redq.utils.logx
 from redq.algos.core import (TanhGaussianPolicy, Mlp, soft_update_model1_with_model2, ReplayBuffer,
                              mbpo_target_entropy_dict)
+from redq.algos.sumtree import SumTree
 
 
 class REDQSACAgent(object):
@@ -39,6 +40,13 @@ class REDQSACAgent(object):
                  layer_norm_policy: bool = False,
                  experience_group_size: int = 5000,
                  mask_dim: int = 20,
+                 replay_mode: str = "uniform",
+                 sumtree: Optional[SumTree] = None,
+                 per_alpha: float = 0.6,
+                 per_beta_start: float = 0.4,
+                 per_beta_end: float = 1.0,
+                 per_beta_anneal_steps: int = 1_000_000,
+                 per_epsilon: float = 1e-6,
                  ) -> None:
         """
         Initialize the PIToD agent.
@@ -118,11 +126,20 @@ class REDQSACAgent(object):
             self.alpha = alpha
             self.target_entropy, self.log_alpha, self.alpha_optim = None, None, None
         # set up replay buffer
+        self.replay_mode = replay_mode
+        self.sumtree = sumtree
         self.replay_buffer = ReplayBuffer(obs_dim=obs_dim,
                                           act_dim=act_dim,
                                           size=replay_size,
                                           experience_group_size=experience_group_size,
-                                          mask_dim=mask_dim
+                                          mask_dim=mask_dim,
+                                          replay_mode=replay_mode,
+                                          per_alpha=per_alpha,
+                                          per_beta_start=per_beta_start,
+                                          per_beta_end=per_beta_end,
+                                          per_beta_anneal_steps=per_beta_anneal_steps,
+                                          per_epsilon=per_epsilon,
+                                          sumtree=sumtree,
                                           )
 
         # set up other things
@@ -215,9 +232,9 @@ class REDQSACAgent(object):
         # store one transition to the buffer
         self.replay_buffer.store(o, a, r, o2, d)
 
-    def sample_data(self, batch_size: int) \
-            -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
-        # sample data from replay buffer
+    def sample_data(self, batch_size: int):
+        # sample data from replay buffer. Returns tensors plus idxs and IS-weights
+        # (ones when sampling uniformly).
         batch = self.replay_buffer.sample_batch(batch_size)
         obs_tensor = Tensor(batch['obs1']).to(self.device)
         obs_next_tensor = Tensor(batch['obs2']).to(self.device)
@@ -225,7 +242,9 @@ class REDQSACAgent(object):
         rews_tensor = Tensor(batch['rews']).unsqueeze(1).to(self.device)
         done_tensor = Tensor(batch['done']).unsqueeze(1).to(self.device)
         masks_tensor = Tensor(batch['masks']).to(self.device)
-        return obs_tensor, obs_next_tensor, acts_tensor, rews_tensor, done_tensor, masks_tensor
+        idxs = batch['idxs']
+        is_weights_tensor = Tensor(batch['is_weights']).unsqueeze(1).to(self.device)
+        return obs_tensor, obs_next_tensor, acts_tensor, rews_tensor, done_tensor, masks_tensor, idxs, is_weights_tensor
 
     def get_redq_q_target_no_grad(self,
                                   obs_next_tensor: torch.Tensor,
@@ -261,8 +280,8 @@ class REDQSACAgent(object):
         num_update = 0 if self.__get_current_num_data() <= self.delay_update_steps else self.utd_ratio
 
         for i_update in range(num_update):
-            obs_tensor, obs_next_tensor, acts_tensor, rews_tensor, done_tensor, masks_tensor = self.sample_data(
-                self.batch_size)
+            (obs_tensor, obs_next_tensor, acts_tensor, rews_tensor, done_tensor, masks_tensor,
+             batch_idxs, is_weights_tensor) = self.sample_data(self.batch_size)
 
             """Q loss"""
             y_q = self.get_redq_q_target_no_grad(obs_next_tensor, rews_tensor, done_tensor,
@@ -276,11 +295,20 @@ class REDQSACAgent(object):
                 q_prediction_list.append(q_prediction)
             q_prediction_cat = torch.cat(q_prediction_list, dim=1)
             y_q = y_q.expand((-1, self.num_Q)) if y_q.shape[1] == 1 else y_q
-            q_loss_all = self.mse_criterion(q_prediction_cat, y_q) * self.num_Q
+            # per-sample squared error [batch_size, num_Q] -> per-sample mean [batch_size, 1]
+            sq_err = (q_prediction_cat - y_q) ** 2
+            per_sample_q_loss = sq_err.mean(dim=1, keepdim=True)
+            q_loss_all = (per_sample_q_loss * is_weights_tensor).mean() * self.num_Q
 
             for q_i in range(self.num_Q):
                 self.q_optimizer_list[q_i].zero_grad()
             q_loss_all.backward()
+
+            # PER priority writeback: |TD error| per transition
+            if self.replay_mode == "per" and self.sumtree is not None:
+                with torch.no_grad():
+                    td_abs = (q_prediction_cat - y_q).abs().mean(dim=1).detach().cpu().numpy()
+                self.replay_buffer.update_priorities(batch_idxs, td_abs)
 
             """policy and alpha loss"""
             if ((i_update + 1) % self.policy_update_delay == 0) or (i_update == num_update - 1):
@@ -300,7 +328,8 @@ class REDQSACAgent(object):
                 ave_q = torch.mean(q_a_tilda_cat,
                                    dim=1,
                                    keepdim=True)
-                policy_loss = (self.alpha * log_prob_a_tilda - ave_q).mean()
+                per_sample_policy = (self.alpha * log_prob_a_tilda - ave_q)
+                policy_loss = (per_sample_policy * is_weights_tensor).mean()
                 self.policy_optimizer.zero_grad()
                 policy_loss.backward()
                 for sample_idx in range(self.num_Q):
