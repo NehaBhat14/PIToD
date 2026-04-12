@@ -54,7 +54,7 @@ A single flag selects the sampling strategy. The `static_pitod` mode is a label 
 
 ## 4. CLI reference
 
-### Legacy flags (same as `main-TH.py`)
+### Legacy flags (overlap with `main-TH.py`; `-start_steps` is **dynamic-main-TH.py only**)
 ```
 -env Hopper-v2          # env name (Hopper-v2 is the only one tested)
 -seed 0
@@ -67,6 +67,7 @@ A single flag selects the sampling strategy. The `static_pitod` mode is a label 
 -layer_norm_policy 0
 -hidden_sizes 128 128
 -experience_group_size 5000
+-start_steps 5000       # dynamic-main-TH.py only: random warmup; sets delay_update_steps when 'auto'. Lower for smoke.
 -evaluate_bias 0        # 1 enables the (expensive) static-PIToD log_evaluation call
 ```
 
@@ -115,22 +116,23 @@ python -m py_compile redq/algos/sumtree.py redq/algos/group_registry.py \
 Make sure the torch stack is active, then:
 
 ```bash
-# dynamic_pitod: frequent refresh so we observe the controller at work
-python dynamic-main-TH.py -env Hopper-v2 -seed 0 -epochs 2 -steps_per_epoch 1000 \
-    -info smoke --replay_mode dynamic_pitod \
-    --k_refresh 500 --b_refresh 8 --dynamic_warmup_steps 500
+# dynamic_pitod: short run but enough steps for (1) Q updates and (2) at least one sealed group
+# Default start_steps=5000 and experience_group_size=5000 exceed 2×1000 env steps — Loss* and DynPIToD/* stay 0.
+python dynamic-main-TH.py -env Hopper-v2 -seed 0 -epochs 4 -steps_per_epoch 1000 \
+    -info smoke --replay_mode dynamic_pitod -start_steps 500 -experience_group_size 1000 \
+    --k_refresh 250 --b_refresh 8 --dynamic_warmup_steps 250 -gpu_id 0
 ```
 
-Expected: `runs/smoke/redq_sac_Hopper-v2_dynamic_pitod_s0/progress.txt` contains columns including `SPS`, `DynPIToD/ScoreMean`, `DynPIToD/NumEvicted`, and no crash.
+Expected: `runs/smoke/.../progress.txt` shows **non-zero** `LossQ1` / `LossPi` after data exceeds `-start_steps`, and **non-zero** `DynPIToD/NumRefreshed` (or other `DynPIToD/*`) once refresh runs with sealed groups — plus `SPS` and no crash.
 
 ```bash
 # per sanity
-python dynamic-main-TH.py -env Hopper-v2 -seed 0 -epochs 2 -steps_per_epoch 1000 \
-    -info smoke --replay_mode per
+python dynamic-main-TH.py -env Hopper-v2 -seed 0 -epochs 4 -steps_per_epoch 1000 \
+    -info smoke --replay_mode per -start_steps 500 -gpu_id 0
 
 # uniform control
-python dynamic-main-TH.py -env Hopper-v2 -seed 0 -epochs 2 -steps_per_epoch 1000 \
-    -info smoke --replay_mode uniform
+python dynamic-main-TH.py -env Hopper-v2 -seed 0 -epochs 4 -steps_per_epoch 1000 \
+    -info smoke --replay_mode uniform -start_steps 500 -gpu_id 0
 ```
 
 ---

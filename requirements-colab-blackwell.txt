@@ -1,12 +1,8 @@
-# Colab / pip-only for NVIDIA Blackwell (sm_120), e.g. RTX PRO 6000 Blackwell.
+# Colab / pip-only for NVIDIA Blackwell (sm_120), e.g. RTX PRO 6000.
 # PyTorch 2.5 + cu124 does NOT ship sm_120 kernels — use CUDA 12.8 wheels (torch >= 2.7).
-#
-# Recommended install (avoids pip pulling a CPU-only torch from PyPI):
-#   pip uninstall -y torch torchvision torchaudio
-#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
-#   pip install -r requirements-colab-blackwell.txt
-#
-# Or a single line for torch only, then use requirements-colab.txt with torch lines removed.
+# Install order (see COLAB-DYNAMIC-PITOD.md §3 Path B):
+#   1) pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+#   2) pip install -r requirements-colab-blackwell.txt
 --extra-index-url https://download.pytorch.org/whl/cu128
 torch==2.7.0
 torchvision==0.22.0
@@ -62,7 +58,8 @@ scipy>=1.11.1,<2.0
 seaborn==0.13.2
 six
 tqdm==4.66.2
-typing-extensions==4.9.0
+# torch 2.7+ requires typing-extensions>=4.10.0 (pip was failing at 4.9.0)
+typing-extensions>=4.10.0,<5
 tzdata==2024.1
 urllib3==2.2.2
 zipp

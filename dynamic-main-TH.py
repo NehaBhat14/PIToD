@@ -110,7 +110,10 @@ def dynamic_pitod(
     total_steps = steps_per_epoch * epochs + 1
 
     logger = EpochLogger(**logger_kwargs)
-    logger.save_config(locals())
+    # Avoid dumping `logger` (holds open files) into config.json — produces huge / odd JSON.
+    _cfg = {k: v for k, v in locals().items() if k != "logger"}
+    _cfg["device"] = str(device)
+    logger.save_config(_cfg)
 
     if env_name in dm_control_env:
         import dmc2gym
@@ -311,6 +314,10 @@ if __name__ == '__main__':
     parser.add_argument('-hidden_sizes', type=int, nargs='+', default=[128, 128])
     parser.add_argument('-evaluate_bias', type=int, default=0, choices=[0, 1])
     parser.add_argument('-steps_per_epoch', type=int, default=5000)
+    parser.add_argument('-start_steps', type=int, default=5000,
+                        help="Random actions until replay has this many transitions; "
+                             "delay_update_steps defaults to this value. Use a small value "
+                             "(e.g. 500) for short smoke runs so Q/policy updates actually run.")
 
     # --- new replay-mode flags ---
     parser.add_argument('--replay_mode', type=str, default='uniform',
@@ -341,6 +348,7 @@ if __name__ == '__main__':
     dynamic_pitod(
         env_name=args.env, seed=args.seed, epochs=args.epochs,
         logger_kwargs=logger_kwargs, gpu_id=args.gpu_id,
+        start_steps=args.start_steps,
         num_Q=args.num_q, layer_norm=bool(args.layer_norm),
         layer_norm_policy=bool(args.layer_norm_policy),
         target_drop_rate=args.target_drop_rate, reset_interval=args.reset_interval,
