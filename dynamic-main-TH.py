@@ -313,6 +313,12 @@ if __name__ == '__main__':
     parser.add_argument('-experience_group_size', type=int, default=5000)
     parser.add_argument('-hidden_sizes', type=int, nargs='+', default=[128, 128])
     parser.add_argument('-evaluate_bias', type=int, default=0, choices=[0, 1])
+    parser.add_argument('--record_training_self_training_losses', type=int, default=0, choices=[0, 1],
+                        help="Log self-training TD/policy flip-vs-nonflip metrics for ratio plots.")
+    parser.add_argument('--experience_cleansing', type=int, default=0, choices=[0, 1],
+                        help="Run cleansing evaluation and write list_*_cleansing.bz2 artifacts.")
+    parser.add_argument('--influence_estimation_interval', type=int, default=10,
+                        help="Evaluate/store influence artifacts every N epochs.")
     parser.add_argument('-steps_per_epoch', type=int, default=5000)
     parser.add_argument('-start_steps', type=int, default=5000,
                         help="Random actions until replay has this many transitions; "
@@ -357,6 +363,9 @@ if __name__ == '__main__':
         experience_group_size=args.experience_group_size,
         hidden_sizes=tuple(args.hidden_sizes),
         evaluate_bias=bool(args.evaluate_bias),
+        record_training_self_training_losses=bool(args.record_training_self_training_losses),
+        experience_cleansing=bool(args.experience_cleansing),
+        influence_estimation_interval=args.influence_estimation_interval,
         steps_per_epoch=args.steps_per_epoch,
         replay_mode=args.replay_mode,
         k_refresh=args.k_refresh,
