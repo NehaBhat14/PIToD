@@ -4,6 +4,10 @@ extra-python-libs/
 
 # ignore experiment files that are not useful to track
 hpc_experiments/
+runs/
+logs/
+figure/
+*.bak
 
 .idea/
 
