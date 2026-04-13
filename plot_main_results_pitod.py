@@ -1,8 +1,8 @@
 from typing import Dict, Union, List
 
+import argparse
 import pickle
 import bz2
-import sys
 import matplotlib.pyplot as plt
 import matplotlib.ticker
 import numpy
@@ -18,8 +18,6 @@ sns.set(style="white")
 sns.set_context("paper", 2.0, {"lines.linewidth": 4})
 
 # TODO clean up
-
-experiment_dirs = ["./runs"]
 
 environments = [
     # MuJoCo environments.
@@ -38,9 +36,6 @@ environments = [
     # "humanoid-stand",
     # "humanoid-run",
 ]
-
-methods = ["SAC+ToD"]
-
 
 file_name_map = {"list_flip_td.bz2": "policy evaluation",
                  "list_flip_policy_loss.bz2": "policy improvement",
@@ -115,9 +110,6 @@ def read_bz_results(experiment_dirs: List[str], environments: List[str], methods
                         results[env][method][performance_file.split("/")[-1]] = []
                     results[env][method][performance_file.split("/")[-1]].append(dataset)
     return results
-
-
-results_bz2 = read_bz_results(experiment_dirs, environments, methods)
 
 
 def plot_influence_positive_ratio_and_colormesh(result: Dict,
@@ -223,10 +215,6 @@ def plot_influence_positive_ratio_and_colormesh(result: Dict,
                 bbox_inches='tight')
 
 
-plot_influence_positive_ratio_and_colormesh(results_bz2, "list_flip_td.bz2", "list_non_flip_td.bz2")
-plot_influence_positive_ratio_and_colormesh(results_bz2, "list_flip_policy_loss.bz2", "list_non_flip_policy_loss.bz2")
-
-
 def read_csv_results(experiment_dirs: List[str], environments: List[str], methods: List[str]) -> Dict:
     """
     Read result files from experiment directories and organize them based on environment and method.
@@ -254,10 +242,6 @@ def read_csv_results(experiment_dirs: List[str], environments: List[str], method
                     dataset = pd.read_table(performance_file)
                     results[env][method].append(dataset)
     return results
-
-
-# Plot time to train PIToD and estimated time for Leave-One-Out (LoO) method.
-results_csv = read_csv_results(experiment_dirs, environments, methods)
 
 
 def plot_computational_time(result: Dict, plot_baseline_score: bool = True) -> None:
@@ -334,10 +318,6 @@ def plot_computational_time(result: Dict, plot_baseline_score: bool = True) -> N
             plt.savefig("./figure/training_time_wo_loo.pdf", bbox_inches='tight')
 
 
-plot_computational_time(results_csv)
-plot_computational_time(results_csv, plot_baseline_score=False)
-
-
 def plot_cleansing_result(result: Dict, additional_baseline: Union[Dict, None] = None, plot_worst_case: bool = False) \
         -> None:
     """
@@ -399,26 +379,62 @@ def plot_cleansing_result(result: Dict, additional_baseline: Union[Dict, None] =
             plt.savefig("./figure/cleansing_" + metric + ".pdf", bbox_inches='tight')
 
 
-plot_cleansing_result(results_bz2,
-                      additional_baseline={"list_q_bias_cleansing": "list_non_flip_q_bias.bz2",
-                                           "list_q_bias_cleansing_valid": None,
-                                           "list_return_cleansing": "list_non_flip_return.bz2"})
-plot_cleansing_result(results_bz2,
-                      additional_baseline={"list_q_bias_cleansing": "list_non_flip_q_bias.bz2",
-                                           "list_q_bias_cleansing_valid": None,
-                                           "list_return_cleansing": "list_non_flip_return.bz2"},
-                      plot_worst_case=True)
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Plot PIToD main results from runs under ./runs/<top-level-dir>/...",
+    )
+    parser.add_argument(
+        "--top-level-dir",
+        default="SAC+ToD",
+        help="Folder under ./runs/ where experiments are stored (same as -info for dynamic-main-TH.py).",
+    )
+    args = parser.parse_args()
+    experiment_dirs = ["./runs"]
+    methods = [args.top_level_dir]
 
-plot_influence_positive_ratio_and_colormesh(results_bz2,
-                                            "list_flip_q_bias.bz2",
-                                            "list_non_flip_q_bias.bz2",
-                                            scale_x_axis=10,
-                                            baseline="list_q_bias_cleansing.bz2"
-                                            )
-plot_influence_positive_ratio_and_colormesh(results_bz2,
-                                            "list_flip_return.bz2",
-                                            "list_non_flip_return.bz2",
-                                            scale_x_axis=10,
-                                            baseline="list_return_cleansing.bz2"
-                                            )
+    results_bz2 = read_bz_results(experiment_dirs, environments, methods)
+    plot_influence_positive_ratio_and_colormesh(results_bz2, "list_flip_td.bz2", "list_non_flip_td.bz2")
+    plot_influence_positive_ratio_and_colormesh(
+        results_bz2, "list_flip_policy_loss.bz2", "list_non_flip_policy_loss.bz2"
+    )
 
+    results_csv = read_csv_results(experiment_dirs, environments, methods)
+    plot_computational_time(results_csv)
+    plot_computational_time(results_csv, plot_baseline_score=False)
+
+    plot_cleansing_result(
+        results_bz2,
+        additional_baseline={
+            "list_q_bias_cleansing": "list_non_flip_q_bias.bz2",
+            "list_q_bias_cleansing_valid": None,
+            "list_return_cleansing": "list_non_flip_return.bz2",
+        },
+    )
+    plot_cleansing_result(
+        results_bz2,
+        additional_baseline={
+            "list_q_bias_cleansing": "list_non_flip_q_bias.bz2",
+            "list_q_bias_cleansing_valid": None,
+            "list_return_cleansing": "list_non_flip_return.bz2",
+        },
+        plot_worst_case=True,
+    )
+
+    plot_influence_positive_ratio_and_colormesh(
+        results_bz2,
+        "list_flip_q_bias.bz2",
+        "list_non_flip_q_bias.bz2",
+        scale_x_axis=10,
+        baseline="list_q_bias_cleansing.bz2",
+    )
+    plot_influence_positive_ratio_and_colormesh(
+        results_bz2,
+        "list_flip_return.bz2",
+        "list_non_flip_return.bz2",
+        scale_x_axis=10,
+        baseline="list_return_cleansing.bz2",
+    )
+
+
+if __name__ == "__main__":
+    main()
