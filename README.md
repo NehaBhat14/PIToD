@@ -7,6 +7,7 @@ This is the source code for replicating the experiments reported in ["Which Expe
 This codebase provides a method to estimate and disable the influence of experiences on the performance of reinforcement learning (RL) agents **WITHOUT** retraining them. 
 ![Outline](figure_readme/pitod_outline.jpg)
 
+For a **theory and implementation** walkthrough (static PIToD, turn-over dropout, Dynamic PIToD, replay modes, and code pointers), see **[ALGORITHM.md](ALGORITHM.md)**.
 
 What is this functionality used for? This functionality can be used to debug RL agents. 
 When an RL agent fails to learn properly, identifying and disabling the experiences that negatively affect the agent can improve its performance. 
