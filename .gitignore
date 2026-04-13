@@ -5,6 +5,8 @@ extra-python-libs/
 # ignore experiment files that are not useful to track
 hpc_experiments/
 
+paper/
+
 .idea/
 
 # Byte-compiled / optimized / DLL files
