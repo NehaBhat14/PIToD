@@ -283,7 +283,16 @@ def plot_computational_time(result: Dict, plot_baseline_score: bool = True) -> N
             for dataset in result[env][method]:
                 total_times.append(dataset["Time"].values.flatten())
 
-            # remove time for estimating influence on bias and return. 
+            if len(total_times) == 0:
+                continue
+            # diff expects shape (n_seeds, n_epochs); a single run must stay 2D
+            total_times = numpy.stack(total_times, axis=0)
+            if total_times.ndim == 1:
+                total_times = total_times[numpy.newaxis, :]
+            if total_times.shape[1] < 2:
+                continue
+
+            # remove time for estimating influence on bias and return.
             diff_total_times = numpy.diff(total_times, axis=1)
             i = 1
             for _ in range(diff_total_times.shape[1]):
