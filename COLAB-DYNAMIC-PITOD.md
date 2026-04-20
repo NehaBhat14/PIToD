@@ -105,3 +105,20 @@ python -u dynamic-main-TH.py -env Hopper-v2 -seed 0 -epochs 4 -steps_per_epoch 1
 ```
 
 Logs under `runs/<info>/.../progress.txt`. Do **not** use `%%capture` on the training cell. Optional: **`-evaluate_bias 1`**, Drive symlink for `runs/` — [COLAB.md](COLAB.md) §4–5 (same patterns as `main-TH.py`).
+
+---
+
+### 5. `PiToD.ipynb` — static vs dynamic smoke + Drive + live cell output
+
+The notebook [PiToD.ipynb](PiToD.ipynb) is the recommended Colab path for a **paired** comparison:
+
+1. **`static_pitod`** — uniform replay during training + post-hoc PIToD when `-evaluate_bias 1` (see [HOW_TO_RUN.md](HOW_TO_RUN.md) §3).
+2. **`dynamic_pitod`** — SumTree sampling + periodic TD-flip-delta refresh (same matched flags otherwise).
+
+After clone, it mounts Google Drive and **symlinks** `/content/PIToD/runs` and `/content/PIToD/figure` to `MyDrive/PIToD_runs/` so checkpoints and plots survive runtime disconnects. Training logs are also mirrored to `MyDrive/PIToD_runs/logs/<run>.log`.
+
+**Why not `%%bash` for long training?** A `%%bash` cell often **buffers the whole subshell stdout** until the process exits; on Colab you may see an empty output area for hours, then only `Process is terminated` if the session ends early. That is separate from Python’s own stdout buffering.
+
+**Live output in the notebook cell:** the notebook runs training from a **Python** cell using `subprocess.Popen(..., stdout=PIPE)` and a loop that does `print(line, end='', flush=True)` for every line read from the child. That attaches the trainer’s stdout to the **same cell’s output panel** as lines are produced. The child is still started with `python -u` and `PYTHONUNBUFFERED=1`.
+
+For a one-shot train + plot workflow, use [run_dynamic_pitod_pipeline.py](run_dynamic_pitod_pipeline.py) locally or on Colab: it runs `dynamic-main-TH.py` then `plot_main_results_pitod.py` and **does not run git** unless you pass **`--with-git`** (optional **`--skip-push`** to commit without pushing). The [PiToD.ipynb](PiToD.ipynb) notebook calls `dynamic-main-TH.py` directly for finer control (e.g. paired static vs dynamic cells).

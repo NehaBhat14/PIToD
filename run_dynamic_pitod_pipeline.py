@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
 """
-Run Dynamic PIToD training, regenerate main result plots, then git add / commit / push.
+Run Dynamic PIToD training, then optionally regenerate main result plots.
 
 Forwards all unrecognized CLI arguments to dynamic-main-TH.py. Parses -info for
 plot_main_results_pitod.py --top-level-dir (defaults to SAC+ToD if omitted).
 
-After a successful commit, pushes to origin: branch ``main`` if HEAD is ``main``,
-otherwise pushes the current branch to the same name on origin.
-
-Colab: configure git and auth (HTTPS token or SSH) before push, e.g.
-  git config user.email "you@example.com"
-  git config user.name "Your Name"
+By default no git operations are performed (train + plot only). Pass --with-git
+to opt into git add / commit / push after a successful plot.
 """
 
 import argparse
@@ -43,15 +39,19 @@ def _git_current_branch(cwd: str) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Train with dynamic-main-TH.py, run plot_main_results_pitod.py, "
-        "then git add / commit / push.",
+        description="Train with dynamic-main-TH.py, optionally run plot_main_results_pitod.py, "
+        "and optionally git add / commit / push (--with-git).",
     )
     parser.add_argument("--skip-plot", action="store_true")
-    parser.add_argument("--skip-git", action="store_true")
+    parser.add_argument(
+        "--with-git",
+        action="store_true",
+        help="After training (and plot), run git add, commit, and push. Off by default.",
+    )
     parser.add_argument(
         "--skip-push",
         action="store_true",
-        help="Commit locally but do not git push.",
+        help="With --with-git: commit locally but do not git push.",
     )
     parser.add_argument(
         "--commit-message",
@@ -91,8 +91,8 @@ def main() -> None:
             print("[dry-run] plot: (skipped --skip-plot)")
         else:
             print("[dry-run] plot:", " ".join(plot_cmd))
-        if args.skip_git:
-            print("[dry-run] git: (skipped --skip-git)")
+        if not args.with_git:
+            print("[dry-run] git: (skipped; default — pass --with-git to enable)")
         elif not (REPO_ROOT / ".git").is_dir():
             print("[dry-run] git: (would skip: no .git)")
         else:
@@ -126,11 +126,11 @@ def main() -> None:
             check=True,
         )
 
-    if args.skip_git:
+    if not args.with_git:
         return
 
     if not (REPO_ROOT / ".git").is_dir():
-        print("No .git directory; skipping git commit.", file=sys.stderr)
+        print("No .git directory; skipping git (--with-git was set).", file=sys.stderr)
         return
 
     cwd = str(REPO_ROOT)
