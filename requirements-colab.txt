@@ -41,7 +41,8 @@ mujoco
 numpy>=1.24.4,<2.0
 packaging
 # 2.0.3 has no cp312 wheels — pip builds from sdist and often fails on Colab
-pandas>=2.1.4,<3.0
+# Cap pandas below 2.3: manylinux wheels for 2.3+ assume NumPy 2 ABI; we pin NumPy 1.x for gym/mujoco-py.
+pandas>=2.1.4,<2.3.0
 pettingzoo==1.24.3
 pillow==10.2.0
 protobuf==5.27.3
@@ -53,7 +54,8 @@ python-dateutil==2.9.0.post0
 pytz==2024.1
 requests==2.32.3
 # 1.10.x has no Python 3.12 wheels (Requires-Python <3.12)
-scipy>=1.11.1,<2.0
+# Colab may ship scipy 1.16+ (NumPy 2); pin below 1.14 so binaries match numpy<2.
+scipy>=1.11.1,<1.14.0
 seaborn==0.13.2
 six
 tqdm==4.66.2
