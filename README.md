@@ -48,6 +48,8 @@ To visualize the results, run the following command:
 python plot_main_results_pitod.py
 ```
 
+For Dynamic PIToD training / analysis workflows, see [HOW_TO_RUN.md](HOW_TO_RUN.md). The focused Hopper screen can be launched with [scripts/run_dynamic_pitod_screen.sh](scripts/run_dynamic_pitod_screen.sh) and compared with [analyze_dynamic_pitod_study.py](analyze_dynamic_pitod_study.py).
+
 
 ## Note: PIToD runtime and memory
 

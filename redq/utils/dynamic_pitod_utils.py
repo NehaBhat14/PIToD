@@ -204,6 +204,11 @@ class DynamicPIToDController:
         pitod_alpha: float,
         n_samples_per_group: int,
         warmup_steps: int,
+        early_phase_steps: int = 0,
+        early_k_refresh: int = 0,
+        early_b_refresh: int = 0,
+        pruning_enabled: bool = True,
+        prune_warmup_steps: int = 0,
         rng: Optional[np.random.RandomState] = None,
         h2_tracker: Optional[H2Tracker] = None,
     ) -> None:
@@ -217,8 +222,55 @@ class DynamicPIToDController:
         self.pitod_alpha = float(pitod_alpha)
         self.n_samples_per_group = int(n_samples_per_group)
         self.warmup_steps = int(warmup_steps)
+        self.early_phase_steps = int(early_phase_steps)
+        self.early_k_refresh = int(early_k_refresh)
+        self.early_b_refresh = int(early_b_refresh)
+        self.pruning_enabled = bool(pruning_enabled)
+        self.prune_warmup_steps = int(prune_warmup_steps)
         self.rng = rng if rng is not None else np.random.RandomState(0)
         self.h2_tracker = h2_tracker
+        self.last_refresh_step = -1
+
+    def _refresh_interval(self, env_step: int) -> int:
+        if self.early_phase_steps > 0 and env_step < self.early_phase_steps and self.early_k_refresh > 0:
+            return self.early_k_refresh
+        return self.k_refresh
+
+    def _refresh_batch_size(self, env_step: int) -> int:
+        if self.early_phase_steps > 0 and env_step < self.early_phase_steps and self.early_b_refresh > 0:
+            return self.early_b_refresh
+        return self.b_refresh
+
+    def _pruning_enabled(self, env_step: int) -> bool:
+        if not self.pruning_enabled:
+            return False
+        return env_step >= self.prune_warmup_steps
+
+    def should_refresh(self, env_step: int) -> bool:
+        if env_step < self.warmup_steps:
+            return False
+        interval = self._refresh_interval(env_step)
+        return (env_step - self.last_refresh_step) >= interval
+
+    def snapshot_stats(self, env_step: int) -> Dict[str, float]:
+        stats = dict(
+            NumRefreshed=0.0,
+            NewlyEvicted=0.0,
+            Epsilon=float(self.registry.compute_epsilon(self.epsilon_k)),
+            RefreshWallclock=0.0,
+            ScheduleK=float(self._refresh_interval(env_step)),
+            ScheduleB=float(self._refresh_batch_size(env_step)),
+            PruningEnabled=float(self._pruning_enabled(env_step)),
+        )
+        stats.update(self.registry.snapshot(env_step))
+        return stats
+
+    def maybe_refresh(self, env_step: int) -> Optional[Dict[str, float]]:
+        if not self.should_refresh(env_step):
+            return None
+        stats = self.refresh(env_step)
+        self.last_refresh_step = int(env_step)
+        return stats
 
     # --- stage 1 ----------------------------------------------------------- #
 
@@ -261,14 +313,11 @@ class DynamicPIToDController:
     def refresh(self, env_step: int) -> Dict[str, float]:
         start = time.time()
         rb = self.agent.replay_buffer
-        gids = self.registry.sample_refresh_targets(self.b_refresh, env_step, self.rng)
+        b_refresh = self._refresh_batch_size(env_step)
+        pruning_enabled = self._pruning_enabled(env_step)
+        gids = self.registry.sample_refresh_targets(b_refresh, env_step, self.rng)
         if gids.size == 0:
-            return dict(
-                NumRefreshed=0,
-                Epsilon=0.0,
-                RefreshWallclock=0.0,
-                **self.registry.snapshot(env_step),
-            )
+            return self.snapshot_stats(env_step)
 
         scores = compute_group_scores_td_batch(
             self.agent, gids, self.registry, self.n_samples_per_group, self.rng,
@@ -280,9 +329,9 @@ class DynamicPIToDController:
 
         num_newly_evicted = 0
         for gid, s in scores.items():
-            was_active_before = bool(self.registry.active[gid])
             evicted_now = self.registry.update_score(
                 gid, s, epsilon, env_step, self.m_strikes,
+                pruning_enabled=pruning_enabled,
             )
             if evicted_now:
                 num_newly_evicted += 1
@@ -297,6 +346,9 @@ class DynamicPIToDController:
             NewlyEvicted=num_newly_evicted,
             Epsilon=float(epsilon),
             RefreshWallclock=float(wallclock),
+            ScheduleK=float(self._refresh_interval(env_step)),
+            ScheduleB=float(b_refresh),
+            PruningEnabled=float(pruning_enabled),
         )
         stats.update(self.registry.snapshot(env_step))
 

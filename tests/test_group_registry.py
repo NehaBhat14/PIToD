@@ -75,6 +75,22 @@ def test_strikes_reset_on_good_score() -> None:
     print("[PASS] strikes reset on good score")
 
 
+def test_pruning_disabled_resets_strikes_without_eviction() -> None:
+    reg = GroupRegistry(buffer_capacity=50, experience_group_size=10)
+    reg.seal_group(0, env_step=0, init_score=1.0)
+    reg.update_score(0, -1.0, epsilon=0.5, env_step=1, m_strikes=3)  # strike
+    reg.update_score(0, -1.0, epsilon=0.5, env_step=2, m_strikes=3)  # strike
+    assert reg.strikes[0] == 2
+    evicted = reg.update_score(
+        0, -2.0, epsilon=0.5, env_step=3, m_strikes=3, pruning_enabled=False,
+    )
+    assert not evicted
+    assert reg.active[0]
+    assert reg.strikes[0] == 0
+    assert reg.scores[0] == -2.0
+    print("[PASS] pruning-disabled refresh updates score without eviction")
+
+
 def test_to_transition_priority_evicted_zero() -> None:
     reg = GroupRegistry(buffer_capacity=50, experience_group_size=10)
     reg.seal_group(0, env_step=0, init_score=4.0)
@@ -134,6 +150,7 @@ if __name__ == "__main__":
     test_seal_and_snapshot()
     test_eviction_after_m_strikes()
     test_strikes_reset_on_good_score()
+    test_pruning_disabled_resets_strikes_without_eviction()
     test_to_transition_priority_evicted_zero()
     test_sample_refresh_targets_biases_old()
     test_compute_epsilon_uses_active_only()

@@ -81,6 +81,11 @@ A single flag selects the sampling strategy. The `static_pitod` mode is a label 
 --pitod_alpha          0.6         priority exponent (score ** alpha)
 --n_samples_per_group  64          transitions sampled per group for TD-flip-delta
 --dynamic_warmup_steps 5000        skip rescoring until this many env-steps
+--early_phase_steps    0           for env-steps < this, use early refresh settings if provided
+--early_k_refresh      0           early-phase refresh interval; 0 keeps --k_refresh
+--early_b_refresh      0           early-phase batch size; 0 keeps --b_refresh
+--dynamic_pruning      1           {0,1} soft-evict low-score groups when strikes accumulate
+--prune_warmup_steps   0           disable strikes / eviction until this env-step
 
 --per_alpha            0.6
 --per_beta_start       0.4
@@ -106,7 +111,10 @@ python tests/test_group_registry.py
 # byte-compile every touched file
 python -m py_compile redq/algos/sumtree.py redq/algos/group_registry.py \
     redq/algos/core.py redq/algos/redq_sac.py \
-    redq/utils/dynamic_pitod_utils.py dynamic-main-TH.py
+    redq/utils/dynamic_pitod_utils.py dynamic-main-TH.py analyze_dynamic_pitod_study.py
+
+# shell syntax check for the focused screen runner
+bash -n scripts/run_dynamic_pitod_screen.sh
 ```
 
 ---
@@ -150,7 +158,73 @@ Compare `TestEpRet` to a matching `--replay_mode uniform` run.
 
 ---
 
-## 8. Full experimental plan (from `CS6955_Project_Proposal.pdf`)
+## 8. Focused screen to make Dynamic PIToD stand out
+
+The current repo now supports two light-weight algorithm changes that are useful for screening:
+
+- **earlier / denser refresh** via `--early_phase_steps`, `--early_k_refresh`, `--early_b_refresh`
+- **delayed or disabled pruning** via `--prune_warmup_steps` and `--dynamic_pruning`
+
+Recommended Hopper-v2 screen (3 seeds first, then promote the best dynamic variant to 5 seeds):
+
+```bash
+for seed in 0 1 2; do
+  python dynamic-main-TH.py -env Hopper-v2 -seed $seed -epochs 60 -steps_per_epoch 5000 \
+      -info screen_uniform --replay_mode uniform
+
+  python dynamic-main-TH.py -env Hopper-v2 -seed $seed -epochs 60 -steps_per_epoch 5000 \
+      -info screen_static --replay_mode static_pitod -evaluate_bias 1
+
+  python dynamic-main-TH.py -env Hopper-v2 -seed $seed -epochs 60 -steps_per_epoch 5000 \
+      -info screen_dyn_base --replay_mode dynamic_pitod \
+      --k_refresh 10000 --b_refresh 16 --dynamic_warmup_steps 10000 --m_strikes 5
+
+  python dynamic-main-TH.py -env Hopper-v2 -seed $seed -epochs 60 -steps_per_epoch 5000 \
+      -info screen_dyn_early --replay_mode dynamic_pitod \
+      --k_refresh 10000 --b_refresh 16 --dynamic_warmup_steps 5000 \
+      --early_phase_steps 50000 --early_k_refresh 5000 --early_b_refresh 16 \
+      --m_strikes 5 --prune_warmup_steps 50000
+
+  python dynamic-main-TH.py -env Hopper-v2 -seed $seed -epochs 60 -steps_per_epoch 5000 \
+      -info screen_dyn_strong --replay_mode dynamic_pitod \
+      --k_refresh 5000 --b_refresh 32 --dynamic_warmup_steps 5000 \
+      --early_phase_steps 50000 --early_k_refresh 2500 --early_b_refresh 32 \
+      --m_strikes 5 --prune_warmup_steps 50000
+
+  python dynamic-main-TH.py -env Hopper-v2 -seed $seed -epochs 60 -steps_per_epoch 5000 \
+      -info screen_dyn_noprune --replay_mode dynamic_pitod \
+      --k_refresh 5000 --b_refresh 32 --dynamic_warmup_steps 5000 \
+      --early_phase_steps 50000 --early_k_refresh 2500 --early_b_refresh 32 \
+      --dynamic_pruning 0
+done
+```
+
+Analyze the screen with:
+
+```bash
+python analyze_dynamic_pitod_study.py \
+    --env Hopper-v2 \
+    --spec uniform=screen_uniform:uniform \
+    --spec static=screen_static:static_pitod \
+    --spec dyn_base=screen_dyn_base:dynamic_pitod \
+    --spec dyn_early=screen_dyn_early:dynamic_pitod \
+    --spec dyn_strong=screen_dyn_strong:dynamic_pitod \
+    --spec dyn_noprune=screen_dyn_noprune:dynamic_pitod \
+    --analysis-seed 0 \
+    --return-threshold 1000 \
+    --output-dir figure/dynamic_screen
+```
+
+The script prints per-seed / aggregate AUC, final return, wall-clock, and return-threshold crossing stats, and saves:
+
+- `learning_and_time.png`
+- `return_vs_wallclock.png`
+- `dynamic_diagnostics.png`
+- `h2_<label>_seed<seed>.png` when H2 logs are present
+
+---
+
+## 9. Full experimental plan (from `CS6955_Project_Proposal.pdf`)
 
 ### H1 — Sample efficiency (5 seeds × 4 modes × 1M steps)
 
@@ -201,7 +275,7 @@ done
 
 ---
 
-## 9. Output layout
+## 10. Output layout
 
 ```
 runs/
@@ -216,17 +290,17 @@ runs/
 Relevant columns in `progress.txt`:
 
 - **Always:** `Epoch, TotalEnvInteracts, Time, SPS, EpRet*, TestEpRet*, LossQ1, LossPi`
-- **Dynamic only:** `DynPIToD/ScoreMean, ScoreStd, Epsilon, NumEvicted, NumActive, NumRefreshed, BufferActiveFrac, GroupAgeMean, RefreshWallclock`
+- **Dynamic only:** `AverageDynPIToD/ScoreMean, AverageDynPIToD/ScoreStd, AverageDynPIToD/Epsilon, AverageDynPIToD/NumEvicted, AverageDynPIToD/NewlyEvicted, AverageDynPIToD/NumActive, AverageDynPIToD/NumRefreshed, AverageDynPIToD/BufferActiveFrac, AverageDynPIToD/GroupAgeMean, AverageDynPIToD/RefreshWallclock, AverageDynPIToD/ScheduleK, AverageDynPIToD/ScheduleB, AverageDynPIToD/PruningEnabled`
 - **With `-evaluate_bias 1`:** `QBias*, NormQBias*, MCDisRet*` (static-PIToD post-hoc analysis)
 
 ---
 
-## 10. Common pitfalls
+## 11. Common pitfalls
 
-- **`--k_refresh` smaller than `--dynamic_warmup_steps`** — the first refresh will be skipped (by design). Set warmup to at most one refresh period for early-training ablations.
+- **`--dynamic_warmup_steps` vs `--k_refresh`** — refreshes now happen when enough steps have elapsed since the previous refresh, not only at fixed global multiples. If you want early refreshes, lower `--dynamic_warmup_steps` and/or use `--early_*`.
 - **SumTree wall-clock** — the current `broadcast_group_to_sumtree` does `G` individual `sumtree.update` calls per group written; at `B_refresh=32, G=5000` that is 160k updates per refresh. If this shows up in `RefreshWallclock`, the optimization is to add a `SumTree.fill_range(lo, hi, priority)` method — not needed for correctness.
 - **Static `main-TH.py` behavior** — entirely unchanged. If you need the published static-PIToD numbers, keep using `main-TH.py`, not `dynamic-main-TH.py`.
-- **Logger key warnings** — `DynPIToD/*` keys are only populated once the first refresh fires. The `try/except` in `dynamic-main-TH.py` swallows the missing-key error for epochs before that happens; the output log just skips those columns for the first epoch or two.
+- **Dynamic logging** — `progress.txt` now gets Dynamic PIToD columns from epoch 0 onward, even before the first refresh. Older runs created before this change may not have the `AverageDynPIToD/*` columns.
 - **PER IS-weights interact with REDQ's `utd_ratio`** — each env-step does `utd_ratio=4` updates, so PER writeback happens 4× more often than in a vanilla SAC implementation. This is intentional and consistent with the static REDQ-SAC loop.
 
 ---

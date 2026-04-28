@@ -66,6 +66,7 @@ class GroupRegistry:
         epsilon: float,
         env_step: int,
         m_strikes: int,
+        pruning_enabled: bool = True,
     ) -> bool:
         """Write back a refreshed score. Returns True iff the group became evicted this call."""
         new_score = float(new_score)
@@ -76,6 +77,9 @@ class GroupRegistry:
 
         newly_evicted = False
         if self.active[group_id]:
+            if not pruning_enabled:
+                self.strikes[group_id] = 0
+                return False
             if new_score < epsilon:
                 self.strikes[group_id] += 1
                 if self.strikes[group_id] >= m_strikes:

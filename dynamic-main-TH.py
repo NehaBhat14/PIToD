@@ -91,6 +91,11 @@ def dynamic_pitod(
     pitod_alpha: float = 0.6,
     n_samples_per_group: int = 64,
     dynamic_warmup_steps: int = 5000,
+    early_phase_steps: int = 0,
+    early_k_refresh: int = 0,
+    early_b_refresh: int = 0,
+    dynamic_pruning: bool = True,
+    prune_warmup_steps: int = 0,
     per_alpha: float = 0.6,
     per_beta_start: float = 0.4,
     per_beta_end: float = 1.0,
@@ -186,6 +191,11 @@ def dynamic_pitod(
             epsilon_k=epsilon_k, pitod_alpha=pitod_alpha,
             n_samples_per_group=n_samples_per_group,
             warmup_steps=dynamic_warmup_steps,
+            early_phase_steps=early_phase_steps,
+            early_k_refresh=early_k_refresh,
+            early_b_refresh=early_b_refresh,
+            pruning_enabled=dynamic_pruning,
+            prune_warmup_steps=prune_warmup_steps,
             rng=np.random.RandomState(seed + 77),
             h2_tracker=h2_tracker,
         )
@@ -210,8 +220,8 @@ def dynamic_pitod(
         # --- Dynamic PIToD hooks ---
         if controller is not None:
             controller.on_new_transition(t)
-            if (t + 1) % k_refresh == 0 and t >= dynamic_warmup_steps:
-                stats = controller.refresh(t)
+            stats = controller.maybe_refresh(t)
+            if stats is not None:
                 logger.store(**{f"DynPIToD/{k}": v for k, v in stats.items()})
 
         o = o2
@@ -257,12 +267,18 @@ def dynamic_pitod(
             logger.log_tabular('PreTanh', with_min_and_max=True)
 
             if replay_mode == "dynamic_pitod":
+                dynamic_stats = controller.snapshot_stats(t) if controller is not None else {}
+                for key, value in dynamic_stats.items():
+                    full_key = f'DynPIToD/{key}'
+                    if len(logger.epoch_dict.get(full_key, [])) == 0:
+                        logger.store(**{full_key: value})
                 for key in ('DynPIToD/ScoreMean', 'DynPIToD/ScoreMin', 'DynPIToD/ScoreMax',
                             'DynPIToD/ScoreStd', 'DynPIToD/Epsilon', 'DynPIToD/MeanStrikes',
-                            'DynPIToD/NumEvicted', 'DynPIToD/NumActive',
+                            'DynPIToD/NumEvicted', 'DynPIToD/NewlyEvicted', 'DynPIToD/NumActive',
                             'DynPIToD/BufferActiveFrac', 'DynPIToD/GroupAgeMean',
                             'DynPIToD/GroupAgeMax', 'DynPIToD/NumRefreshed',
-                            'DynPIToD/RefreshWallclock'):
+                            'DynPIToD/RefreshWallclock', 'DynPIToD/ScheduleK',
+                            'DynPIToD/ScheduleB', 'DynPIToD/PruningEnabled'):
                     try:
                         logger.log_tabular(key, average_only=True)
                     except Exception:
@@ -335,6 +351,16 @@ if __name__ == '__main__':
     parser.add_argument('--pitod_alpha', type=float, default=0.6)
     parser.add_argument('--n_samples_per_group', type=int, default=64)
     parser.add_argument('--dynamic_warmup_steps', type=int, default=5000)
+    parser.add_argument('--early_phase_steps', type=int, default=0,
+                        help="For env-steps < this value, use early refresh settings if provided.")
+    parser.add_argument('--early_k_refresh', type=int, default=0,
+                        help="Refresh interval used during the early phase; 0 keeps --k_refresh.")
+    parser.add_argument('--early_b_refresh', type=int, default=0,
+                        help="Refresh batch size used during the early phase; 0 keeps --b_refresh.")
+    parser.add_argument('--dynamic_pruning', type=int, default=1, choices=[0, 1],
+                        help="Whether refreshed low-score groups can be soft-evicted.")
+    parser.add_argument('--prune_warmup_steps', type=int, default=0,
+                        help="Disable strike accumulation / eviction until this env-step.")
 
     parser.add_argument('--per_alpha', type=float, default=0.6)
     parser.add_argument('--per_beta_start', type=float, default=0.4)
@@ -375,6 +401,11 @@ if __name__ == '__main__':
         pitod_alpha=args.pitod_alpha,
         n_samples_per_group=args.n_samples_per_group,
         dynamic_warmup_steps=args.dynamic_warmup_steps,
+        early_phase_steps=args.early_phase_steps,
+        early_k_refresh=args.early_k_refresh,
+        early_b_refresh=args.early_b_refresh,
+        dynamic_pruning=bool(args.dynamic_pruning),
+        prune_warmup_steps=args.prune_warmup_steps,
         per_alpha=args.per_alpha,
         per_beta_start=args.per_beta_start,
         per_beta_end=args.per_beta_end,
