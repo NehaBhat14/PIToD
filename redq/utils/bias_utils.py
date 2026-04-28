@@ -379,7 +379,8 @@ def log_evaluation(bias_eval_env: Env,
                    dump_trajectory_for_demo: bool = False,
                    record_training_self_training_losses: bool = False,
                    influence_estimation_interval: int = 10,
-                   n_eval: int = 10
+                   n_eval: int = 10,
+                   return_evaluation_interval: int = 1,
                    ) -> None:
     # bias evaluation part
     final_mc_list, final_mc_entropy_list, final_obs_list, final_act_list, final_done_list = get_mc_return_with_entropy_on_reset(
@@ -414,8 +415,13 @@ def log_evaluation(bias_eval_env: Env,
     eval_data_size = bias.size
 
     if (agent.num_epoch % influence_estimation_interval) == 0:
+        influence_eval_id = agent.num_epoch // influence_estimation_interval
+        metrics_to_run = ["q_bias"]
+        if return_evaluation_interval <= 1 or (influence_eval_id % return_evaluation_interval) == 0:
+            metrics_to_run.append("return")
+
         # - evaluate Q-estimation biases and return with non-flipped / flipped masks.
-        for metric in ["q_bias", "return"]:
+        for metric in metrics_to_run:
             with torch.no_grad():
                 flip_score, non_flip_score, indices = _evaluate_performance_with_masks(agent,
                                                                                        sample_mask_size,

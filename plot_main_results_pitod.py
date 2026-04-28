@@ -1,8 +1,9 @@
-from typing import Dict, Union, List
+from typing import Any, Dict, Union, List
 
 import argparse
 import pickle
 import bz2
+import json
 import matplotlib.pyplot as plt
 import matplotlib.ticker
 import numpy
@@ -57,6 +58,48 @@ mapenvironmentsname = {"Hopper-v2": "Hopper-v2",
                        "hopper-stand": "hopper-stand",
                        }
 
+_CONFIG_CACHE: Dict[str, Dict[str, Any]] = {}
+
+
+def _load_run_config(run_dir: str) -> Dict[str, Any]:
+    if run_dir not in _CONFIG_CACHE:
+        config_path = os.path.join(run_dir, "config.json")
+        if os.path.exists(config_path):
+            with open(config_path, "r", encoding="utf-8") as fin:
+                _CONFIG_CACHE[run_dir] = json.load(fin)
+        else:
+            _CONFIG_CACHE[run_dir] = {}
+    return _CONFIG_CACHE[run_dir]
+
+
+def _make_result_entry(path: str, dataset: Any) -> Dict[str, Any]:
+    run_dir = os.path.dirname(path)
+    return {
+        "data": dataset,
+        "run_dir": run_dir,
+        "config": _load_run_config(run_dir),
+    }
+
+
+def _entry_data(entry: Any) -> Any:
+    if isinstance(entry, dict) and "data" in entry:
+        return entry["data"]
+    return entry
+
+
+def _entry_config(entry: Any) -> Dict[str, Any]:
+    if isinstance(entry, dict) and "config" in entry:
+        return entry["config"]
+    return {}
+
+
+def _metric_epoch_stride(entry: Any, metric_name: str, default_stride: int = 1) -> int:
+    config = _entry_config(entry)
+    influence_stride = int(config.get("influence_estimation_interval", default_stride))
+    if metric_name in ("return", "list_return_cleansing"):
+        return influence_stride * int(config.get("return_evaluation_interval", 1))
+    return influence_stride
+
 
 def _select_worst_case_score(score, metric, number_of_trials=2):
     """
@@ -108,14 +151,16 @@ def read_bz_results(experiment_dirs: List[str], environments: List[str], methods
                     dataset = np.array(dataset)
                     if performance_file.split("/")[-1] not in results[env][method].keys():
                         results[env][method][performance_file.split("/")[-1]] = []
-                    results[env][method][performance_file.split("/")[-1]].append(dataset)
+                    results[env][method][performance_file.split("/")[-1]].append(
+                        _make_result_entry(performance_file, dataset)
+                    )
     return results
 
 
 def plot_influence_positive_ratio_and_colormesh(result: Dict,
                                                 flip_file_name: str,
                                                 non_flip_file_name: str,
-                                                scale_x_axis: Union[int, float] = 1,
+                                                scale_x_axis: Union[int, float, None] = 1,
                                                 baseline: Union[None, str] = None
                                                 ) -> None:
     """
@@ -141,9 +186,11 @@ def plot_influence_positive_ratio_and_colormesh(result: Dict,
                     or (non_flip_file_name not in result[env][method].keys())):
                 continue
             positive_ratios = []
-            for seed in range(len(result[env][method][flip_file_name])):
-                flip_score = result[env][method][flip_file_name][seed]
-                non_flip_score = result[env][method][non_flip_file_name][seed]
+            flip_entries = result[env][method][flip_file_name]
+            non_flip_entries = result[env][method][non_flip_file_name]
+            for seed in range(len(flip_entries)):
+                flip_score = _entry_data(flip_entries[seed])
+                non_flip_score = _entry_data(non_flip_entries[seed])
 
                 influence = flip_score - non_flip_score
                 positive_ratio = np.where(influence > 0.0, 1, 0).mean(axis=-1)
@@ -152,7 +199,9 @@ def plot_influence_positive_ratio_and_colormesh(result: Dict,
             mean_positive_ratio = np.mean(positive_ratios, axis=0)
             std_positive_ratio = np.std(positive_ratios, axis=0)
 
-            x = np.arange(mean_positive_ratio.shape[0])
+            metric_name = file_name_map[flip_file_name]
+            stride = _metric_epoch_stride(flip_entries[0], metric_name, default_stride=1)
+            x = np.arange(mean_positive_ratio.shape[0]) * stride
             plt.plot(x, mean_positive_ratio, label=mapenvironmentsname[env], zorder=-10)
             line_color = plt.gca().lines[-1].get_color()
             plt.fill_between(x, mean_positive_ratio - std_positive_ratio,
@@ -177,13 +226,15 @@ def plot_influence_positive_ratio_and_colormesh(result: Dict,
                     or (non_flip_file_name not in result[env][method].keys())):
                 continue
             influences = []
-            for seed in range(len(result[env][method][flip_file_name])):
-                flip_score = result[env][method][flip_file_name][seed]
-                non_flip_score = result[env][method][non_flip_file_name][seed]
+            flip_entries = result[env][method][flip_file_name]
+            non_flip_entries = result[env][method][non_flip_file_name]
+            for seed in range(len(flip_entries)):
+                flip_score = _entry_data(flip_entries[seed])
+                non_flip_score = _entry_data(non_flip_entries[seed])
 
                 # If baseline is provided, replace non-flip score with baseline score
                 if baseline is not None:
-                    baseline_score = result[env][method][baseline][seed][:, 0, 0].reshape((-1, 1))
+                    baseline_score = _entry_data(result[env][method][baseline][seed])[:, 0, 0].reshape((-1, 1))
                     non_flip_score = np.tile(baseline_score, (1, flip_score.shape[1]))
 
                 influence = flip_score - non_flip_score
@@ -196,7 +247,12 @@ def plot_influence_positive_ratio_and_colormesh(result: Dict,
                 mean_influence[i] = maximum_filter(mean_influence[i], size=10)
             len_epoch = mean_influence.shape[0]
             num_samples = mean_influence.shape[1]
-            x = np.arange(0, int(len_epoch)) * scale_x_axis
+            if scale_x_axis is None:
+                metric_name = file_name_map[flip_file_name]
+                stride = _metric_epoch_stride(flip_entries[0], metric_name, default_stride=1)
+            else:
+                stride = scale_x_axis
+            x = np.arange(0, int(len_epoch)) * stride
             y = np.arange(0, 1, 1.0 / int(num_samples))
             plt.pcolormesh(x, y, np.transpose(mean_influence), zorder=-10, cmap="inferno")
             cbar = plt.colorbar(label="Influence")
@@ -240,7 +296,7 @@ def read_csv_results(experiment_dirs: List[str], environments: List[str], method
                                      re.search(".*" + env + ".*", p)]
                 for performance_file in performance_files:
                     dataset = pd.read_table(performance_file)
-                    results[env][method].append(dataset)
+                    results[env][method].append(_make_result_entry(performance_file, dataset))
     return results
 
 
@@ -264,7 +320,8 @@ def plot_computational_time(result: Dict, plot_baseline_score: bool = True) -> N
         assert len(result[env].keys()) == 1, "number of method should be one"
         for method in result[env].keys():
             total_times = []
-            for dataset in result[env][method]:
+            for entry in result[env][method]:
+                dataset = _entry_data(entry)
                 total_times.append(dataset["Time"].values.flatten())
 
             if len(total_times) == 0:
@@ -278,9 +335,10 @@ def plot_computational_time(result: Dict, plot_baseline_score: bool = True) -> N
 
             # remove time for estimating influence on bias and return.
             diff_total_times = numpy.diff(total_times, axis=1)
+            q_bias_stride = _metric_epoch_stride(result[env][method][0], "bias", default_stride=10)
             i = 1
             for _ in range(diff_total_times.shape[1]):
-                if i % 10 == 0:
+                if i % q_bias_stride == 0:
                     for j in range(diff_total_times.shape[0]):
                         diff_total_times[j][i - 1] = diff_total_times[j][i]  # interpolate time
                 i += 1
@@ -339,9 +397,10 @@ def plot_cleansing_result(result: Dict, additional_baseline: Union[Dict, None] =
                 if metric + ".bz2" not in result[env][method].keys():
                     continue
                 score, score_valid = [], []
-                for seed in range(len(result[env][method][metric + ".bz2"])):
-                    score.append(result[env][method][metric + ".bz2"][seed])
-                    score_valid.append(result[env][method][metric + ".bz2"][seed])
+                metric_entries = result[env][method][metric + ".bz2"]
+                for seed in range(len(metric_entries)):
+                    score.append(_entry_data(metric_entries[seed]))
+                    score_valid.append(_entry_data(metric_entries[seed]))
 
                 # Select worst-case trials if specified
                 if plot_worst_case:
@@ -354,7 +413,9 @@ def plot_cleansing_result(result: Dict, additional_baseline: Union[Dict, None] =
                     min_max_score = np.max(score, axis=2)
                 mean_score_cle = np.mean(min_max_score, axis=0).reshape(-1)
                 std_score_cle = np.std(min_max_score, axis=0).reshape(-1)
-                x = np.arange(mean_score_cle.shape[0]) * 10
+                metric_name = "list_return_cleansing" if metric == "list_return_cleansing" else "bias"
+                x_stride = _metric_epoch_stride(metric_entries[0], metric_name, default_stride=10)
+                x = np.arange(mean_score_cle.shape[0]) * x_stride
                 plt.plot(x, mean_score_cle, label=mapenvironmentsname[env], zorder=-10)
                 line_color = plt.gca().lines[-1].get_color()
                 plt.fill_between(x, mean_score_cle - std_score_cle,
@@ -424,14 +485,14 @@ def main() -> None:
         results_bz2,
         "list_flip_q_bias.bz2",
         "list_non_flip_q_bias.bz2",
-        scale_x_axis=10,
+        scale_x_axis=None,
         baseline="list_q_bias_cleansing.bz2",
     )
     plot_influence_positive_ratio_and_colormesh(
         results_bz2,
         "list_flip_return.bz2",
         "list_non_flip_return.bz2",
-        scale_x_axis=10,
+        scale_x_axis=None,
         baseline="list_return_cleansing.bz2",
     )
 

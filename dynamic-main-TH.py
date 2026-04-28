@@ -82,6 +82,7 @@ def dynamic_pitod(
     record_training_self_training_losses: bool = False,
     influence_estimation_interval: int = 10,
     n_eval: int = 10,
+    return_evaluation_interval: int = 1,
     # --- Dynamic PIToD / PER knobs ---
     replay_mode: str = 'uniform',
     k_refresh: int = 5000,
@@ -242,7 +243,8 @@ def dynamic_pitod(
                                dump_trajectory_for_demo=dump_trajectory_for_demo,
                                record_training_self_training_losses=record_training_self_training_losses,
                                influence_estimation_interval=influence_estimation_interval,
-                               n_eval=n_eval)
+                               n_eval=n_eval,
+                               return_evaluation_interval=return_evaluation_interval)
 
             if reseed_each_epoch:
                 seed_all(epoch)
@@ -335,6 +337,8 @@ if __name__ == '__main__':
                         help="Run cleansing evaluation and write list_*_cleansing.bz2 artifacts.")
     parser.add_argument('--influence_estimation_interval', type=int, default=10,
                         help="Evaluate/store influence artifacts every N epochs.")
+    parser.add_argument('--return_evaluation_interval', type=int, default=1,
+                        help="Run expensive return-mask evaluation every N influence-evaluation cycles.")
     parser.add_argument('-steps_per_epoch', type=int, default=5000)
     parser.add_argument('-start_steps', type=int, default=5000,
                         help="Random actions until replay has this many transitions; "
@@ -392,6 +396,7 @@ if __name__ == '__main__':
         record_training_self_training_losses=bool(args.record_training_self_training_losses),
         experience_cleansing=bool(args.experience_cleansing),
         influence_estimation_interval=args.influence_estimation_interval,
+        return_evaluation_interval=args.return_evaluation_interval,
         steps_per_epoch=args.steps_per_epoch,
         replay_mode=args.replay_mode,
         k_refresh=args.k_refresh,
