@@ -94,6 +94,56 @@ def get_mc_return_with_entropy_and_obs_act(bias_eval_env: Env,
 
     return final_mc_entropy_list, final_mc_entropy_list_normalize_base, obs_tensor, acts_tensor
 
+
+def _batched_q_bias_with_flip_and_non_flip_masks(agent: REDQSACAgent,
+                                                 obs_tensor: torch.Tensor,
+                                                 acts_tensor: torch.Tensor,
+                                                 masks_tensor: torch.Tensor,
+                                                 final_mc_entropy_list: np.ndarray,
+                                                 final_mc_entropy_list_normalize_base: np.ndarray,
+                                                 chunk_size: int = 32) \
+        -> Tuple[List[np.float64], List[np.float64]]:
+    eval_data_size = obs_tensor.shape[0]
+    if acts_tensor.shape[0] != eval_data_size or final_mc_entropy_list.shape[0] != eval_data_size:
+        raise ValueError("obs, acts, and Monte Carlo targets must have the same batch dimension")
+
+    mc_tensor = torch.as_tensor(final_mc_entropy_list, device=agent.device, dtype=obs_tensor.dtype).view(1, -1)
+    norm_tensor = torch.as_tensor(final_mc_entropy_list_normalize_base,
+                                  device=agent.device,
+                                  dtype=obs_tensor.dtype).view(1, -1)
+
+    flip_scores: List[np.float64] = []
+    non_flip_scores: List[np.float64] = []
+    for start in tqdm.tqdm(range(0, masks_tensor.shape[0], chunk_size)):
+        end = min(start + chunk_size, masks_tensor.shape[0])
+        group_masks = masks_tensor[start:end]
+        n_groups = group_masks.shape[0]
+
+        obs_chunk = obs_tensor.repeat(n_groups, 1)
+        acts_chunk = acts_tensor.repeat(n_groups, 1)
+        mask_chunk = group_masks.repeat_interleave(eval_data_size, dim=0)
+
+        non_flip_prediction = agent.get_ave_q_prediction_for_bias_evaluation(obs_chunk,
+                                                                             acts_chunk,
+                                                                             masks=mask_chunk,
+                                                                             flips=False
+                                                                             ).squeeze(-1).reshape(n_groups,
+                                                                                                   eval_data_size)
+        flip_prediction = agent.get_ave_q_prediction_for_bias_evaluation(obs_chunk,
+                                                                         acts_chunk,
+                                                                         masks=mask_chunk,
+                                                                         flips=True
+                                                                         ).squeeze(-1).reshape(n_groups,
+                                                                                               eval_data_size)
+
+        non_flip_bias = torch.mean(torch.abs(non_flip_prediction - mc_tensor) / norm_tensor, dim=1)
+        flip_bias = torch.mean(torch.abs(flip_prediction - mc_tensor) / norm_tensor, dim=1)
+
+        flip_scores.extend(np.float64(score) for score in flip_bias.detach().cpu().tolist())
+        non_flip_scores.extend(np.float64(score) for score in non_flip_bias.detach().cpu().tolist())
+
+    return flip_scores, non_flip_scores
+
 def _evaluate_performance_with_masks(agent: REDQSACAgent,
                                      sample_mask_size: int,
                                      eval_data_size: int,
@@ -123,22 +173,24 @@ def _evaluate_performance_with_masks(agent: REDQSACAgent,
         masks_tensor = Tensor(mask).to(agent.device)
         sample_mask_size = mask.shape[0]
 
-    # - evaluate scores for flip and non-flip masks.
+    if evaluation_metric == "q_bias":
+        flip_scores, non_flip_scores = _batched_q_bias_with_flip_and_non_flip_masks(agent,
+                                                                                     obs_tensor,
+                                                                                     acts_tensor,
+                                                                                     masks_tensor,
+                                                                                     final_mc_entropy_list,
+                                                                                     final_mc_entropy_list_normalize_base)
+        return flip_scores, non_flip_scores, indices
+    if evaluation_metric != "return":
+        raise NotImplementedError
+
+    # The return path still performs real environment rollouts and remains serial.
     flip_scores = []
     non_flip_scores = []
     for i in tqdm.tqdm(range(sample_mask_size)):
-        if evaluation_metric == "q_bias":
-            current_masks = masks_tensor[i].repeat(eval_data_size, 1)
-            flip_score, non_flip_score = _q_bias_with_flip_and_non_flip_masks(agent, obs_tensor, acts_tensor,
-                                                                              current_masks, final_mc_entropy_list,
-                                                                              final_mc_entropy_list_normalize_base)
-        elif evaluation_metric == "return":
-            current_masks = masks_tensor[i].repeat(1, 1)
-            flip_score, non_flip_score = _return_with_flip_and_non_flip_masks(agent, current_masks, env,
-                                                                              n_eval, video_dir)
-        else:
-            raise NotImplementedError
-
+        current_masks = masks_tensor[i].repeat(1, 1)
+        flip_score, non_flip_score = _return_with_flip_and_non_flip_masks(agent, current_masks, env,
+                                                                          n_eval, video_dir)
         flip_scores.append(flip_score)
         non_flip_scores.append(non_flip_score)
     return flip_scores, non_flip_scores, indices

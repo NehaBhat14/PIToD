@@ -96,17 +96,60 @@ def compute_group_scores_td_batch(
     n_samples_per_group: int,
     rng: np.random.RandomState,
 ) -> Dict[int, float]:
-    """Score a batch of groups. Currently loops per group — the inner
-    _evaluate_td_with_masks already batches across the n_samples_per_group
-    transitions, which dominates cost. Truly cross-group batching would
-    require flattening masks across groups; left as a future optimization.
-    """
-    out: Dict[int, float] = {}
+    """Score a batch of groups with one concatenated TD evaluation pass."""
+    valid_group_ids: List[int] = []
+    group_lengths: List[int] = []
+    obs_list: List[np.ndarray] = []
+    obs_next_list: List[np.ndarray] = []
+    acts_list: List[np.ndarray] = []
+    rews_list: List[np.ndarray] = []
+    done_list: List[np.ndarray] = []
+    masks_list: List[np.ndarray] = []
+
     for gid in group_ids:
         gid_int = int(gid)
-        s = compute_group_score_td(agent, gid_int, registry, n_samples_per_group, rng)
-        if s is not None:
-            out[gid_int] = s
+        slot_range = registry.buffer_slot_range(gid_int, agent.replay_buffer.size)
+        if slot_range is None or slot_range.size == 0:
+            continue
+        if slot_range.size > n_samples_per_group:
+            chosen = rng.choice(slot_range, size=n_samples_per_group, replace=False)
+        else:
+            chosen = slot_range
+        batch = agent.replay_buffer.sample_batch(batch_size=None, idxs=chosen)
+        valid_group_ids.append(gid_int)
+        group_lengths.append(len(chosen))
+        obs_list.append(batch['obs1'])
+        obs_next_list.append(batch['obs2'])
+        acts_list.append(batch['acts'])
+        rews_list.append(batch['rews'])
+        done_list.append(batch['done'])
+        masks_list.append(batch['masks'])
+
+    if not valid_group_ids:
+        return {}
+
+    device = agent.device
+    obs_tensor = Tensor(np.concatenate(obs_list, axis=0)).to(device)
+    obs_next_tensor = Tensor(np.concatenate(obs_next_list, axis=0)).to(device)
+    acts_tensor = Tensor(np.concatenate(acts_list, axis=0)).to(device)
+    rews_tensor = Tensor(np.concatenate(rews_list, axis=0)).unsqueeze(1).to(device)
+    done_tensor = Tensor(np.concatenate(done_list, axis=0)).unsqueeze(1).to(device)
+    masks_tensor = Tensor(np.concatenate(masks_list, axis=0)).to(device)
+
+    non_flip_td, flip_td = _evaluate_td_with_masks(agent,
+                                                   obs_tensor,
+                                                   acts_tensor,
+                                                   obs_next_tensor,
+                                                   rews_tensor,
+                                                   done_tensor,
+                                                   masks_tensor)
+
+    out: Dict[int, float] = {}
+    start = 0
+    for gid_int, group_length in zip(valid_group_ids, group_lengths):
+        end = start + group_length
+        out[gid_int] = float(np.mean(flip_td[start:end] - non_flip_td[start:end]))
+        start = end
     return out
 
 

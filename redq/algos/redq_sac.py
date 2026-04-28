@@ -236,14 +236,25 @@ class REDQSACAgent(object):
         # sample data from replay buffer. Returns tensors plus idxs and IS-weights
         # (ones when sampling uniformly).
         batch = self.replay_buffer.sample_batch(batch_size)
-        obs_tensor = Tensor(batch['obs1']).to(self.device)
-        obs_next_tensor = Tensor(batch['obs2']).to(self.device)
-        acts_tensor = Tensor(batch['acts']).to(self.device)
-        rews_tensor = Tensor(batch['rews']).unsqueeze(1).to(self.device)
-        done_tensor = Tensor(batch['done']).unsqueeze(1).to(self.device)
-        masks_tensor = Tensor(batch['masks']).to(self.device)
+
+        def _to_device(array, unsqueeze: bool = False) -> torch.Tensor:
+            tensor = torch.as_tensor(array, dtype=torch.float32)
+            if unsqueeze:
+                tensor = tensor.unsqueeze(1)
+            if self.device.type == "cuda":
+                tensor = tensor.pin_memory().to(self.device, non_blocking=True)
+            else:
+                tensor = tensor.to(self.device)
+            return tensor
+
+        obs_tensor = _to_device(batch['obs1'])
+        obs_next_tensor = _to_device(batch['obs2'])
+        acts_tensor = _to_device(batch['acts'])
+        rews_tensor = _to_device(batch['rews'], unsqueeze=True)
+        done_tensor = _to_device(batch['done'], unsqueeze=True)
+        masks_tensor = _to_device(batch['masks'])
         idxs = batch['idxs']
-        is_weights_tensor = Tensor(batch['is_weights']).unsqueeze(1).to(self.device)
+        is_weights_tensor = _to_device(batch['is_weights'], unsqueeze=True)
         return obs_tensor, obs_next_tensor, acts_tensor, rews_tensor, done_tensor, masks_tensor, idxs, is_weights_tensor
 
     def get_redq_q_target_no_grad(self,
