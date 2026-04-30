@@ -7,6 +7,10 @@ hpc_experiments/
 
 paper/
 
+# experiment outputs (regenerable)
+runs/
+figure/
+
 .idea/
 
 # Byte-compiled / optimized / DLL files
