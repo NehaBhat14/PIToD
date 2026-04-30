@@ -1,0 +1,3956 @@
+Warning: Log dir ./runs/screen_dyn_early_vs_static/redq_sac_Hopper-v2_dynamic_pitod/redq_sac_Hopper-v2_dynamic_pitod_s0 already exists! Storing info there anyway.
+Logging data to ./runs/screen_dyn_early_vs_static/redq_sac_Hopper-v2_dynamic_pitod/redq_sac_Hopper-v2_dynamic_pitod_s0/progress.txt
+Saving config:
+
+{
+    "adversarial_reward_epoch":	-999,
+    "alpha":	0.2,
+    "auto_alpha":	true,
+    "b_refresh":	16,
+    "batch_size":	256,
+    "delay_update_steps":	"auto",
+    "device":	"cuda:0",
+    "dump_trajectory_for_demo":	false,
+    "dynamic_pruning":	true,
+    "dynamic_warmup_steps":	5000,
+    "early_b_refresh":	16,
+    "early_k_refresh":	5000,
+    "early_phase_steps":	50000,
+    "env_name":	"Hopper-v2",
+    "epochs":	40,
+    "epsilon_k":	1.0,
+    "evaluate_bias":	true,
+    "exp_name":	"redq_sac_Hopper-v2_dynamic_pitod",
+    "experience_cleansing":	true,
+    "experience_group_size":	5000,
+    "gamma":	0.99,
+    "gpu_id":	0,
+    "h2_log":	true,
+    "h2_tag_n_groups":	2,
+    "h2_tag_step":	10000,
+    "hidden_sizes":	[
+        128,
+        128
+    ],
+    "influence_estimation_interval":	10,
+    "k_refresh":	10000,
+    "layer_norm":	true,
+    "layer_norm_policy":	true,
+    "logger_kwargs":	{
+        "exp_name":	"redq_sac_Hopper-v2_dynamic_pitod",
+        "output_dir":	"./runs/screen_dyn_early_vs_static/redq_sac_Hopper-v2_dynamic_pitod/redq_sac_Hopper-v2_dynamic_pitod_s0"
+    },
+    "lr":	0.0003,
+    "m_strikes":	5,
+    "mask_dim":	20,
+    "max_ep_len":	1000,
+    "n_eval":	20,
+    "n_evals_per_epoch":	10,
+    "n_mc_cutoff":	350,
+    "n_mc_eval":	1000,
+    "n_samples_per_group":	64,
+    "num_Q":	2,
+    "num_min":	2,
+    "per_alpha":	0.6,
+    "per_beta_anneal_steps":	1000000,
+    "per_beta_end":	1.0,
+    "per_beta_start":	0.4,
+    "pitod_alpha":	0.6,
+    "policy_update_delay":	20,
+    "polyak":	0.995,
+    "prune_warmup_steps":	50000,
+    "record_training_self_training_losses":	false,
+    "replay_mode":	"dynamic_pitod",
+    "replay_size":	1510000,
+    "reseed_each_epoch":	true,
+    "reset_interval":	-1,
+    "return_evaluation_interval":	1,
+    "seed":	0,
+    "start_steps":	5000,
+    "steps_per_epoch":	5000,
+    "target_drop_rate":	0.0,
+    "target_entropy":	"mbpo",
+    "total_steps":	200001,
+    "utd_ratio":	4
+}
+Compiling /usr/local/lib/python3.12/dist-packages/mujoco_py/cymj.pyx because it depends on /usr/local/lib/python3.12/dist-packages/mujoco_py/pxd/mujoco.pxd.
+[1/1] Cythonizing /usr/local/lib/python3.12/dist-packages/mujoco_py/cymj.pyx
+
+  0%|          | 0/10 [00:00<?, ?it/s]
+ 10%|█         | 1/10 [00:00<00:01,  5.57it/s]
+ 20%|██        | 2/10 [00:00<00:01,  6.40it/s]
+ 30%|███       | 3/10 [00:00<00:01,  6.91it/s]
+ 40%|████      | 4/10 [00:00<00:00,  7.21it/s]
+ 50%|█████     | 5/10 [00:00<00:00,  7.39it/s]
+ 60%|██████    | 6/10 [00:00<00:00,  7.49it/s]
+ 70%|███████   | 7/10 [00:00<00:00,  7.58it/s]
+ 80%|████████  | 8/10 [00:01<00:00,  7.61it/s]
+ 90%|█████████ | 9/10 [00:01<00:00,  7.64it/s]
+100%|██████████| 10/10 [00:01<00:00,  7.78it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 198.85it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 159.24it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 122.47it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 116.39it/s]
+
+  0%|          | 0/302 [00:00<?, ?it/s]
+  0%|          | 1/302 [00:03<19:13,  3.83s/it]
+  1%|          | 2/302 [00:07<17:57,  3.59s/it]
+  1%|          | 3/302 [00:10<17:13,  3.46s/it]
+  1%|▏         | 4/302 [00:14<17:59,  3.62s/it]
+  2%|▏         | 5/302 [00:18<18:06,  3.66s/it]
+  2%|▏         | 6/302 [00:21<17:23,  3.52s/it]
+  2%|▏         | 7/302 [00:24<16:47,  3.42s/it]
+  3%|▎         | 8/302 [00:28<17:23,  3.55s/it]
+  3%|▎         | 9/302 [00:32<17:43,  3.63s/it]
+  3%|▎         | 10/302 [00:35<17:06,  3.52s/it]
+  4%|▎         | 11/302 [00:38<16:31,  3.41s/it]
+  4%|▍         | 12/302 [00:42<16:59,  3.51s/it]
+  4%|▍         | 13/302 [00:46<17:18,  3.59s/it]
+  5%|▍         | 14/302 [00:49<16:35,  3.46s/it]
+  5%|▍         | 15/302 [00:52<16:07,  3.37s/it]
+  5%|▌         | 16/302 [00:56<16:18,  3.42s/it]
+  6%|▌         | 17/302 [01:00<17:03,  3.59s/it]
+  6%|▌         | 18/302 [01:03<16:35,  3.50s/it]
+  6%|▋         | 19/302 [01:06<16:15,  3.45s/it]
+  7%|▋         | 20/302 [01:10<16:27,  3.50s/it]
+  7%|▋         | 21/302 [01:14<17:08,  3.66s/it]
+  7%|▋         | 22/302 [01:17<16:30,  3.54s/it]
+  8%|▊         | 23/302 [01:20<15:59,  3.44s/it]
+  8%|▊         | 24/302 [01:24<16:01,  3.46s/it]
+  8%|▊         | 25/302 [01:28<16:53,  3.66s/it]
+  9%|▊         | 26/302 [01:31<16:17,  3.54s/it]
+  9%|▉         | 27/302 [01:34<15:52,  3.46s/it]
+  9%|▉         | 28/302 [01:38<15:56,  3.49s/it]
+ 10%|▉         | 29/302 [01:42<16:45,  3.68s/it]
+ 10%|▉         | 30/302 [01:45<16:05,  3.55s/it]
+ 10%|█         | 31/302 [01:49<15:36,  3.46s/it]
+ 11%|█         | 32/302 [01:52<15:26,  3.43s/it]
+ 11%|█         | 33/302 [01:56<16:26,  3.67s/it]
+ 11%|█▏        | 34/302 [01:59<15:49,  3.54s/it]
+ 12%|█▏        | 35/302 [02:03<15:22,  3.46s/it]
+ 12%|█▏        | 36/302 [02:06<15:12,  3.43s/it]
+ 12%|█▏        | 37/302 [02:11<16:32,  3.74s/it]
+ 13%|█▎        | 38/302 [02:14<15:53,  3.61s/it]
+ 13%|█▎        | 39/302 [02:17<15:22,  3.51s/it]
+ 13%|█▎        | 40/302 [02:20<14:55,  3.42s/it]
+ 14%|█▎        | 41/302 [02:25<16:06,  3.70s/it]
+ 14%|█▍        | 42/302 [02:28<15:24,  3.56s/it]
+ 14%|█▍        | 43/302 [02:31<14:55,  3.46s/it]
+ 15%|█▍        | 44/302 [02:34<14:35,  3.39s/it]
+ 15%|█▍        | 45/302 [02:39<15:54,  3.72s/it]
+ 15%|█▌        | 46/302 [02:42<15:16,  3.58s/it]
+ 16%|█▌        | 47/302 [02:45<14:51,  3.50s/it]
+ 16%|█▌        | 48/302 [02:49<14:31,  3.43s/it]
+ 16%|█▌        | 49/302 [02:53<15:35,  3.70s/it]
+ 17%|█▋        | 50/302 [02:56<15:00,  3.57s/it]
+ 17%|█▋        | 51/302 [03:00<14:31,  3.47s/it]
+ 17%|█▋        | 52/302 [03:03<14:10,  3.40s/it]
+ 18%|█▊        | 53/302 [03:07<15:09,  3.65s/it]
+ 18%|█▊        | 54/302 [03:10<14:51,  3.59s/it]
+ 18%|█▊        | 55/302 [03:14<14:24,  3.50s/it]
+ 19%|█▊        | 56/302 [03:17<14:06,  3.44s/it]
+ 19%|█▉        | 57/302 [03:21<15:02,  3.68s/it]
+ 19%|█▉        | 58/302 [03:25<14:39,  3.60s/it]
+ 20%|█▉        | 59/302 [03:28<14:14,  3.51s/it]
+ 20%|█▉        | 60/302 [03:31<13:54,  3.45s/it]
+ 20%|██        | 61/302 [03:36<14:52,  3.70s/it]
+ 21%|██        | 62/302 [03:39<14:34,  3.64s/it]
+ 21%|██        | 63/302 [03:42<14:03,  3.53s/it]
+ 21%|██        | 64/302 [03:46<13:42,  3.46s/it]
+ 22%|██▏       | 65/302 [03:50<14:31,  3.68s/it]
+ 22%|██▏       | 66/302 [03:53<14:09,  3.60s/it]
+ 22%|██▏       | 67/302 [03:56<13:38,  3.48s/it]
+ 23%|██▎       | 68/302 [04:00<13:25,  3.44s/it]
+ 23%|██▎       | 69/302 [04:04<14:10,  3.65s/it]
+ 23%|██▎       | 70/302 [04:08<13:59,  3.62s/it]
+ 24%|██▎       | 71/302 [04:11<13:31,  3.51s/it]
+ 24%|██▍       | 72/302 [04:14<13:15,  3.46s/it]
+ 24%|██▍       | 73/302 [04:18<14:01,  3.67s/it]
+ 25%|██▍       | 74/302 [04:22<13:43,  3.61s/it]
+ 25%|██▍       | 75/302 [04:25<13:09,  3.48s/it]
+ 25%|██▌       | 76/302 [04:28<12:50,  3.41s/it]
+ 25%|██▌       | 77/302 [04:32<13:25,  3.58s/it]
+ 26%|██▌       | 78/302 [04:36<13:26,  3.60s/it]
+ 26%|██▌       | 79/302 [04:39<13:02,  3.51s/it]
+ 26%|██▋       | 80/302 [04:42<12:40,  3.43s/it]
+ 27%|██▋       | 81/302 [04:46<13:13,  3.59s/it]
+ 27%|██▋       | 82/302 [04:50<13:11,  3.60s/it]
+ 27%|██▋       | 83/302 [04:53<12:48,  3.51s/it]
+ 28%|██▊       | 84/302 [04:57<12:29,  3.44s/it]
+ 28%|██▊       | 85/302 [05:01<13:02,  3.61s/it]
+ 28%|██▊       | 86/302 [05:04<12:59,  3.61s/it]
+ 29%|██▉       | 87/302 [05:07<12:29,  3.49s/it]
+ 29%|██▉       | 88/302 [05:11<12:09,  3.41s/it]
+ 29%|██▉       | 89/302 [05:14<12:34,  3.54s/it]
+ 30%|██▉       | 90/302 [05:18<12:41,  3.59s/it]
+ 30%|███       | 91/302 [05:21<12:16,  3.49s/it]
+ 30%|███       | 92/302 [05:25<12:04,  3.45s/it]
+ 31%|███       | 93/302 [05:29<12:26,  3.57s/it]
+ 31%|███       | 94/302 [05:32<12:32,  3.62s/it]
+ 31%|███▏      | 95/302 [05:36<12:07,  3.52s/it]
+ 32%|███▏      | 96/302 [05:39<11:46,  3.43s/it]
+ 32%|███▏      | 97/302 [05:43<12:05,  3.54s/it]
+ 32%|███▏      | 98/302 [05:46<12:18,  3.62s/it]
+ 33%|███▎      | 99/302 [05:50<11:48,  3.49s/it]
+ 33%|███▎      | 100/302 [05:53<11:26,  3.40s/it]
+ 33%|███▎      | 101/302 [05:57<11:43,  3.50s/it]
+ 34%|███▍      | 102/302 [06:01<12:12,  3.66s/it]
+ 34%|███▍      | 103/302 [06:04<11:47,  3.56s/it]
+ 34%|███▍      | 104/302 [06:07<11:30,  3.49s/it]
+ 35%|███▍      | 105/302 [06:11<11:47,  3.59s/it]
+ 35%|███▌      | 106/302 [06:15<11:59,  3.67s/it]
+ 35%|███▌      | 107/302 [06:18<11:35,  3.57s/it]
+ 36%|███▌      | 108/302 [06:22<11:16,  3.49s/it]
+ 36%|███▌      | 109/302 [06:25<11:25,  3.55s/it]
+ 36%|███▋      | 110/302 [06:29<11:37,  3.64s/it]
+ 37%|███▋      | 111/302 [06:32<11:09,  3.50s/it]
+ 37%|███▋      | 112/302 [06:35<10:51,  3.43s/it]
+ 37%|███▋      | 113/302 [06:39<10:57,  3.48s/it]
+ 38%|███▊      | 114/302 [06:43<11:24,  3.64s/it]
+ 38%|███▊      | 115/302 [06:46<10:59,  3.53s/it]
+ 38%|███▊      | 116/302 [06:50<10:43,  3.46s/it]
+ 39%|███▊      | 117/302 [06:53<10:45,  3.49s/it]
+ 39%|███▉      | 118/302 [06:57<11:10,  3.64s/it]
+ 39%|███▉      | 119/302 [07:00<10:42,  3.51s/it]
+ 40%|███▉      | 120/302 [07:04<10:22,  3.42s/it]
+ 40%|████      | 121/302 [07:07<10:23,  3.45s/it]
+ 40%|████      | 122/302 [07:11<10:55,  3.64s/it]
+ 41%|████      | 123/302 [07:14<10:30,  3.52s/it]
+ 41%|████      | 124/302 [07:18<10:08,  3.42s/it]
+ 41%|████▏     | 125/302 [07:21<10:00,  3.39s/it]
+ 42%|████▏     | 126/302 [07:25<10:40,  3.64s/it]
+ 42%|████▏     | 127/302 [07:28<10:14,  3.51s/it]
+ 42%|████▏     | 128/302 [07:32<09:55,  3.42s/it]
+ 43%|████▎     | 129/302 [07:35<09:44,  3.38s/it]
+ 43%|████▎     | 130/302 [07:39<10:32,  3.68s/it]
+ 43%|████▎     | 131/302 [07:43<10:05,  3.54s/it]
+ 44%|████▎     | 132/302 [07:46<09:47,  3.45s/it]
+ 44%|████▍     | 133/302 [07:49<09:31,  3.38s/it]
+ 44%|████▍     | 134/302 [07:53<10:15,  3.67s/it]
+ 45%|████▍     | 135/302 [07:56<09:48,  3.52s/it]
+ 45%|████▌     | 136/302 [08:00<09:29,  3.43s/it]
+ 45%|████▌     | 137/302 [08:03<09:16,  3.37s/it]
+ 46%|████▌     | 138/302 [08:07<09:51,  3.61s/it]
+ 46%|████▌     | 139/302 [08:10<09:36,  3.53s/it]
+ 46%|████▋     | 140/302 [08:14<09:17,  3.44s/it]
+ 47%|████▋     | 141/302 [08:17<09:02,  3.37s/it]
+ 47%|████▋     | 142/302 [08:21<09:35,  3.60s/it]
+ 47%|████▋     | 143/302 [08:25<09:31,  3.59s/it]
+ 48%|████▊     | 144/302 [08:28<09:08,  3.47s/it]
+ 48%|████▊     | 145/302 [08:31<08:51,  3.39s/it]
+ 48%|████▊     | 146/302 [08:35<09:16,  3.57s/it]
+ 49%|████▊     | 147/302 [08:39<09:17,  3.59s/it]
+ 49%|████▉     | 148/302 [08:42<08:58,  3.50s/it]
+ 49%|████▉     | 149/302 [08:45<08:45,  3.44s/it]
+ 50%|████▉     | 150/302 [08:49<09:05,  3.59s/it]
+ 50%|█████     | 151/302 [08:53<09:03,  3.60s/it]
+ 50%|█████     | 152/302 [08:56<08:40,  3.47s/it]
+ 51%|█████     | 153/302 [08:59<08:23,  3.38s/it]
+ 51%|█████     | 154/302 [09:03<08:42,  3.53s/it]
+ 51%|█████▏    | 155/302 [09:07<08:45,  3.58s/it]
+ 52%|█████▏    | 156/302 [09:10<08:25,  3.46s/it]
+ 52%|█████▏    | 157/302 [09:13<08:12,  3.40s/it]
+ 52%|█████▏    | 158/302 [09:17<08:25,  3.51s/it]
+ 53%|█████▎    | 159/302 [09:21<08:33,  3.59s/it]
+ 53%|█████▎    | 160/302 [09:24<08:13,  3.47s/it]
+ 53%|█████▎    | 161/302 [09:27<07:57,  3.39s/it]
+ 54%|█████▎    | 162/302 [09:31<08:07,  3.48s/it]
+ 54%|█████▍    | 163/302 [09:35<08:21,  3.61s/it]
+ 54%|█████▍    | 164/302 [09:38<08:00,  3.48s/it]
+ 55%|█████▍    | 165/302 [09:41<07:43,  3.38s/it]
+ 55%|█████▍    | 166/302 [09:45<07:46,  3.43s/it]
+ 55%|█████▌    | 167/302 [09:49<08:06,  3.60s/it]
+ 56%|█████▌    | 168/302 [09:52<07:47,  3.49s/it]
+ 56%|█████▌    | 169/302 [09:55<07:29,  3.38s/it]
+ 56%|█████▋    | 170/302 [09:58<07:23,  3.36s/it]
+ 57%|█████▋    | 171/302 [10:02<07:48,  3.58s/it]
+ 57%|█████▋    | 172/302 [10:06<07:31,  3.48s/it]
+ 57%|█████▋    | 173/302 [10:09<07:20,  3.42s/it]
+ 58%|█████▊    | 174/302 [10:12<07:21,  3.45s/it]
+ 58%|█████▊    | 175/302 [10:17<07:49,  3.70s/it]
+ 58%|█████▊    | 176/302 [10:20<07:28,  3.56s/it]
+ 59%|█████▊    | 177/302 [10:23<07:11,  3.45s/it]
+ 59%|█████▉    | 178/302 [10:27<07:12,  3.49s/it]
+ 59%|█████▉    | 179/302 [10:31<07:38,  3.73s/it]
+ 60%|█████▉    | 180/302 [10:34<07:17,  3.59s/it]
+ 60%|█████▉    | 181/302 [10:37<07:03,  3.50s/it]
+ 60%|██████    | 182/302 [10:41<06:57,  3.48s/it]
+ 61%|██████    | 183/302 [10:45<07:19,  3.69s/it]
+ 61%|██████    | 184/302 [10:48<06:59,  3.56s/it]
+ 61%|██████▏   | 185/302 [10:52<06:45,  3.47s/it]
+ 62%|██████▏   | 186/302 [10:55<06:38,  3.44s/it]
+ 62%|██████▏   | 187/302 [10:59<07:04,  3.69s/it]
+ 62%|██████▏   | 188/302 [11:02<06:46,  3.56s/it]
+ 63%|██████▎   | 189/302 [11:06<06:31,  3.46s/it]
+ 63%|██████▎   | 190/302 [11:09<06:21,  3.41s/it]
+ 63%|██████▎   | 191/302 [11:13<06:49,  3.69s/it]
+ 64%|██████▎   | 192/302 [11:17<06:29,  3.55s/it]
+ 64%|██████▍   | 193/302 [11:20<06:17,  3.46s/it]
+ 64%|██████▍   | 194/302 [11:23<06:03,  3.37s/it]
+ 65%|██████▍   | 195/302 [11:27<06:33,  3.68s/it]
+ 65%|██████▍   | 196/302 [11:31<06:17,  3.56s/it]
+ 65%|██████▌   | 197/302 [11:34<06:00,  3.44s/it]
+ 66%|██████▌   | 198/302 [11:37<05:49,  3.36s/it]
+ 66%|██████▌   | 199/302 [11:41<06:16,  3.65s/it]
+ 66%|██████▌   | 200/302 [11:45<06:06,  3.59s/it]
+ 67%|██████▋   | 201/302 [11:48<05:52,  3.49s/it]
+ 67%|██████▋   | 202/302 [11:51<05:41,  3.42s/it]
+ 67%|██████▋   | 203/302 [11:55<06:01,  3.65s/it]
+ 68%|██████▊   | 204/302 [11:59<05:50,  3.58s/it]
+ 68%|██████▊   | 205/302 [12:02<05:38,  3.49s/it]
+ 68%|██████▊   | 206/302 [12:05<05:27,  3.41s/it]
+ 69%|██████▊   | 207/302 [12:10<05:45,  3.63s/it]
+ 69%|██████▉   | 208/302 [12:13<05:39,  3.61s/it]
+ 69%|██████▉   | 209/302 [12:16<05:26,  3.51s/it]
+ 70%|██████▉   | 210/302 [12:20<05:14,  3.42s/it]
+ 70%|██████▉   | 211/302 [12:24<05:27,  3.60s/it]
+ 70%|███████   | 212/302 [12:27<05:21,  3.57s/it]
+ 71%|███████   | 213/302 [12:30<05:10,  3.49s/it]
+ 71%|███████   | 214/302 [12:34<05:00,  3.42s/it]
+ 71%|███████   | 215/302 [12:38<05:13,  3.60s/it]
+ 72%|███████▏  | 216/302 [12:41<05:08,  3.59s/it]
+ 72%|███████▏  | 217/302 [12:45<04:56,  3.49s/it]
+ 72%|███████▏  | 218/302 [12:48<04:46,  3.41s/it]
+ 73%|███████▎  | 219/302 [12:52<04:55,  3.56s/it]
+ 73%|███████▎  | 220/302 [12:55<04:53,  3.58s/it]
+ 73%|███████▎  | 221/302 [12:58<04:38,  3.44s/it]
+ 74%|███████▎  | 222/302 [13:02<04:28,  3.35s/it]
+ 74%|███████▍  | 223/302 [13:05<04:36,  3.51s/it]
+ 74%|███████▍  | 224/302 [13:09<04:37,  3.56s/it]
+ 75%|███████▍  | 225/302 [13:12<04:25,  3.44s/it]
+ 75%|███████▍  | 226/302 [13:15<04:16,  3.37s/it]
+ 75%|███████▌  | 227/302 [13:19<04:18,  3.45s/it]
+ 75%|███████▌  | 228/302 [13:23<04:23,  3.56s/it]
+ 76%|███████▌  | 229/302 [13:26<04:11,  3.45s/it]
+ 76%|███████▌  | 230/302 [13:29<04:01,  3.36s/it]
+ 76%|███████▋  | 231/302 [13:33<04:01,  3.40s/it]
+ 77%|███████▋  | 232/302 [13:37<04:10,  3.58s/it]
+ 77%|███████▋  | 233/302 [13:40<03:59,  3.47s/it]
+ 77%|███████▋  | 234/302 [13:43<03:50,  3.39s/it]
+ 78%|███████▊  | 235/302 [13:47<03:48,  3.41s/it]
+ 78%|███████▊  | 236/302 [13:51<03:57,  3.61s/it]
+ 78%|███████▊  | 237/302 [13:54<03:45,  3.46s/it]
+ 79%|███████▉  | 238/302 [13:57<03:35,  3.37s/it]
+ 79%|███████▉  | 239/302 [14:00<03:30,  3.35s/it]
+ 79%|███████▉  | 240/302 [14:04<03:42,  3.59s/it]
+ 80%|███████▉  | 241/302 [14:08<03:30,  3.45s/it]
+ 80%|████████  | 242/302 [14:11<03:24,  3.41s/it]
+ 80%|████████  | 243/302 [14:14<03:17,  3.35s/it]
+ 81%|████████  | 244/302 [14:18<03:33,  3.68s/it]
+ 81%|████████  | 245/302 [14:22<03:21,  3.53s/it]
+ 81%|████████▏ | 246/302 [14:25<03:12,  3.44s/it]
+ 82%|████████▏ | 247/302 [14:28<03:05,  3.37s/it]
+ 82%|████████▏ | 248/302 [14:32<03:17,  3.65s/it]
+ 82%|████████▏ | 249/302 [14:36<03:10,  3.60s/it]
+ 83%|████████▎ | 250/302 [14:39<03:01,  3.49s/it]
+ 83%|████████▎ | 251/302 [14:42<02:53,  3.41s/it]
+ 83%|████████▎ | 252/302 [14:47<03:03,  3.66s/it]
+ 84%|████████▍ | 253/302 [14:50<02:54,  3.56s/it]
+ 84%|████████▍ | 254/302 [14:53<02:45,  3.45s/it]
+ 84%|████████▍ | 255/302 [14:56<02:38,  3.37s/it]
+ 85%|████████▍ | 256/302 [15:00<02:43,  3.56s/it]
+ 85%|████████▌ | 257/302 [15:04<02:38,  3.53s/it]
+ 85%|████████▌ | 258/302 [15:07<02:31,  3.45s/it]
+ 86%|████████▌ | 259/302 [15:10<02:25,  3.39s/it]
+ 86%|████████▌ | 260/302 [15:14<02:29,  3.57s/it]
+ 86%|████████▋ | 261/302 [15:18<02:27,  3.59s/it]
+ 87%|████████▋ | 262/302 [15:21<02:18,  3.47s/it]
+ 87%|████████▋ | 263/302 [15:24<02:12,  3.39s/it]
+ 87%|████████▋ | 264/302 [15:28<02:14,  3.55s/it]
+ 88%|████████▊ | 265/302 [15:32<02:10,  3.54s/it]
+ 88%|████████▊ | 266/302 [15:35<02:03,  3.42s/it]
+ 88%|████████▊ | 267/302 [15:38<01:56,  3.34s/it]
+ 89%|████████▊ | 268/302 [15:42<01:56,  3.43s/it]
+ 89%|████████▉ | 269/302 [15:45<01:56,  3.52s/it]
+ 89%|████████▉ | 270/302 [15:49<01:49,  3.43s/it]
+ 90%|████████▉ | 271/302 [15:52<01:43,  3.35s/it]
+ 90%|█████████ | 272/302 [15:55<01:42,  3.41s/it]
+ 90%|█████████ | 273/302 [15:59<01:43,  3.56s/it]
+ 91%|█████████ | 274/302 [16:02<01:36,  3.46s/it]
+ 91%|█████████ | 275/302 [16:06<01:30,  3.37s/it]
+ 91%|█████████▏| 276/302 [16:09<01:28,  3.41s/it]
+ 92%|█████████▏| 277/302 [16:13<01:29,  3.57s/it]
+ 92%|█████████▏| 278/302 [16:16<01:23,  3.47s/it]
+ 92%|█████████▏| 279/302 [16:20<01:18,  3.40s/it]
+ 93%|█████████▎| 280/302 [16:23<01:14,  3.39s/it]
+ 93%|█████████▎| 281/302 [16:27<01:15,  3.58s/it]
+ 93%|█████████▎| 282/302 [16:30<01:08,  3.44s/it]
+ 94%|█████████▎| 283/302 [16:33<01:03,  3.35s/it]
+ 94%|█████████▍| 284/302 [16:37<01:00,  3.35s/it]
+ 94%|█████████▍| 285/302 [16:41<01:01,  3.63s/it]
+ 95%|█████████▍| 286/302 [16:44<00:56,  3.51s/it]
+ 95%|█████████▌| 287/302 [16:47<00:51,  3.41s/it]
+ 95%|█████████▌| 288/302 [16:50<00:46,  3.33s/it]
+ 96%|█████████▌| 289/302 [16:55<00:46,  3.61s/it]
+ 96%|█████████▌| 290/302 [16:58<00:42,  3.51s/it]
+ 96%|█████████▋| 291/302 [17:01<00:37,  3.45s/it]
+ 97%|█████████▋| 292/302 [17:04<00:33,  3.38s/it]
+ 97%|█████████▋| 293/302 [17:09<00:33,  3.68s/it]
+ 97%|█████████▋| 294/302 [17:12<00:28,  3.61s/it]
+ 98%|█████████▊| 295/302 [17:16<00:25,  3.65s/it]
+ 98%|█████████▊| 296/302 [17:19<00:21,  3.57s/it]
+ 98%|█████████▊| 297/302 [17:24<00:19,  3.81s/it]
+ 99%|█████████▊| 298/302 [17:27<00:14,  3.67s/it]
+ 99%|█████████▉| 299/302 [17:30<00:10,  3.56s/it]
+ 99%|█████████▉| 300/302 [17:34<00:07,  3.57s/it]
+100%|█████████▉| 301/302 [17:38<00:03,  3.79s/it]
+100%|██████████| 302/302 [17:42<00:00,  3.65s/it]
+100%|██████████| 302/302 [17:42<00:00,  3.52s/it]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:03<00:00,  3.32s/it]
+100%|██████████| 1/1 [00:03<00:00,  3.32s/it]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:05<00:00,  5.83s/it]
+100%|██████████| 1/1 [00:05<00:00,  5.83s/it]
+-----------------------------------------------
+|                     Epoch |               0 |
+|         TotalEnvInteracts |           5e+03 |
+|                      Time |        1.09e+03 |
+|                       SPS |            4.62 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |            16.4 |
+|                  StdEpRet |            14.3 |
+|                  MaxEpRet |             133 |
+|                  MinEpRet |            2.33 |
+|                     EpLen |            21.4 |
+|          AverageTestEpRet |              65 |
+|              StdTestEpRet |             2.6 |
+|              MaxTestEpRet |            69.7 |
+|              MinTestEpRet |            60.4 |
+|                 TestEpLen |              94 |
+|             AverageQ1Vals |               0 |
+|                 StdQ1Vals |               0 |
+|                 MaxQ1Vals |               0 |
+|                 MinQ1Vals |               0 |
+|             AverageLossQ1 |               0 |
+|                 StdLossQ1 |               0 |
+|              AverageLogPi |               0 |
+|                  StdLogPi |               0 |
+|                  MaxLogPi |               0 |
+|                  MinLogPi |               0 |
+|                    LossPi |               0 |
+|              AverageAlpha |               0 |
+|                  StdAlpha |               0 |
+|                  MaxAlpha |               0 |
+|                  MinAlpha |               0 |
+|                 LossAlpha |               0 |
+|            AveragePreTanh |               0 |
+|                StdPreTanh |               0 |
+|                MaxPreTanh |               0 |
+|                MinPreTanh |               0 |
+|        DynPIToD/ScoreMean |               1 |
+|         DynPIToD/ScoreMin |               1 |
+|         DynPIToD/ScoreMax |               1 |
+|         DynPIToD/ScoreStd |               0 |
+|          DynPIToD/Epsilon |               1 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               1 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |               0 |
+|      DynPIToD/GroupAgeMax |               0 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |              15 |
+|               StdMCDisRet |            14.2 |
+|               MaxMCDisRet |            67.2 |
+|               MinMCDisRet |          -0.917 |
+|        AverageMCDisRetEnt |            20.7 |
+|            StdMCDisRetEnt |            17.4 |
+|            MaxMCDisRetEnt |            82.2 |
+|            MinMCDisRetEnt |          -0.361 |
+|              AverageQPred |          0.0151 |
+|                  StdQPred |          0.0898 |
+|                  MaxQPred |           0.465 |
+|                  MinQPred |          -0.183 |
+|              AverageQBias |           -20.7 |
+|                  StdQBias |            17.4 |
+|                  MaxQBias |           0.245 |
+|                  MinQBias |           -82.1 |
+|           AverageQBiasAbs |            20.7 |
+|               StdQBiasAbs |            17.4 |
+|               MaxQBiasAbs |            82.1 |
+|               MinQBiasAbs |          0.0357 |
+|          AverageNormQBias |           0.826 |
+|              StdNormQBias |           0.299 |
+|              MaxNormQBias |            1.01 |
+|              MinNormQBias |         0.00357 |
+|           AverageQBiasSqr |             730 |
+|               StdQBiasSqr |        1.15e+03 |
+|               MaxQBiasSqr |        6.74e+03 |
+|               MinQBiasSqr |         0.00127 |
+|       AverageNormQBiasSqr |            20.1 |
+|           StdNormQBiasSqr |            17.9 |
+|           MaxNormQBiasSqr |              82 |
+|           MinNormQBiasSqr |        0.000127 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |               1 |
+|         TotalEnvInteracts |           1e+04 |
+|                      Time |         1.4e+03 |
+|                       SPS |            7.18 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |             174 |
+|                  StdEpRet |            84.1 |
+|                  MaxEpRet |             314 |
+|                  MinEpRet |            11.1 |
+|                     EpLen |            89.6 |
+|          AverageTestEpRet |             288 |
+|              StdTestEpRet |            1.66 |
+|              MaxTestEpRet |             291 |
+|              MinTestEpRet |             285 |
+|                 TestEpLen |             112 |
+|             AverageQ1Vals |            88.6 |
+|                 StdQ1Vals |            48.4 |
+|                 MaxQ1Vals |             175 |
+|                 MinQ1Vals |             -20 |
+|             AverageLossQ1 |            4.99 |
+|                 StdLossQ1 |            4.94 |
+|              AverageLogPi |          -0.715 |
+|                  StdLogPi |            2.01 |
+|                  MaxLogPi |              16 |
+|                  MinLogPi |           -10.8 |
+|                    LossPi |           -92.8 |
+|              AverageAlpha |           0.552 |
+|                  StdAlpha |           0.202 |
+|                  MaxAlpha |               1 |
+|                  MinAlpha |           0.288 |
+|                 LossAlpha |          -0.929 |
+|            AveragePreTanh |           0.844 |
+|                StdPreTanh |           0.637 |
+|                MaxPreTanh |            6.85 |
+|                MinPreTanh |        2.38e-07 |
+|        DynPIToD/ScoreMean |            5.16 |
+|         DynPIToD/ScoreMin |            5.16 |
+|         DynPIToD/ScoreMax |            5.16 |
+|         DynPIToD/ScoreStd |               0 |
+|          DynPIToD/Epsilon |            5.16 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               1 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |               1 |
+|      DynPIToD/GroupAgeMax |               1 |
+|     DynPIToD/NumRefreshed |               1 |
+| DynPIToD/RefreshWallclock |          0.0427 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |             114 |
+|               StdMCDisRet |            46.3 |
+|               MaxMCDisRet |             170 |
+|               MinMCDisRet |            1.47 |
+|        AverageMCDisRetEnt |             127 |
+|            StdMCDisRetEnt |            52.8 |
+|            MaxMCDisRetEnt |             192 |
+|            MinMCDisRetEnt |            1.47 |
+|              AverageQPred |            69.8 |
+|                  StdQPred |              21 |
+|                  MaxQPred |            87.4 |
+|                  MinQPred |          -0.535 |
+|              AverageQBias |           -56.9 |
+|                  StdQBias |            35.6 |
+|                  MaxQBias |            81.4 |
+|                  MinQBias |            -107 |
+|           AverageQBiasAbs |            59.1 |
+|               StdQBiasAbs |            31.8 |
+|               MaxQBiasAbs |             107 |
+|               MinQBiasAbs |             0.2 |
+|          AverageNormQBias |           0.496 |
+|              StdNormQBias |           0.703 |
+|              MaxNormQBias |            8.14 |
+|              MinNormQBias |         0.00539 |
+|           AverageQBiasSqr |        4.51e+03 |
+|               StdQBiasSqr |        3.39e+03 |
+|               MaxQBiasSqr |        1.15e+04 |
+|               MinQBiasSqr |          0.0399 |
+|       AverageNormQBiasSqr |              34 |
+|           StdNormQBiasSqr |            54.6 |
+|           MaxNormQBiasSqr |             663 |
+|           MinNormQBiasSqr |         0.00108 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |               2 |
+|         TotalEnvInteracts |         1.5e+04 |
+|                      Time |         1.7e+03 |
+|                       SPS |            8.82 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |             258 |
+|                  StdEpRet |             149 |
+|                  MaxEpRet |             555 |
+|                  MinEpRet |            7.03 |
+|                     EpLen |             113 |
+|          AverageTestEpRet |             411 |
+|              StdTestEpRet |             1.6 |
+|              MaxTestEpRet |             414 |
+|              MinTestEpRet |             408 |
+|                 TestEpLen |             164 |
+|             AverageQ1Vals |             167 |
+|                 StdQ1Vals |            50.7 |
+|                 MaxQ1Vals |             233 |
+|                 MinQ1Vals |           -38.3 |
+|             AverageLossQ1 |            8.27 |
+|                 StdLossQ1 |            7.46 |
+|              AverageLogPi |           0.721 |
+|                  StdLogPi |             2.6 |
+|                  MaxLogPi |            20.5 |
+|                  MinLogPi |           -11.6 |
+|                    LossPi |            -171 |
+|              AverageAlpha |           0.201 |
+|                  StdAlpha |          0.0356 |
+|                  MaxAlpha |           0.287 |
+|                  MinAlpha |           0.167 |
+|                 LossAlpha |          -0.408 |
+|            AveragePreTanh |            1.01 |
+|                StdPreTanh |           0.738 |
+|                MaxPreTanh |             6.7 |
+|                MinPreTanh |        4.47e-07 |
+|        DynPIToD/ScoreMean |        2.49e+04 |
+|         DynPIToD/ScoreMin |        2.41e+04 |
+|         DynPIToD/ScoreMax |        2.58e+04 |
+|         DynPIToD/ScoreStd |             854 |
+|          DynPIToD/Epsilon |        2.41e+04 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               2 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         2.5e+03 |
+|      DynPIToD/GroupAgeMax |           5e+03 |
+|     DynPIToD/NumRefreshed |               2 |
+| DynPIToD/RefreshWallclock |           0.135 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |             136 |
+|               StdMCDisRet |            50.7 |
+|               MaxMCDisRet |             198 |
+|               MinMCDisRet |             3.4 |
+|        AverageMCDisRetEnt |             144 |
+|            StdMCDisRetEnt |            55.3 |
+|            MaxMCDisRetEnt |             211 |
+|            MinMCDisRetEnt |             3.4 |
+|              AverageQPred |             118 |
+|                  StdQPred |            25.4 |
+|                  MaxQPred |             136 |
+|                  MinQPred |            24.9 |
+|              AverageQBias |           -26.1 |
+|                  StdQBias |            36.7 |
+|                  MaxQBias |            49.9 |
+|                  MinQBias |           -84.2 |
+|           AverageQBiasAbs |            40.3 |
+|               StdQBiasAbs |            20.1 |
+|               MaxQBiasAbs |            84.2 |
+|               MinQBiasAbs |          0.0396 |
+|          AverageNormQBias |           0.379 |
+|              StdNormQBias |           0.496 |
+|              MaxNormQBias |            4.34 |
+|              MinNormQBias |        0.000313 |
+|           AverageQBiasSqr |        2.03e+03 |
+|               StdQBiasSqr |        1.66e+03 |
+|               MaxQBiasSqr |        7.08e+03 |
+|               MinQBiasSqr |         0.00157 |
+|       AverageNormQBiasSqr |            16.2 |
+|           StdNormQBiasSqr |            19.1 |
+|           MaxNormQBiasSqr |             188 |
+|           MinNormQBiasSqr |        1.24e-05 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |               3 |
+|         TotalEnvInteracts |           2e+04 |
+|                      Time |        2.01e+03 |
+|                       SPS |            9.97 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |             303 |
+|                  StdEpRet |            53.6 |
+|                  MaxEpRet |             411 |
+|                  MinEpRet |             139 |
+|                     EpLen |             140 |
+|          AverageTestEpRet |             142 |
+|              StdTestEpRet |            2.07 |
+|              MaxTestEpRet |             144 |
+|              MinTestEpRet |             138 |
+|                 TestEpLen |            77.7 |
+|             AverageQ1Vals |             198 |
+|                 StdQ1Vals |            63.8 |
+|                 MaxQ1Vals |             279 |
+|                 MinQ1Vals |           -35.4 |
+|             AverageLossQ1 |            6.26 |
+|                 StdLossQ1 |            7.48 |
+|              AverageLogPi |            1.02 |
+|                  StdLogPi |            2.65 |
+|                  MaxLogPi |            22.1 |
+|                  MinLogPi |           -13.5 |
+|                    LossPi |            -138 |
+|              AverageAlpha |           0.203 |
+|                  StdAlpha |          0.0135 |
+|                  MaxAlpha |           0.221 |
+|                  MinAlpha |           0.174 |
+|                 LossAlpha |          0.0402 |
+|            AveragePreTanh |            1.02 |
+|                StdPreTanh |           0.755 |
+|                MaxPreTanh |            6.82 |
+|                MinPreTanh |        3.87e-07 |
+|        DynPIToD/ScoreMean |        2.01e+04 |
+|         DynPIToD/ScoreMin |        4.61e+03 |
+|         DynPIToD/ScoreMax |        2.79e+04 |
+|         DynPIToD/ScoreStd |         1.1e+04 |
+|          DynPIToD/Epsilon |        9.15e+03 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               3 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           5e+03 |
+|      DynPIToD/GroupAgeMax |           1e+04 |
+|     DynPIToD/NumRefreshed |               3 |
+| DynPIToD/RefreshWallclock |            0.22 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |             147 |
+|               StdMCDisRet |            75.3 |
+|               MaxMCDisRet |             257 |
+|               MinMCDisRet |            2.52 |
+|        AverageMCDisRetEnt |             155 |
+|            StdMCDisRetEnt |            77.6 |
+|            MaxMCDisRetEnt |             267 |
+|            MinMCDisRetEnt |            2.52 |
+|              AverageQPred |             156 |
+|                  StdQPred |            31.5 |
+|                  MaxQPred |             178 |
+|                  MinQPred |            4.89 |
+|              AverageQBias |           0.944 |
+|                  StdQBias |            76.6 |
+|                  MaxQBias |             158 |
+|                  MinQBias |            -105 |
+|           AverageQBiasAbs |            67.7 |
+|               StdQBiasAbs |            35.7 |
+|               MaxQBiasAbs |             158 |
+|               MinQBiasAbs |          0.0131 |
+|          AverageNormQBias |            1.06 |
+|              StdNormQBias |            2.29 |
+|              MaxNormQBias |            15.8 |
+|              MinNormQBias |        9.22e-05 |
+|           AverageQBiasSqr |        5.86e+03 |
+|               StdQBiasSqr |        5.42e+03 |
+|               MaxQBiasSqr |        2.51e+04 |
+|               MinQBiasSqr |        0.000173 |
+|       AverageNormQBiasSqr |             123 |
+|           StdNormQBiasSqr |             343 |
+|           MaxNormQBiasSqr |        2.51e+03 |
+|           MinNormQBiasSqr |        1.21e-06 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |               4 |
+|         TotalEnvInteracts |         2.5e+04 |
+|                      Time |        2.31e+03 |
+|                       SPS |            10.8 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |             358 |
+|                  StdEpRet |            81.9 |
+|                  MaxEpRet |             496 |
+|                  MinEpRet |            54.3 |
+|                     EpLen |             142 |
+|          AverageTestEpRet |             421 |
+|              StdTestEpRet |            1.33 |
+|              MaxTestEpRet |             424 |
+|              MinTestEpRet |             419 |
+|                 TestEpLen |             152 |
+|             AverageQ1Vals |             213 |
+|                 StdQ1Vals |            72.5 |
+|                 MaxQ1Vals |             293 |
+|                 MinQ1Vals |           -37.5 |
+|             AverageLossQ1 |            2.86 |
+|                 StdLossQ1 |            3.26 |
+|              AverageLogPi |           0.999 |
+|                  StdLogPi |            2.66 |
+|                  MaxLogPi |            21.7 |
+|                  MinLogPi |           -11.4 |
+|                    LossPi |           -77.7 |
+|              AverageAlpha |           0.215 |
+|                  StdAlpha |         0.00792 |
+|                  MaxAlpha |           0.228 |
+|                  MinAlpha |           0.199 |
+|                 LossAlpha |        -0.00227 |
+|            AveragePreTanh |            1.01 |
+|                StdPreTanh |            0.76 |
+|                MaxPreTanh |            8.53 |
+|                MinPreTanh |         9.8e-07 |
+|        DynPIToD/ScoreMean |        1.92e+04 |
+|         DynPIToD/ScoreMin |             374 |
+|         DynPIToD/ScoreMax |        3.71e+04 |
+|         DynPIToD/ScoreStd |        1.37e+04 |
+|          DynPIToD/Epsilon |        5.52e+03 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               4 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         7.5e+03 |
+|      DynPIToD/GroupAgeMax |         1.5e+04 |
+|     DynPIToD/NumRefreshed |               4 |
+| DynPIToD/RefreshWallclock |           0.172 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |             148 |
+|               StdMCDisRet |            57.2 |
+|               MaxMCDisRet |             215 |
+|               MinMCDisRet |             2.9 |
+|        AverageMCDisRetEnt |             156 |
+|            StdMCDisRetEnt |            61.1 |
+|            MaxMCDisRetEnt |             225 |
+|            MinMCDisRetEnt |             2.9 |
+|              AverageQPred |             157 |
+|                  StdQPred |            55.4 |
+|                  MaxQPred |             204 |
+|                  MinQPred |            1.86 |
+|              AverageQBias |            1.69 |
+|                  StdQBias |            18.6 |
+|                  MaxQBias |            53.7 |
+|                  MinQBias |           -31.3 |
+|           AverageQBiasAbs |            14.7 |
+|               StdQBiasAbs |            11.5 |
+|               MaxQBiasAbs |            53.7 |
+|               MinQBiasAbs |         0.00988 |
+|          AverageNormQBias |           0.134 |
+|              StdNormQBias |           0.156 |
+|              MaxNormQBias |           0.901 |
+|              MinNormQBias |        9.23e-05 |
+|           AverageQBiasSqr |             350 |
+|               StdQBiasSqr |             520 |
+|               MaxQBiasSqr |        2.88e+03 |
+|               MinQBiasSqr |        9.76e-05 |
+|       AverageNormQBiasSqr |            3.42 |
+|           StdNormQBiasSqr |            6.82 |
+|           MaxNormQBiasSqr |            44.6 |
+|           MinNormQBiasSqr |        1.39e-06 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |               5 |
+|         TotalEnvInteracts |           3e+04 |
+|                      Time |        2.62e+03 |
+|                       SPS |            11.4 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |             533 |
+|                  StdEpRet |            97.3 |
+|                  MaxEpRet |             725 |
+|                  MinEpRet |             301 |
+|                     EpLen |             183 |
+|          AverageTestEpRet |             646 |
+|              StdTestEpRet |            3.05 |
+|              MaxTestEpRet |             650 |
+|              MinTestEpRet |             641 |
+|                 TestEpLen |             206 |
+|             AverageQ1Vals |             215 |
+|                 StdQ1Vals |              70 |
+|                 MaxQ1Vals |             292 |
+|                 MinQ1Vals |           -66.8 |
+|             AverageLossQ1 |            2.43 |
+|                 StdLossQ1 |            2.75 |
+|              AverageLogPi |           0.968 |
+|                  StdLogPi |            2.69 |
+|                  MaxLogPi |            23.3 |
+|                  MinLogPi |           -12.9 |
+|                    LossPi |           -82.9 |
+|              AverageAlpha |             0.2 |
+|                  StdAlpha |          0.0208 |
+|                  MaxAlpha |           0.231 |
+|                  MinAlpha |           0.157 |
+|                 LossAlpha |         -0.0554 |
+|            AveragePreTanh |               1 |
+|                StdPreTanh |           0.763 |
+|                MaxPreTanh |            7.31 |
+|                MinPreTanh |        8.34e-07 |
+|        DynPIToD/ScoreMean |        1.37e+04 |
+|         DynPIToD/ScoreMin |             381 |
+|         DynPIToD/ScoreMax |        3.41e+04 |
+|         DynPIToD/ScoreStd |        1.26e+04 |
+|          DynPIToD/Epsilon |        1.02e+03 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               5 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           1e+04 |
+|      DynPIToD/GroupAgeMax |           2e+04 |
+|     DynPIToD/NumRefreshed |               5 |
+| DynPIToD/RefreshWallclock |           0.243 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |             194 |
+|               StdMCDisRet |            66.8 |
+|               MaxMCDisRet |             262 |
+|               MinMCDisRet |            4.04 |
+|        AverageMCDisRetEnt |             196 |
+|            StdMCDisRetEnt |              69 |
+|            MaxMCDisRetEnt |             265 |
+|            MinMCDisRetEnt |            4.04 |
+|              AverageQPred |             166 |
+|                  StdQPred |            52.2 |
+|                  MaxQPred |             214 |
+|                  MinQPred |            15.3 |
+|              AverageQBias |           -30.8 |
+|                  StdQBias |              19 |
+|                  MaxQBias |            19.4 |
+|                  MinQBias |           -74.1 |
+|           AverageQBiasAbs |            32.1 |
+|               StdQBiasAbs |            16.9 |
+|               MaxQBiasAbs |            74.1 |
+|               MinQBiasAbs |          0.0697 |
+|          AverageNormQBias |           0.176 |
+|              StdNormQBias |           0.176 |
+|              MaxNormQBias |            1.94 |
+|              MinNormQBias |        0.000536 |
+|           AverageQBiasSqr |        1.31e+03 |
+|               StdQBiasSqr |        1.07e+03 |
+|               MaxQBiasSqr |        5.49e+03 |
+|               MinQBiasSqr |         0.00486 |
+|       AverageNormQBiasSqr |            6.02 |
+|           StdNormQBiasSqr |            4.61 |
+|           MaxNormQBiasSqr |            37.6 |
+|           MinNormQBiasSqr |        3.74e-05 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |               6 |
+|         TotalEnvInteracts |         3.5e+04 |
+|                      Time |        2.93e+03 |
+|                       SPS |              12 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |             492 |
+|                  StdEpRet |            93.1 |
+|                  MaxEpRet |             635 |
+|                  MinEpRet |            95.9 |
+|                     EpLen |             166 |
+|          AverageTestEpRet |             636 |
+|              StdTestEpRet |            2.44 |
+|              MaxTestEpRet |             639 |
+|              MinTestEpRet |             632 |
+|                 TestEpLen |             202 |
+|             AverageQ1Vals |             198 |
+|                 StdQ1Vals |            65.8 |
+|                 MaxQ1Vals |             275 |
+|                 MinQ1Vals |           -43.2 |
+|             AverageLossQ1 |            2.81 |
+|                 StdLossQ1 |            2.78 |
+|              AverageLogPi |           0.992 |
+|                  StdLogPi |            2.58 |
+|                  MaxLogPi |            22.9 |
+|                  MinLogPi |           -17.6 |
+|                    LossPi |           -98.7 |
+|              AverageAlpha |           0.168 |
+|                  StdAlpha |          0.0168 |
+|                  MaxAlpha |           0.201 |
+|                  MinAlpha |           0.146 |
+|                 LossAlpha |         -0.0148 |
+|            AveragePreTanh |           0.957 |
+|                StdPreTanh |           0.756 |
+|                MaxPreTanh |            8.06 |
+|                MinPreTanh |        1.53e-07 |
+|        DynPIToD/ScoreMean |        4.74e+03 |
+|         DynPIToD/ScoreMin |             406 |
+|         DynPIToD/ScoreMax |        1.12e+04 |
+|         DynPIToD/ScoreStd |        4.19e+03 |
+|          DynPIToD/Epsilon |             559 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               6 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |        1.25e+04 |
+|      DynPIToD/GroupAgeMax |         2.5e+04 |
+|     DynPIToD/NumRefreshed |               6 |
+| DynPIToD/RefreshWallclock |           0.306 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |             199 |
+|               StdMCDisRet |            70.7 |
+|               MaxMCDisRet |             266 |
+|               MinMCDisRet |            3.96 |
+|        AverageMCDisRetEnt |             200 |
+|            StdMCDisRetEnt |            72.1 |
+|            MaxMCDisRetEnt |             269 |
+|            MinMCDisRetEnt |            3.96 |
+|              AverageQPred |             188 |
+|                  StdQPred |            50.3 |
+|                  MaxQPred |             235 |
+|                  MinQPred |            17.3 |
+|              AverageQBias |           -12.4 |
+|                  StdQBias |              24 |
+|                  MaxQBias |              51 |
+|                  MinQBias |           -46.9 |
+|           AverageQBiasAbs |            24.3 |
+|               StdQBiasAbs |            11.8 |
+|               MaxQBiasAbs |              51 |
+|               MinQBiasAbs |          0.0359 |
+|          AverageNormQBias |           0.207 |
+|              StdNormQBias |           0.407 |
+|              MaxNormQBias |            4.34 |
+|              MinNormQBias |        0.000217 |
+|           AverageQBiasSqr |             732 |
+|               StdQBiasSqr |             532 |
+|               MaxQBiasSqr |         2.6e+03 |
+|               MinQBiasSqr |         0.00129 |
+|       AverageNormQBiasSqr |            6.32 |
+|           StdNormQBiasSqr |              15 |
+|           MaxNormQBiasSqr |             188 |
+|           MinNormQBiasSqr |        7.78e-06 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |               7 |
+|         TotalEnvInteracts |           4e+04 |
+|                      Time |        3.24e+03 |
+|                       SPS |            12.4 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |             597 |
+|                  StdEpRet |            53.7 |
+|                  MaxEpRet |             711 |
+|                  MinEpRet |             514 |
+|                     EpLen |             193 |
+|          AverageTestEpRet |             632 |
+|              StdTestEpRet |            2.43 |
+|              MaxTestEpRet |             636 |
+|              MinTestEpRet |             629 |
+|                 TestEpLen |             204 |
+|             AverageQ1Vals |             207 |
+|                 StdQ1Vals |            62.9 |
+|                 MaxQ1Vals |             287 |
+|                 MinQ1Vals |             -41 |
+|             AverageLossQ1 |             2.3 |
+|                 StdLossQ1 |            2.19 |
+|              AverageLogPi |               1 |
+|                  StdLogPi |            2.58 |
+|                  MaxLogPi |            24.6 |
+|                  MinLogPi |           -11.3 |
+|                    LossPi |            -104 |
+|              AverageAlpha |           0.153 |
+|                  StdAlpha |         0.00509 |
+|                  MaxAlpha |           0.162 |
+|                  MinAlpha |           0.146 |
+|                 LossAlpha |         0.00171 |
+|            AveragePreTanh |           0.979 |
+|                StdPreTanh |            0.77 |
+|                MaxPreTanh |            8.67 |
+|                MinPreTanh |        6.26e-07 |
+|        DynPIToD/ScoreMean |        3.28e+03 |
+|         DynPIToD/ScoreMin |             335 |
+|         DynPIToD/ScoreMax |        6.68e+03 |
+|         DynPIToD/ScoreStd |        2.16e+03 |
+|          DynPIToD/Epsilon |        1.12e+03 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               7 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         1.5e+04 |
+|      DynPIToD/GroupAgeMax |           3e+04 |
+|     DynPIToD/NumRefreshed |               7 |
+| DynPIToD/RefreshWallclock |           0.439 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |             199 |
+|               StdMCDisRet |            69.6 |
+|               MaxMCDisRet |             267 |
+|               MinMCDisRet |            3.88 |
+|        AverageMCDisRetEnt |             203 |
+|            StdMCDisRetEnt |            71.6 |
+|            MaxMCDisRetEnt |             275 |
+|            MinMCDisRetEnt |            3.88 |
+|              AverageQPred |             202 |
+|                  StdQPred |              57 |
+|                  MaxQPred |             247 |
+|                  MinQPred |            1.68 |
+|              AverageQBias |          -0.652 |
+|                  StdQBias |            20.2 |
+|                  MaxQBias |            42.7 |
+|                  MinQBias |           -29.4 |
+|           AverageQBiasAbs |            18.4 |
+|               StdQBiasAbs |            8.48 |
+|               MaxQBiasAbs |            42.7 |
+|               MinQBiasAbs |          0.0405 |
+|          AverageNormQBias |           0.156 |
+|              StdNormQBias |           0.302 |
+|              MaxNormQBias |            3.44 |
+|              MinNormQBias |        0.000173 |
+|           AverageQBiasSqr |             409 |
+|               StdQBiasSqr |             318 |
+|               MaxQBiasSqr |        1.82e+03 |
+|               MinQBiasSqr |         0.00164 |
+|       AverageNormQBiasSqr |             3.9 |
+|           StdNormQBiasSqr |            9.58 |
+|           MaxNormQBiasSqr |             119 |
+|           MinNormQBiasSqr |           7e-06 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |               8 |
+|         TotalEnvInteracts |         4.5e+04 |
+|                      Time |        3.55e+03 |
+|                       SPS |            12.7 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |             610 |
+|                  StdEpRet |            37.7 |
+|                  MaxEpRet |             716 |
+|                  MinEpRet |             575 |
+|                     EpLen |             197 |
+|          AverageTestEpRet |             862 |
+|              StdTestEpRet |             6.5 |
+|              MaxTestEpRet |             876 |
+|              MinTestEpRet |             851 |
+|                 TestEpLen |             257 |
+|             AverageQ1Vals |             210 |
+|                 StdQ1Vals |            68.9 |
+|                 MaxQ1Vals |             293 |
+|                 MinQ1Vals |           -36.9 |
+|             AverageLossQ1 |            2.44 |
+|                 StdLossQ1 |            2.69 |
+|              AverageLogPi |           0.994 |
+|                  StdLogPi |            2.47 |
+|                  MaxLogPi |            24.8 |
+|                  MinLogPi |           -12.7 |
+|                    LossPi |            -113 |
+|              AverageAlpha |           0.145 |
+|                  StdAlpha |         0.00341 |
+|                  MaxAlpha |           0.152 |
+|                  MinAlpha |            0.14 |
+|                 LossAlpha |         -0.0108 |
+|            AveragePreTanh |           0.946 |
+|                StdPreTanh |           0.758 |
+|                MaxPreTanh |            7.68 |
+|                MinPreTanh |        8.94e-07 |
+|        DynPIToD/ScoreMean |        2.39e+03 |
+|         DynPIToD/ScoreMin |             337 |
+|         DynPIToD/ScoreMax |        4.96e+03 |
+|         DynPIToD/ScoreStd |        1.51e+03 |
+|          DynPIToD/Epsilon |             880 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               8 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |        1.75e+04 |
+|      DynPIToD/GroupAgeMax |         3.5e+04 |
+|     DynPIToD/NumRefreshed |               8 |
+| DynPIToD/RefreshWallclock |           0.358 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |             219 |
+|               StdMCDisRet |            75.4 |
+|               MaxMCDisRet |             299 |
+|               MinMCDisRet |            4.36 |
+|        AverageMCDisRetEnt |             220 |
+|            StdMCDisRetEnt |            76.7 |
+|            MaxMCDisRetEnt |             302 |
+|            MinMCDisRetEnt |            4.36 |
+|              AverageQPred |             218 |
+|                  StdQPred |            48.4 |
+|                  MaxQPred |             263 |
+|                  MinQPred |            17.7 |
+|              AverageQBias |           -2.31 |
+|                  StdQBias |            35.6 |
+|                  MaxQBias |             102 |
+|                  MinQBias |           -58.4 |
+|           AverageQBiasAbs |            29.7 |
+|               StdQBiasAbs |            19.9 |
+|               MaxQBiasAbs |             102 |
+|               MinQBiasAbs |           0.123 |
+|          AverageNormQBias |           0.283 |
+|              StdNormQBias |           0.729 |
+|              MaxNormQBias |            9.35 |
+|              MinNormQBias |        0.000519 |
+|           AverageQBiasSqr |        1.28e+03 |
+|               StdQBiasSqr |        1.73e+03 |
+|               MaxQBiasSqr |        1.03e+04 |
+|               MinQBiasSqr |           0.015 |
+|       AverageNormQBiasSqr |            16.1 |
+|           StdNormQBiasSqr |            59.3 |
+|           MaxNormQBiasSqr |             874 |
+|           MinNormQBiasSqr |        6.36e-05 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |               9 |
+|         TotalEnvInteracts |           5e+04 |
+|                      Time |        3.86e+03 |
+|                       SPS |              13 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |             914 |
+|                  StdEpRet |             300 |
+|                  MaxEpRet |        1.96e+03 |
+|                  MinEpRet |             649 |
+|                     EpLen |             283 |
+|          AverageTestEpRet |        1.05e+03 |
+|              StdTestEpRet |            14.5 |
+|              MaxTestEpRet |        1.07e+03 |
+|              MinTestEpRet |        1.02e+03 |
+|                 TestEpLen |             317 |
+|             AverageQ1Vals |             221 |
+|                 StdQ1Vals |            68.1 |
+|                 MaxQ1Vals |             300 |
+|                 MinQ1Vals |           -46.7 |
+|             AverageLossQ1 |            2.24 |
+|                 StdLossQ1 |            2.38 |
+|              AverageLogPi |               1 |
+|                  StdLogPi |            2.44 |
+|                  MaxLogPi |            24.4 |
+|                  MinLogPi |           -11.3 |
+|                    LossPi |            -126 |
+|              AverageAlpha |           0.149 |
+|                  StdAlpha |         0.00451 |
+|                  MaxAlpha |           0.156 |
+|                  MinAlpha |           0.141 |
+|                 LossAlpha |         0.00527 |
+|            AveragePreTanh |           0.945 |
+|                StdPreTanh |            0.76 |
+|                MaxPreTanh |            7.59 |
+|                MinPreTanh |               0 |
+|        DynPIToD/ScoreMean |        1.86e+03 |
+|         DynPIToD/ScoreMin |             364 |
+|         DynPIToD/ScoreMax |        3.42e+03 |
+|         DynPIToD/ScoreStd |        1.09e+03 |
+|          DynPIToD/Epsilon |             771 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |               9 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           2e+04 |
+|      DynPIToD/GroupAgeMax |           4e+04 |
+|     DynPIToD/NumRefreshed |               9 |
+| DynPIToD/RefreshWallclock |           0.438 |
+|        DynPIToD/ScheduleK |           5e+03 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               0 |
+|           AverageMCDisRet |             224 |
+|               StdMCDisRet |            72.5 |
+|               MaxMCDisRet |             298 |
+|               MinMCDisRet |            4.73 |
+|        AverageMCDisRetEnt |             226 |
+|            StdMCDisRetEnt |            73.8 |
+|            MaxMCDisRetEnt |             303 |
+|            MinMCDisRetEnt |            4.73 |
+|              AverageQPred |             224 |
+|                  StdQPred |            54.9 |
+|                  MaxQPred |             266 |
+|                  MinQPred |            15.4 |
+|              AverageQBias |           -2.72 |
+|                  StdQBias |            28.9 |
+|                  MaxQBias |              98 |
+|                  MinQBias |           -48.5 |
+|           AverageQBiasAbs |              23 |
+|               StdQBiasAbs |            17.7 |
+|               MaxQBiasAbs |              98 |
+|               MinQBiasAbs |          0.0604 |
+|          AverageNormQBias |           0.183 |
+|              StdNormQBias |           0.454 |
+|              MaxNormQBias |            6.98 |
+|              MinNormQBias |        0.000233 |
+|           AverageQBiasSqr |             841 |
+|               StdQBiasSqr |        1.44e+03 |
+|               MaxQBiasSqr |        9.61e+03 |
+|               MinQBiasSqr |         0.00365 |
+|       AverageNormQBiasSqr |            8.02 |
+|           StdNormQBiasSqr |            30.1 |
+|           MaxNormQBiasSqr |             487 |
+|           MinNormQBiasSqr |        1.41e-05 |
+-----------------------------------------------
+
+  0%|          | 0/10 [00:00<?, ?it/s]
+ 10%|█         | 1/10 [00:00<00:01,  4.91it/s]
+ 20%|██        | 2/10 [00:00<00:01,  5.62it/s]
+ 30%|███       | 3/10 [00:00<00:01,  6.19it/s]
+ 40%|████      | 4/10 [00:00<00:00,  6.50it/s]
+ 50%|█████     | 5/10 [00:00<00:00,  6.68it/s]
+ 60%|██████    | 6/10 [00:00<00:00,  6.79it/s]
+ 70%|███████   | 7/10 [00:01<00:00,  6.87it/s]
+ 80%|████████  | 8/10 [00:01<00:00,  6.92it/s]
+ 90%|█████████ | 9/10 [00:01<00:00,  6.95it/s]
+100%|██████████| 10/10 [00:01<00:00,  7.03it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 182.45it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 136.85it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 132.99it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 132.71it/s]
+
+  0%|          | 0/302 [00:00<?, ?it/s]
+  0%|          | 1/302 [00:07<39:18,  7.84s/it]
+  1%|          | 2/302 [00:15<38:10,  7.64s/it]
+  1%|          | 3/302 [00:23<39:32,  7.93s/it]
+  1%|▏         | 4/302 [00:30<37:19,  7.51s/it]
+  2%|▏         | 5/302 [00:38<38:16,  7.73s/it]
+  2%|▏         | 6/302 [00:45<36:55,  7.49s/it]
+  2%|▏         | 7/302 [00:53<37:50,  7.70s/it]
+  3%|▎         | 8/302 [01:00<36:36,  7.47s/it]
+  3%|▎         | 9/302 [01:08<37:36,  7.70s/it]
+  3%|▎         | 10/302 [01:15<36:25,  7.48s/it]
+  4%|▎         | 11/302 [01:23<37:03,  7.64s/it]
+  4%|▍         | 12/302 [01:30<35:47,  7.40s/it]
+  4%|▍         | 13/302 [01:38<36:31,  7.58s/it]
+  5%|▍         | 14/302 [01:46<36:05,  7.52s/it]
+  5%|▍         | 15/302 [01:53<36:16,  7.58s/it]
+  5%|▌         | 16/302 [02:01<35:57,  7.55s/it]
+  6%|▌         | 17/302 [02:08<35:50,  7.55s/it]
+  6%|▌         | 18/302 [02:16<36:00,  7.61s/it]
+  6%|▋         | 19/302 [02:23<35:14,  7.47s/it]
+  7%|▋         | 20/302 [02:31<35:44,  7.61s/it]
+  7%|▋         | 21/302 [02:38<34:45,  7.42s/it]
+  7%|▋         | 22/302 [02:46<35:26,  7.59s/it]
+  8%|▊         | 23/302 [02:53<34:21,  7.39s/it]
+  8%|▊         | 24/302 [03:01<35:09,  7.59s/it]
+  8%|▊         | 25/302 [03:08<34:09,  7.40s/it]
+  9%|▊         | 26/302 [03:16<35:00,  7.61s/it]
+  9%|▉         | 27/302 [03:23<34:01,  7.42s/it]
+  9%|▉         | 28/302 [03:31<34:42,  7.60s/it]
+ 10%|▉         | 29/302 [03:38<33:28,  7.36s/it]
+ 10%|▉         | 30/302 [03:46<34:17,  7.56s/it]
+ 10%|█         | 31/302 [03:53<33:29,  7.42s/it]
+ 11%|█         | 32/302 [04:01<34:01,  7.56s/it]
+ 11%|█         | 33/302 [04:08<33:35,  7.49s/it]
+ 11%|█▏        | 34/302 [04:16<33:40,  7.54s/it]
+ 12%|█▏        | 35/302 [04:24<33:34,  7.55s/it]
+ 12%|█▏        | 36/302 [04:31<33:09,  7.48s/it]
+ 12%|█▏        | 37/302 [04:39<33:32,  7.59s/it]
+ 13%|█▎        | 38/302 [04:46<32:56,  7.49s/it]
+ 13%|█▎        | 39/302 [04:54<33:30,  7.65s/it]
+ 13%|█▎        | 40/302 [05:01<32:28,  7.44s/it]
+ 14%|█▎        | 41/302 [05:09<33:12,  7.63s/it]
+ 14%|█▍        | 42/302 [05:16<32:15,  7.44s/it]
+ 14%|█▍        | 43/302 [05:24<32:54,  7.62s/it]
+ 15%|█▍        | 44/302 [05:31<31:48,  7.40s/it]
+ 15%|█▍        | 45/302 [05:39<32:28,  7.58s/it]
+ 15%|█▌        | 46/302 [05:46<31:29,  7.38s/it]
+ 16%|█▌        | 47/302 [05:54<32:10,  7.57s/it]
+ 16%|█▌        | 48/302 [06:01<31:29,  7.44s/it]
+ 16%|█▌        | 49/302 [06:09<31:49,  7.55s/it]
+ 17%|█▋        | 50/302 [06:16<31:26,  7.48s/it]
+ 17%|█▋        | 51/302 [06:24<31:28,  7.53s/it]
+ 17%|█▋        | 52/302 [06:31<31:20,  7.52s/it]
+ 18%|█▊        | 53/302 [06:39<31:03,  7.48s/it]
+ 18%|█▊        | 54/302 [06:47<31:20,  7.58s/it]
+ 18%|█▊        | 55/302 [06:54<30:44,  7.47s/it]
+ 19%|█▊        | 56/302 [07:27<1:02:03, 15.14s/it]
+ 19%|█▉        | 57/302 [08:00<1:23:29, 20.45s/it]
+ 19%|█▉        | 58/302 [08:32<1:37:33, 23.99s/it]
+ 20%|█▉        | 59/302 [09:04<1:46:49, 26.37s/it]
+ 20%|█▉        | 60/302 [09:37<1:54:49, 28.47s/it]
+ 20%|██        | 61/302 [10:09<1:58:55, 29.61s/it]
+ 21%|██        | 62/302 [10:42<2:02:09, 30.54s/it]
+ 21%|██        | 63/302 [11:16<2:05:37, 31.54s/it]
+ 21%|██        | 64/302 [11:49<2:06:41, 31.94s/it]
+ 22%|██▏       | 65/302 [12:21<2:06:58, 32.15s/it]
+ 22%|██▏       | 66/302 [12:55<2:08:18, 32.62s/it]
+ 22%|██▏       | 67/302 [13:28<2:07:46, 32.62s/it]
+ 23%|██▎       | 68/302 [14:01<2:07:23, 32.67s/it]
+ 23%|██▎       | 69/302 [14:34<2:07:53, 32.93s/it]
+ 23%|██▎       | 70/302 [15:07<2:07:19, 32.93s/it]
+ 24%|██▎       | 71/302 [15:40<2:06:43, 32.92s/it]
+ 24%|██▍       | 72/302 [16:14<2:06:52, 33.10s/it]
+ 24%|██▍       | 73/302 [16:46<2:06:06, 33.04s/it]
+ 25%|██▍       | 74/302 [17:19<2:05:31, 33.03s/it]
+ 25%|██▍       | 75/302 [17:53<2:05:53, 33.27s/it]
+ 25%|██▌       | 76/302 [18:26<2:05:15, 33.25s/it]
+ 25%|██▌       | 77/302 [19:00<2:04:32, 33.21s/it]
+ 26%|██▌       | 78/302 [19:34<2:05:19, 33.57s/it]
+ 26%|██▌       | 79/302 [20:07<2:04:30, 33.50s/it]
+ 26%|██▋       | 80/302 [20:41<2:03:43, 33.44s/it]
+ 27%|██▋       | 81/302 [21:15<2:03:47, 33.61s/it]
+ 27%|██▋       | 82/302 [21:47<2:02:11, 33.32s/it]
+ 27%|██▋       | 83/302 [22:20<2:01:11, 33.20s/it]
+ 28%|██▊       | 84/302 [22:29<1:34:30, 26.01s/it]
+ 28%|██▊       | 85/302 [22:38<1:15:39, 20.92s/it]
+ 28%|██▊       | 86/302 [22:47<1:01:54, 17.20s/it]
+ 29%|██▉       | 87/302 [22:56<52:58, 14.78s/it]  
+ 29%|██▉       | 88/302 [23:04<45:46, 12.83s/it]
+ 29%|██▉       | 89/302 [23:13<41:23, 11.66s/it]
+ 30%|██▉       | 90/302 [23:23<38:44, 10.96s/it]
+ 30%|███       | 91/302 [23:31<35:37, 10.13s/it]
+ 30%|███       | 92/302 [23:40<34:26,  9.84s/it]
+ 31%|███       | 93/302 [23:49<33:19,  9.57s/it]
+ 31%|███       | 94/302 [23:58<32:14,  9.30s/it]
+ 31%|███▏      | 95/302 [24:07<32:14,  9.35s/it]
+ 32%|███▏      | 96/302 [24:16<31:07,  9.06s/it]
+ 32%|███▏      | 97/302 [24:25<31:09,  9.12s/it]
+ 32%|███▏      | 98/302 [24:34<31:05,  9.14s/it]
+ 33%|███▎      | 99/302 [24:42<30:03,  8.88s/it]
+ 33%|███▎      | 100/302 [24:52<30:20,  9.01s/it]
+ 33%|███▎      | 101/302 [25:00<29:59,  8.95s/it]
+ 34%|███▍      | 102/302 [25:09<29:30,  8.85s/it]
+ 34%|███▍      | 103/302 [25:18<29:46,  8.98s/it]
+ 34%|███▍      | 104/302 [25:27<29:10,  8.84s/it]
+ 35%|███▍      | 105/302 [25:36<29:20,  8.94s/it]
+ 35%|███▌      | 106/302 [25:45<29:34,  9.05s/it]
+ 35%|███▌      | 107/302 [25:53<28:35,  8.80s/it]
+ 36%|███▌      | 108/302 [26:03<29:08,  9.02s/it]
+ 36%|███▌      | 109/302 [26:12<29:12,  9.08s/it]
+ 36%|███▋      | 110/302 [26:21<28:31,  8.91s/it]
+ 37%|███▋      | 111/302 [26:28<26:59,  8.48s/it]
+ 37%|███▋      | 112/302 [26:34<24:45,  7.82s/it]
+ 37%|███▋      | 113/302 [26:42<24:15,  7.70s/it]
+ 38%|███▊      | 114/302 [26:48<22:51,  7.29s/it]
+ 38%|███▊      | 115/302 [26:56<22:42,  7.28s/it]
+ 38%|███▊      | 116/302 [27:02<21:29,  6.93s/it]
+ 39%|███▊      | 117/302 [27:09<21:20,  6.92s/it]
+ 39%|███▉      | 118/302 [27:15<20:45,  6.77s/it]
+ 39%|███▉      | 119/302 [27:22<20:38,  6.77s/it]
+ 40%|███▉      | 120/302 [27:28<20:23,  6.72s/it]
+ 40%|████      | 121/302 [27:35<19:59,  6.63s/it]
+ 40%|████      | 122/302 [27:42<20:10,  6.72s/it]
+ 41%|████      | 123/302 [27:48<19:30,  6.54s/it]
+ 41%|████      | 124/302 [27:55<19:55,  6.72s/it]
+ 41%|████▏     | 125/302 [28:01<19:22,  6.57s/it]
+ 42%|████▏     | 126/302 [28:09<20:03,  6.84s/it]
+ 42%|████▏     | 127/302 [28:15<19:21,  6.64s/it]
+ 42%|████▏     | 128/302 [28:22<19:49,  6.84s/it]
+ 43%|████▎     | 129/302 [28:28<19:03,  6.61s/it]
+ 43%|████▎     | 130/302 [28:35<19:32,  6.81s/it]
+ 43%|████▎     | 131/302 [28:42<18:52,  6.62s/it]
+ 44%|████▎     | 132/302 [28:49<19:13,  6.78s/it]
+ 44%|████▍     | 133/302 [28:55<18:30,  6.57s/it]
+ 44%|████▍     | 134/302 [29:02<18:45,  6.70s/it]
+ 45%|████▍     | 135/302 [29:08<18:19,  6.58s/it]
+ 45%|████▌     | 136/302 [29:15<18:24,  6.65s/it]
+ 45%|████▌     | 137/302 [29:22<18:19,  6.67s/it]
+ 46%|████▌     | 138/302 [29:30<19:33,  7.16s/it]
+ 46%|████▌     | 139/302 [29:37<19:26,  7.15s/it]
+ 46%|████▋     | 140/302 [29:45<19:47,  7.33s/it]
+ 47%|████▋     | 141/302 [29:52<19:49,  7.39s/it]
+ 47%|████▋     | 142/302 [30:01<20:52,  7.83s/it]
+ 47%|████▋     | 143/302 [30:08<20:04,  7.57s/it]
+ 48%|████▊     | 144/302 [30:17<21:01,  7.98s/it]
+ 48%|████▊     | 145/302 [30:26<21:25,  8.19s/it]
+ 48%|████▊     | 146/302 [30:35<22:23,  8.61s/it]
+ 49%|████▊     | 147/302 [30:45<23:02,  8.92s/it]
+ 49%|████▉     | 148/302 [30:53<22:00,  8.58s/it]
+ 49%|████▉     | 149/302 [31:01<21:37,  8.48s/it]
+ 50%|████▉     | 150/302 [31:09<20:49,  8.22s/it]
+ 50%|█████     | 151/302 [31:17<20:54,  8.31s/it]
+ 50%|█████     | 152/302 [31:26<21:24,  8.56s/it]
+ 51%|█████     | 153/302 [31:34<20:30,  8.26s/it]
+ 51%|█████     | 154/302 [31:43<21:10,  8.58s/it]
+ 51%|█████▏    | 155/302 [31:53<21:36,  8.82s/it]
+ 52%|█████▏    | 156/302 [32:00<20:04,  8.25s/it]
+ 52%|█████▏    | 157/302 [32:08<20:23,  8.44s/it]
+ 52%|█████▏    | 158/302 [32:16<19:25,  8.10s/it]
+ 53%|█████▎    | 159/302 [32:25<19:46,  8.30s/it]
+ 53%|█████▎    | 160/302 [32:32<18:43,  7.91s/it]
+ 53%|█████▎    | 161/302 [32:40<19:15,  8.19s/it]
+ 54%|█████▎    | 162/302 [32:50<19:53,  8.52s/it]
+ 54%|█████▍    | 163/302 [32:58<19:17,  8.33s/it]
+ 54%|█████▍    | 164/302 [33:06<19:27,  8.46s/it]
+ 55%|█████▍    | 165/302 [33:14<18:53,  8.27s/it]
+ 55%|█████▍    | 166/302 [33:27<21:55,  9.67s/it]
+ 55%|█████▌    | 167/302 [33:40<24:17, 10.79s/it]
+ 56%|█████▌    | 168/302 [33:54<25:42, 11.51s/it]
+ 56%|█████▌    | 169/302 [34:07<26:49, 12.10s/it]
+ 56%|█████▋    | 170/302 [34:21<27:34, 12.53s/it]
+ 57%|█████▋    | 171/302 [34:34<27:41, 12.69s/it]
+ 57%|█████▋    | 172/302 [34:47<27:48, 12.84s/it]
+ 57%|█████▋    | 173/302 [35:00<27:48, 12.93s/it]
+ 58%|█████▊    | 174/302 [35:13<27:50, 13.05s/it]
+ 58%|█████▊    | 175/302 [35:27<27:41, 13.09s/it]
+ 58%|█████▊    | 176/302 [35:40<27:28, 13.08s/it]
+ 59%|█████▊    | 177/302 [35:53<27:20, 13.13s/it]
+ 59%|█████▉    | 178/302 [36:06<27:04, 13.10s/it]
+ 59%|█████▉    | 179/302 [36:19<26:38, 13.00s/it]
+ 60%|█████▉    | 180/302 [36:32<26:31, 13.04s/it]
+ 60%|█████▉    | 181/302 [36:45<26:20, 13.06s/it]
+ 60%|██████    | 182/302 [36:58<26:16, 13.14s/it]
+ 61%|██████    | 183/302 [37:12<26:15, 13.24s/it]
+ 61%|██████    | 184/302 [37:25<26:04, 13.26s/it]
+ 61%|██████▏   | 185/302 [37:38<25:48, 13.24s/it]
+ 62%|██████▏   | 186/302 [37:51<25:35, 13.24s/it]
+ 62%|██████▏   | 187/302 [38:05<25:25, 13.26s/it]
+ 62%|██████▏   | 188/302 [38:18<25:13, 13.28s/it]
+ 63%|██████▎   | 189/302 [38:31<25:02, 13.30s/it]
+ 63%|██████▎   | 190/302 [38:44<24:40, 13.22s/it]
+ 63%|██████▎   | 191/302 [38:57<24:17, 13.13s/it]
+ 64%|██████▎   | 192/302 [39:10<23:49, 12.99s/it]
+ 64%|██████▍   | 193/302 [39:39<32:18, 17.79s/it]
+ 64%|██████▍   | 194/302 [40:08<37:58, 21.09s/it]
+ 65%|██████▍   | 195/302 [40:37<41:49, 23.45s/it]
+ 65%|██████▍   | 196/302 [41:06<44:17, 25.07s/it]
+ 65%|██████▌   | 197/302 [41:34<45:47, 26.17s/it]
+ 66%|██████▌   | 198/302 [42:03<46:40, 26.93s/it]
+ 66%|██████▌   | 199/302 [42:32<47:26, 27.64s/it]
+ 66%|██████▌   | 200/302 [43:02<47:59, 28.23s/it]
+ 67%|██████▋   | 201/302 [43:32<48:10, 28.62s/it]
+ 67%|██████▋   | 202/302 [44:01<47:55, 28.76s/it]
+ 67%|██████▋   | 203/302 [44:30<47:41, 28.91s/it]
+ 68%|██████▊   | 204/302 [44:59<47:21, 29.00s/it]
+ 68%|██████▊   | 205/302 [45:28<46:54, 29.02s/it]
+ 68%|██████▊   | 206/302 [45:57<46:33, 29.10s/it]
+ 69%|██████▊   | 207/302 [46:27<46:23, 29.30s/it]
+ 69%|██████▉   | 208/302 [46:57<46:12, 29.50s/it]
+ 69%|██████▉   | 209/302 [47:26<45:38, 29.45s/it]
+ 70%|██████▉   | 210/302 [47:55<44:55, 29.30s/it]
+ 70%|██████▉   | 211/302 [48:25<44:32, 29.36s/it]
+ 70%|███████   | 212/302 [48:54<44:00, 29.34s/it]
+ 71%|███████   | 213/302 [49:23<43:16, 29.18s/it]
+ 71%|███████   | 214/302 [49:52<42:29, 28.97s/it]
+ 71%|███████   | 215/302 [50:20<41:56, 28.93s/it]
+ 72%|███████▏  | 216/302 [50:49<41:24, 28.88s/it]
+ 72%|███████▏  | 217/302 [51:18<40:56, 28.90s/it]
+ 72%|███████▏  | 218/302 [51:47<40:22, 28.84s/it]
+ 73%|███████▎  | 219/302 [52:15<39:50, 28.80s/it]
+ 73%|███████▎  | 220/302 [52:32<34:27, 25.22s/it]
+ 73%|███████▎  | 221/302 [52:50<30:59, 22.96s/it]
+ 74%|███████▎  | 222/302 [53:07<28:10, 21.13s/it]
+ 74%|███████▍  | 223/302 [53:24<26:22, 20.04s/it]
+ 74%|███████▍  | 224/302 [53:42<25:06, 19.31s/it]
+ 75%|███████▍  | 225/302 [54:00<24:19, 18.96s/it]
+ 75%|███████▍  | 226/302 [54:18<23:24, 18.49s/it]
+ 75%|███████▌  | 227/302 [54:35<22:42, 18.17s/it]
+ 75%|███████▌  | 228/302 [54:52<22:00, 17.84s/it]
+ 76%|███████▌  | 229/302 [55:10<21:36, 17.75s/it]
+ 76%|███████▌  | 230/302 [55:27<21:15, 17.72s/it]
+ 76%|███████▋  | 231/302 [55:43<20:23, 17.24s/it]
+ 77%|███████▋  | 232/302 [56:00<19:50, 17.00s/it]
+ 77%|███████▋  | 233/302 [56:17<19:42, 17.13s/it]
+ 77%|███████▋  | 234/302 [56:36<19:53, 17.56s/it]
+ 78%|███████▊  | 235/302 [56:53<19:22, 17.35s/it]
+ 78%|███████▊  | 236/302 [57:10<19:05, 17.35s/it]
+ 78%|███████▊  | 237/302 [57:27<18:35, 17.16s/it]
+ 79%|███████▉  | 238/302 [57:44<18:14, 17.11s/it]
+ 79%|███████▉  | 239/302 [58:01<18:08, 17.28s/it]
+ 79%|███████▉  | 240/302 [58:17<17:29, 16.93s/it]
+ 80%|███████▉  | 241/302 [58:35<17:21, 17.07s/it]
+ 80%|████████  | 242/302 [58:52<17:12, 17.21s/it]
+ 80%|████████  | 243/302 [59:11<17:11, 17.48s/it]
+ 81%|████████  | 244/302 [59:28<17:01, 17.61s/it]
+ 81%|████████  | 245/302 [59:46<16:36, 17.48s/it]
+ 81%|████████▏ | 246/302 [1:00:02<16:00, 17.15s/it]
+ 82%|████████▏ | 247/302 [1:00:19<15:46, 17.20s/it]
+ 82%|████████▏ | 248/302 [1:00:53<20:03, 22.28s/it]
+ 82%|████████▏ | 249/302 [1:01:27<22:37, 25.62s/it]
+ 83%|████████▎ | 250/302 [1:02:01<24:28, 28.24s/it]
+ 83%|████████▎ | 251/302 [1:02:34<25:12, 29.66s/it]
+ 83%|████████▎ | 252/302 [1:03:07<25:28, 30.57s/it]
+ 84%|████████▍ | 253/302 [1:03:41<25:54, 31.73s/it]
+ 84%|████████▍ | 254/302 [1:04:14<25:34, 31.98s/it]
+ 84%|████████▍ | 255/302 [1:04:47<25:24, 32.44s/it]
+ 85%|████████▍ | 256/302 [1:05:21<25:07, 32.76s/it]
+ 85%|████████▌ | 257/302 [1:05:54<24:40, 32.91s/it]
+ 85%|████████▌ | 258/302 [1:06:28<24:21, 33.22s/it]
+ 86%|████████▌ | 259/302 [1:07:02<23:51, 33.29s/it]
+ 86%|████████▌ | 260/302 [1:07:35<23:22, 33.40s/it]
+ 86%|████████▋ | 261/302 [1:08:09<22:54, 33.53s/it]
+ 87%|████████▋ | 262/302 [1:08:42<22:17, 33.44s/it]
+ 87%|████████▋ | 263/302 [1:09:17<21:54, 33.71s/it]
+ 87%|████████▋ | 264/302 [1:09:50<21:22, 33.76s/it]
+ 88%|████████▊ | 265/302 [1:10:24<20:50, 33.81s/it]
+ 88%|████████▊ | 266/302 [1:10:59<20:24, 34.02s/it]
+ 88%|████████▊ | 267/302 [1:11:32<19:45, 33.88s/it]
+ 89%|████████▊ | 268/302 [1:12:07<19:20, 34.14s/it]
+ 89%|████████▉ | 269/302 [1:12:41<18:39, 33.93s/it]
+ 89%|████████▉ | 270/302 [1:13:15<18:07, 33.99s/it]
+ 90%|████████▉ | 271/302 [1:13:50<17:42, 34.26s/it]
+ 90%|█████████ | 272/302 [1:14:24<17:05, 34.18s/it]
+ 90%|█████████ | 273/302 [1:14:59<16:40, 34.52s/it]
+ 91%|█████████ | 274/302 [1:15:33<16:03, 34.41s/it]
+ 91%|█████████ | 275/302 [1:15:44<12:19, 27.37s/it]
+ 91%|█████████▏| 276/302 [1:15:55<09:46, 22.55s/it]
+ 92%|█████████▏| 277/302 [1:16:06<07:52, 18.91s/it]
+ 92%|█████████▏| 278/302 [1:16:17<06:36, 16.50s/it]
+ 92%|█████████▏| 279/302 [1:16:28<05:42, 14.88s/it]
+ 93%|█████████▎| 280/302 [1:16:39<05:02, 13.75s/it]
+ 93%|█████████▎| 281/302 [1:16:50<04:29, 12.83s/it]
+ 93%|█████████▎| 282/302 [1:17:00<04:01, 12.10s/it]
+ 94%|█████████▎| 283/302 [1:17:11<03:44, 11.83s/it]
+ 94%|█████████▍| 284/302 [1:17:22<03:29, 11.66s/it]
+ 94%|█████████▍| 285/302 [1:17:34<03:15, 11.48s/it]
+ 95%|█████████▍| 286/302 [1:17:44<02:56, 11.05s/it]
+ 95%|█████████▌| 287/302 [1:17:55<02:45, 11.06s/it]
+ 95%|█████████▌| 288/302 [1:18:06<02:36, 11.15s/it]
+ 96%|█████████▌| 289/302 [1:18:17<02:25, 11.16s/it]
+ 96%|█████████▌| 290/302 [1:18:27<02:10, 10.89s/it]
+ 96%|█████████▋| 291/302 [1:18:38<01:59, 10.84s/it]
+ 97%|█████████▋| 292/302 [1:18:49<01:49, 10.93s/it]
+ 97%|█████████▋| 293/302 [1:19:00<01:38, 10.93s/it]
+ 97%|█████████▋| 294/302 [1:19:11<01:26, 10.78s/it]
+ 98%|█████████▊| 295/302 [1:19:21<01:15, 10.74s/it]
+ 98%|█████████▊| 296/302 [1:19:32<01:04, 10.80s/it]
+ 98%|█████████▊| 297/302 [1:19:43<00:54, 10.88s/it]
+ 99%|█████████▊| 298/302 [1:19:54<00:43, 10.83s/it]
+ 99%|█████████▉| 299/302 [1:20:05<00:32, 10.80s/it]
+ 99%|█████████▉| 300/302 [1:20:16<00:21, 10.92s/it]
+100%|█████████▉| 301/302 [1:20:27<00:10, 10.94s/it]
+100%|██████████| 302/302 [1:20:38<00:00, 10.98s/it]
+100%|██████████| 302/302 [1:20:38<00:00, 16.02s/it]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:16<00:00, 16.62s/it]
+100%|██████████| 1/1 [00:16<00:00, 16.62s/it]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:52<00:00, 52.47s/it]
+100%|██████████| 1/1 [00:52<00:00, 52.48s/it]
+-----------------------------------------------
+|                     Epoch |              10 |
+|         TotalEnvInteracts |         5.5e+04 |
+|                      Time |        9.09e+03 |
+|                       SPS |            6.05 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.43e+03 |
+|                  StdEpRet |             395 |
+|                  MaxEpRet |        2.03e+03 |
+|                  MinEpRet |             935 |
+|                     EpLen |             432 |
+|          AverageTestEpRet |        3.21e+03 |
+|              StdTestEpRet |            3.18 |
+|              MaxTestEpRet |        3.21e+03 |
+|              MinTestEpRet |         3.2e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             233 |
+|                 StdQ1Vals |            69.8 |
+|                 MaxQ1Vals |             320 |
+|                 MinQ1Vals |           -53.2 |
+|             AverageLossQ1 |             2.2 |
+|                 StdLossQ1 |            3.46 |
+|              AverageLogPi |           0.997 |
+|                  StdLogPi |            2.38 |
+|                  MaxLogPi |            26.4 |
+|                  MinLogPi |           -12.3 |
+|                    LossPi |            -133 |
+|              AverageAlpha |           0.149 |
+|                  StdAlpha |         0.00657 |
+|                  MaxAlpha |           0.162 |
+|                  MinAlpha |           0.137 |
+|                 LossAlpha |        -0.00654 |
+|            AveragePreTanh |           0.915 |
+|                StdPreTanh |           0.744 |
+|                MaxPreTanh |            7.78 |
+|                MinPreTanh |        3.43e-07 |
+|        DynPIToD/ScoreMean |        1.93e+03 |
+|         DynPIToD/ScoreMin |             364 |
+|         DynPIToD/ScoreMax |        3.42e+03 |
+|         DynPIToD/ScoreStd |           1e+03 |
+|          DynPIToD/Epsilon |             926 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              11 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         2.5e+04 |
+|      DynPIToD/GroupAgeMax |           5e+04 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             300 |
+|               StdMCDisRet |            42.4 |
+|               MaxMCDisRet |             335 |
+|               MinMCDisRet |              60 |
+|        AverageMCDisRetEnt |             301 |
+|            StdMCDisRetEnt |            42.4 |
+|            MaxMCDisRetEnt |             338 |
+|            MinMCDisRetEnt |              60 |
+|              AverageQPred |             268 |
+|                  StdQPred |            26.5 |
+|                  MaxQPred |             285 |
+|                  MinQPred |            99.8 |
+|              AverageQBias |           -33.4 |
+|                  StdQBias |            19.9 |
+|                  MaxQBias |              45 |
+|                  MinQBias |           -62.2 |
+|           AverageQBiasAbs |            35.9 |
+|               StdQBiasAbs |            14.8 |
+|               MaxQBiasAbs |            62.2 |
+|               MinQBiasAbs |         0.00817 |
+|          AverageNormQBias |            0.12 |
+|              StdNormQBias |          0.0599 |
+|              MaxNormQBias |           0.663 |
+|              MinNormQBias |        3.12e-05 |
+|           AverageQBiasSqr |        1.51e+03 |
+|               StdQBiasSqr |             922 |
+|               MaxQBiasSqr |        3.87e+03 |
+|               MinQBiasSqr |        6.68e-05 |
+|       AverageNormQBiasSqr |            4.96 |
+|           StdNormQBiasSqr |            3.18 |
+|           MaxNormQBiasSqr |            27.2 |
+|           MinNormQBiasSqr |        2.55e-07 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              11 |
+|         TotalEnvInteracts |           6e+04 |
+|                      Time |         9.4e+03 |
+|                       SPS |            6.39 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        2.03e+03 |
+|                  StdEpRet |             712 |
+|                  MaxEpRet |        3.02e+03 |
+|                  MinEpRet |             843 |
+|                     EpLen |             644 |
+|          AverageTestEpRet |         2.7e+03 |
+|              StdTestEpRet |            1.25 |
+|              MaxTestEpRet |         2.7e+03 |
+|              MinTestEpRet |         2.7e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             245 |
+|                 StdQ1Vals |            70.5 |
+|                 MaxQ1Vals |             328 |
+|                 MinQ1Vals |           -48.7 |
+|             AverageLossQ1 |            1.99 |
+|                 StdLossQ1 |            2.66 |
+|              AverageLogPi |               1 |
+|                  StdLogPi |            2.38 |
+|                  MaxLogPi |            26.3 |
+|                  MinLogPi |           -13.5 |
+|                    LossPi |            -122 |
+|              AverageAlpha |           0.153 |
+|                  StdAlpha |         0.00697 |
+|                  MaxAlpha |           0.163 |
+|                  MinAlpha |           0.139 |
+|                 LossAlpha |         0.00507 |
+|            AveragePreTanh |           0.915 |
+|                StdPreTanh |           0.747 |
+|                MaxPreTanh |            8.04 |
+|                MinPreTanh |        2.98e-07 |
+|        DynPIToD/ScoreMean |        2.17e+03 |
+|         DynPIToD/ScoreMin |             231 |
+|         DynPIToD/ScoreMax |        3.84e+03 |
+|         DynPIToD/ScoreStd |        1.04e+03 |
+|          DynPIToD/Epsilon |        1.13e+03 |
+|      DynPIToD/MeanStrikes |           0.182 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              11 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         2.5e+04 |
+|      DynPIToD/GroupAgeMax |           5e+04 |
+|     DynPIToD/NumRefreshed |              11 |
+| DynPIToD/RefreshWallclock |           0.906 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             290 |
+|               StdMCDisRet |            20.5 |
+|               MaxMCDisRet |             320 |
+|               MinMCDisRet |             192 |
+|        AverageMCDisRetEnt |             296 |
+|            StdMCDisRetEnt |              20 |
+|            MaxMCDisRetEnt |             329 |
+|            MinMCDisRetEnt |             192 |
+|              AverageQPred |             288 |
+|                  StdQPred |            10.1 |
+|                  MaxQPred |             301 |
+|                  MinQPred |             240 |
+|              AverageQBias |           -7.62 |
+|                  StdQBias |            17.7 |
+|                  MaxQBias |            89.2 |
+|                  MinQBias |           -36.4 |
+|           AverageQBiasAbs |              15 |
+|               StdQBiasAbs |            12.1 |
+|               MaxQBiasAbs |            89.2 |
+|               MinQBiasAbs |          0.0644 |
+|          AverageNormQBias |          0.0526 |
+|              StdNormQBias |          0.0542 |
+|              MaxNormQBias |           0.464 |
+|              MinNormQBias |        0.000223 |
+|           AverageQBiasSqr |             370 |
+|               StdQBiasSqr |             870 |
+|               MaxQBiasSqr |        7.95e+03 |
+|               MinQBiasSqr |         0.00415 |
+|       AverageNormQBiasSqr |            1.43 |
+|           StdNormQBiasSqr |            4.13 |
+|           MaxNormQBiasSqr |            41.3 |
+|           MinNormQBiasSqr |        1.43e-05 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              12 |
+|         TotalEnvInteracts |         6.5e+04 |
+|                      Time |         9.7e+03 |
+|                       SPS |             6.7 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        2.73e+03 |
+|                  StdEpRet |             466 |
+|                  MaxEpRet |         3.1e+03 |
+|                  MinEpRet |        1.81e+03 |
+|                     EpLen |             911 |
+|          AverageTestEpRet |         2.9e+03 |
+|              StdTestEpRet |           0.574 |
+|              MaxTestEpRet |         2.9e+03 |
+|              MinTestEpRet |         2.9e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             255 |
+|                 StdQ1Vals |            72.9 |
+|                 MaxQ1Vals |             332 |
+|                 MinQ1Vals |           -42.4 |
+|             AverageLossQ1 |            1.91 |
+|                 StdLossQ1 |             3.2 |
+|              AverageLogPi |           0.992 |
+|                  StdLogPi |            2.42 |
+|                  MaxLogPi |            23.5 |
+|                  MinLogPi |           -13.1 |
+|                    LossPi |            -127 |
+|              AverageAlpha |           0.148 |
+|                  StdAlpha |          0.0147 |
+|                  MaxAlpha |           0.166 |
+|                  MinAlpha |           0.127 |
+|                 LossAlpha |          -0.016 |
+|            AveragePreTanh |           0.922 |
+|                StdPreTanh |           0.752 |
+|                MaxPreTanh |            9.46 |
+|                MinPreTanh |               0 |
+|        DynPIToD/ScoreMean |        1.89e+03 |
+|         DynPIToD/ScoreMin |             224 |
+|         DynPIToD/ScoreMax |        3.84e+03 |
+|         DynPIToD/ScoreStd |        1.16e+03 |
+|          DynPIToD/Epsilon |             730 |
+|      DynPIToD/MeanStrikes |           0.154 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              13 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           3e+04 |
+|      DynPIToD/GroupAgeMax |           6e+04 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             294 |
+|               StdMCDisRet |            12.5 |
+|               MaxMCDisRet |             307 |
+|               MinMCDisRet |             234 |
+|        AverageMCDisRetEnt |             300 |
+|            StdMCDisRetEnt |            10.9 |
+|            MaxMCDisRetEnt |             312 |
+|            MinMCDisRetEnt |             248 |
+|              AverageQPred |             293 |
+|                  StdQPred |            10.9 |
+|                  MaxQPred |             304 |
+|                  MinQPred |             243 |
+|              AverageQBias |           -6.64 |
+|                  StdQBias |            3.22 |
+|                  MaxQBias |            2.19 |
+|                  MinQBias |             -14 |
+|           AverageQBiasAbs |             6.7 |
+|               StdQBiasAbs |            3.08 |
+|               MaxQBiasAbs |              14 |
+|               MinQBiasAbs |          0.0023 |
+|          AverageNormQBias |          0.0223 |
+|              StdNormQBias |          0.0103 |
+|              MaxNormQBias |            0.05 |
+|              MinNormQBias |         7.6e-06 |
+|           AverageQBiasSqr |            54.5 |
+|               StdQBiasSqr |            41.5 |
+|               MaxQBiasSqr |             195 |
+|               MinQBiasSqr |        5.29e-06 |
+|       AverageNormQBiasSqr |           0.181 |
+|           StdNormQBiasSqr |            0.14 |
+|           MaxNormQBiasSqr |           0.647 |
+|           MinNormQBiasSqr |        1.75e-08 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              13 |
+|         TotalEnvInteracts |           7e+04 |
+|                      Time |           1e+04 |
+|                       SPS |            6.99 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |         2.9e+03 |
+|                  StdEpRet |             271 |
+|                  MaxEpRet |        3.27e+03 |
+|                  MinEpRet |        2.48e+03 |
+|                     EpLen |             912 |
+|          AverageTestEpRet |        3.08e+03 |
+|              StdTestEpRet |           0.911 |
+|              MaxTestEpRet |        3.08e+03 |
+|              MinTestEpRet |        3.08e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             263 |
+|                 StdQ1Vals |            74.3 |
+|                 MaxQ1Vals |             337 |
+|                 MinQ1Vals |           -78.6 |
+|             AverageLossQ1 |            1.93 |
+|                 StdLossQ1 |            2.22 |
+|              AverageLogPi |           0.995 |
+|                  StdLogPi |            2.44 |
+|                  MaxLogPi |            23.6 |
+|                  MinLogPi |           -13.2 |
+|                    LossPi |            -150 |
+|              AverageAlpha |           0.137 |
+|                  StdAlpha |          0.0116 |
+|                  MaxAlpha |           0.155 |
+|                  MinAlpha |           0.117 |
+|                 LossAlpha |           -0.01 |
+|            AveragePreTanh |           0.901 |
+|                StdPreTanh |           0.748 |
+|                MaxPreTanh |            9.16 |
+|                MinPreTanh |        4.47e-07 |
+|        DynPIToD/ScoreMean |        1.49e+03 |
+|         DynPIToD/ScoreMin |             301 |
+|         DynPIToD/ScoreMax |        3.27e+03 |
+|         DynPIToD/ScoreStd |             841 |
+|          DynPIToD/Epsilon |             649 |
+|      DynPIToD/MeanStrikes |           0.308 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              13 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           3e+04 |
+|      DynPIToD/GroupAgeMax |           6e+04 |
+|     DynPIToD/NumRefreshed |              13 |
+| DynPIToD/RefreshWallclock |            0.65 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             319 |
+|               StdMCDisRet |              16 |
+|               MaxMCDisRet |             336 |
+|               MinMCDisRet |             250 |
+|        AverageMCDisRetEnt |             323 |
+|            StdMCDisRetEnt |            14.2 |
+|            MaxMCDisRetEnt |             339 |
+|            MinMCDisRetEnt |             261 |
+|              AverageQPred |             300 |
+|                  StdQPred |            12.5 |
+|                  MaxQPred |             311 |
+|                  MinQPred |             244 |
+|              AverageQBias |           -22.5 |
+|                  StdQBias |            3.72 |
+|                  MaxQBias |           -15.5 |
+|                  MinQBias |           -33.8 |
+|           AverageQBiasAbs |            22.5 |
+|               StdQBiasAbs |            3.72 |
+|               MaxQBiasAbs |            33.8 |
+|               MinQBiasAbs |            15.5 |
+|          AverageNormQBias |          0.0695 |
+|              StdNormQBias |         0.00999 |
+|              MaxNormQBias |          0.0998 |
+|              MinNormQBias |           0.048 |
+|           AverageQBiasSqr |             519 |
+|               StdQBiasSqr |             173 |
+|               MaxQBiasSqr |        1.14e+03 |
+|               MinQBiasSqr |             240 |
+|       AverageNormQBiasSqr |             1.6 |
+|           StdNormQBiasSqr |           0.498 |
+|           MaxNormQBiasSqr |            3.37 |
+|           MinNormQBiasSqr |           0.744 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              14 |
+|         TotalEnvInteracts |         7.5e+04 |
+|                      Time |        1.03e+04 |
+|                       SPS |            7.27 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.65e+03 |
+|                  StdEpRet |             740 |
+|                  MaxEpRet |        3.35e+03 |
+|                  MinEpRet |             829 |
+|                     EpLen |             498 |
+|          AverageTestEpRet |        3.13e+03 |
+|              StdTestEpRet |           0.928 |
+|              MaxTestEpRet |        3.13e+03 |
+|              MinTestEpRet |        3.13e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             263 |
+|                 StdQ1Vals |            72.9 |
+|                 MaxQ1Vals |             339 |
+|                 MinQ1Vals |           -40.2 |
+|             AverageLossQ1 |            2.14 |
+|                 StdLossQ1 |            3.68 |
+|              AverageLogPi |            1.02 |
+|                  StdLogPi |            2.44 |
+|                  MaxLogPi |            26.7 |
+|                  MinLogPi |           -12.5 |
+|                    LossPi |            -153 |
+|              AverageAlpha |           0.139 |
+|                  StdAlpha |          0.0047 |
+|                  MaxAlpha |           0.146 |
+|                  MinAlpha |           0.117 |
+|                 LossAlpha |          0.0483 |
+|            AveragePreTanh |           0.915 |
+|                StdPreTanh |           0.754 |
+|                MaxPreTanh |            8.28 |
+|                MinPreTanh |        1.19e-07 |
+|        DynPIToD/ScoreMean |        1.48e+03 |
+|         DynPIToD/ScoreMin |             301 |
+|         DynPIToD/ScoreMax |        3.27e+03 |
+|         DynPIToD/ScoreStd |             786 |
+|          DynPIToD/Epsilon |             692 |
+|      DynPIToD/MeanStrikes |           0.267 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              15 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         3.5e+04 |
+|      DynPIToD/GroupAgeMax |           7e+04 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             229 |
+|               StdMCDisRet |            77.9 |
+|               MaxMCDisRet |             309 |
+|               MinMCDisRet |            4.02 |
+|        AverageMCDisRetEnt |             229 |
+|            StdMCDisRetEnt |              79 |
+|            MaxMCDisRetEnt |             311 |
+|            MinMCDisRetEnt |            4.02 |
+|              AverageQPred |             296 |
+|                  StdQPred |            21.8 |
+|                  MaxQPred |             315 |
+|                  MinQPred |             180 |
+|              AverageQBias |            66.9 |
+|                  StdQBias |            65.3 |
+|                  MaxQBias |             222 |
+|                  MinQBias |           -5.53 |
+|           AverageQBiasAbs |            67.6 |
+|               StdQBiasAbs |            64.6 |
+|               MaxQBiasAbs |             222 |
+|               MinQBiasAbs |          0.0472 |
+|          AverageNormQBias |           0.858 |
+|              StdNormQBias |            2.43 |
+|              MaxNormQBias |              22 |
+|              MinNormQBias |        0.000153 |
+|           AverageQBiasSqr |        8.74e+03 |
+|               StdQBiasSqr |        1.25e+04 |
+|               MaxQBiasSqr |        4.92e+04 |
+|               MinQBiasSqr |         0.00222 |
+|       AverageNormQBiasSqr |             151 |
+|           StdNormQBiasSqr |             511 |
+|           MaxNormQBiasSqr |        4.84e+03 |
+|           MinNormQBiasSqr |         7.2e-06 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              15 |
+|         TotalEnvInteracts |           8e+04 |
+|                      Time |        1.06e+04 |
+|                       SPS |            7.53 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.52e+03 |
+|                  StdEpRet |             719 |
+|                  MaxEpRet |        3.16e+03 |
+|                  MinEpRet |             892 |
+|                     EpLen |             458 |
+|          AverageTestEpRet |        3.24e+03 |
+|              StdTestEpRet |            1.03 |
+|              MaxTestEpRet |        3.24e+03 |
+|              MinTestEpRet |        3.24e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             267 |
+|                 StdQ1Vals |            74.3 |
+|                 MaxQ1Vals |             339 |
+|                 MinQ1Vals |           -60.2 |
+|             AverageLossQ1 |            2.21 |
+|                 StdLossQ1 |            3.79 |
+|              AverageLogPi |           0.998 |
+|                  StdLogPi |            2.43 |
+|                  MaxLogPi |              26 |
+|                  MinLogPi |           -12.5 |
+|                    LossPi |            -139 |
+|              AverageAlpha |            0.14 |
+|                  StdAlpha |         0.00562 |
+|                  MaxAlpha |            0.15 |
+|                  MinAlpha |           0.132 |
+|                 LossAlpha |        -0.00453 |
+|            AveragePreTanh |           0.917 |
+|                StdPreTanh |            0.75 |
+|                MaxPreTanh |            7.94 |
+|                MinPreTanh |        1.79e-07 |
+|        DynPIToD/ScoreMean |         1.3e+03 |
+|         DynPIToD/ScoreMin |             183 |
+|         DynPIToD/ScoreMax |        2.04e+03 |
+|         DynPIToD/ScoreStd |             547 |
+|          DynPIToD/Epsilon |             757 |
+|      DynPIToD/MeanStrikes |           0.333 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              15 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         3.5e+04 |
+|      DynPIToD/GroupAgeMax |           7e+04 |
+|     DynPIToD/NumRefreshed |              15 |
+| DynPIToD/RefreshWallclock |             1.2 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             307 |
+|               StdMCDisRet |            48.6 |
+|               MaxMCDisRet |             343 |
+|               MinMCDisRet |            4.55 |
+|        AverageMCDisRetEnt |             311 |
+|            StdMCDisRetEnt |            50.2 |
+|            MaxMCDisRetEnt |             344 |
+|            MinMCDisRetEnt |            4.55 |
+|              AverageQPred |             299 |
+|                  StdQPred |            34.2 |
+|                  MaxQPred |             318 |
+|                  MinQPred |            3.53 |
+|              AverageQBias |           -12.6 |
+|                  StdQBias |            24.3 |
+|                  MaxQBias |              98 |
+|                  MinQBias |           -35.2 |
+|           AverageQBiasAbs |            23.2 |
+|               StdQBiasAbs |            14.5 |
+|               MaxQBiasAbs |              98 |
+|               MinQBiasAbs |           0.155 |
+|          AverageNormQBias |          0.0872 |
+|              StdNormQBias |           0.105 |
+|              MaxNormQBias |           0.733 |
+|              MinNormQBias |        0.000527 |
+|           AverageQBiasSqr |             750 |
+|               StdQBiasSqr |        1.26e+03 |
+|               MaxQBiasSqr |        9.61e+03 |
+|               MinQBiasSqr |           0.024 |
+|       AverageNormQBiasSqr |             3.3 |
+|           StdNormQBiasSqr |             8.7 |
+|           MaxNormQBiasSqr |            66.6 |
+|           MinNormQBiasSqr |        8.17e-05 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              16 |
+|         TotalEnvInteracts |         8.5e+04 |
+|                      Time |        1.09e+04 |
+|                       SPS |            7.79 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.39e+03 |
+|                  StdEpRet |             277 |
+|                  MaxEpRet |        1.87e+03 |
+|                  MinEpRet |             975 |
+|                     EpLen |             409 |
+|          AverageTestEpRet |        3.24e+03 |
+|              StdTestEpRet |            1.13 |
+|              MaxTestEpRet |        3.24e+03 |
+|              MinTestEpRet |        3.24e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             266 |
+|                 StdQ1Vals |            75.5 |
+|                 MaxQ1Vals |             341 |
+|                 MinQ1Vals |           -59.3 |
+|             AverageLossQ1 |            2.14 |
+|                 StdLossQ1 |            3.91 |
+|              AverageLogPi |            1.01 |
+|                  StdLogPi |            2.42 |
+|                  MaxLogPi |            25.7 |
+|                  MinLogPi |           -12.5 |
+|                    LossPi |            -139 |
+|              AverageAlpha |           0.144 |
+|                  StdAlpha |         0.00304 |
+|                  MaxAlpha |            0.15 |
+|                  MinAlpha |           0.133 |
+|                 LossAlpha |          0.0115 |
+|            AveragePreTanh |           0.914 |
+|                StdPreTanh |           0.752 |
+|                MaxPreTanh |            8.38 |
+|                MinPreTanh |        7.75e-07 |
+|        DynPIToD/ScoreMean |         1.3e+03 |
+|         DynPIToD/ScoreMin |             183 |
+|         DynPIToD/ScoreMax |        2.33e+03 |
+|         DynPIToD/ScoreStd |             622 |
+|          DynPIToD/Epsilon |             683 |
+|      DynPIToD/MeanStrikes |           0.294 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              17 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           4e+04 |
+|      DynPIToD/GroupAgeMax |           8e+04 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             314 |
+|               StdMCDisRet |            19.2 |
+|               MaxMCDisRet |             335 |
+|               MinMCDisRet |             249 |
+|        AverageMCDisRetEnt |             317 |
+|            StdMCDisRetEnt |            18.1 |
+|            MaxMCDisRetEnt |             338 |
+|            MinMCDisRetEnt |             263 |
+|              AverageQPred |             307 |
+|                  StdQPred |              14 |
+|                  MaxQPred |             320 |
+|                  MinQPred |             250 |
+|              AverageQBias |           -10.1 |
+|                  StdQBias |            12.3 |
+|                  MaxQBias |            43.3 |
+|                  MinQBias |           -23.8 |
+|           AverageQBiasAbs |            14.6 |
+|               StdQBiasAbs |            6.33 |
+|               MaxQBiasAbs |            43.3 |
+|               MinQBiasAbs |        0.000837 |
+|          AverageNormQBias |          0.0463 |
+|              StdNormQBias |          0.0211 |
+|              MaxNormQBias |           0.163 |
+|              MinNormQBias |        2.72e-06 |
+|           AverageQBiasSqr |             253 |
+|               StdQBiasSqr |             216 |
+|               MaxQBiasSqr |        1.88e+03 |
+|               MinQBiasSqr |        7.01e-07 |
+|       AverageNormQBiasSqr |           0.808 |
+|           StdNormQBiasSqr |           0.757 |
+|           MaxNormQBiasSqr |            7.05 |
+|           MinNormQBiasSqr |        2.28e-09 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              17 |
+|         TotalEnvInteracts |           9e+04 |
+|                      Time |        1.12e+04 |
+|                       SPS |            8.03 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        2.53e+03 |
+|                  StdEpRet |             687 |
+|                  MaxEpRet |        3.18e+03 |
+|                  MinEpRet |        1.51e+03 |
+|                     EpLen |             781 |
+|          AverageTestEpRet |         3.1e+03 |
+|              StdTestEpRet |            1.87 |
+|              MaxTestEpRet |         3.1e+03 |
+|              MinTestEpRet |         3.1e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             275 |
+|                 StdQ1Vals |            72.6 |
+|                 MaxQ1Vals |             345 |
+|                 MinQ1Vals |           -58.2 |
+|             AverageLossQ1 |            1.95 |
+|                 StdLossQ1 |            3.44 |
+|              AverageLogPi |           0.986 |
+|                  StdLogPi |            2.45 |
+|                  MaxLogPi |            24.8 |
+|                  MinLogPi |             -12 |
+|                    LossPi |            -152 |
+|              AverageAlpha |           0.139 |
+|                  StdAlpha |         0.00844 |
+|                  MaxAlpha |           0.147 |
+|                  MinAlpha |           0.123 |
+|                 LossAlpha |         -0.0283 |
+|            AveragePreTanh |           0.914 |
+|                StdPreTanh |            0.75 |
+|                MaxPreTanh |            7.39 |
+|                MinPreTanh |        5.96e-08 |
+|        DynPIToD/ScoreMean |        1.25e+03 |
+|         DynPIToD/ScoreMin |             219 |
+|         DynPIToD/ScoreMax |        3.26e+03 |
+|         DynPIToD/ScoreStd |             812 |
+|          DynPIToD/Epsilon |             441 |
+|      DynPIToD/MeanStrikes |           0.235 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              17 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           4e+04 |
+|      DynPIToD/GroupAgeMax |           8e+04 |
+|     DynPIToD/NumRefreshed |              16 |
+| DynPIToD/RefreshWallclock |            0.74 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             314 |
+|               StdMCDisRet |            16.6 |
+|               MaxMCDisRet |             327 |
+|               MinMCDisRet |             244 |
+|        AverageMCDisRetEnt |             321 |
+|            StdMCDisRetEnt |            14.9 |
+|            MaxMCDisRetEnt |             334 |
+|            MinMCDisRetEnt |             258 |
+|              AverageQPred |             310 |
+|                  StdQPred |            14.3 |
+|                  MaxQPred |             323 |
+|                  MinQPred |             252 |
+|              AverageQBias |             -11 |
+|                  StdQBias |             3.2 |
+|                  MaxQBias |           -1.56 |
+|                  MinQBias |           -18.4 |
+|           AverageQBiasAbs |              11 |
+|               StdQBiasAbs |             3.2 |
+|               MaxQBiasAbs |            18.4 |
+|               MinQBiasAbs |            1.56 |
+|          AverageNormQBias |          0.0341 |
+|              StdNormQBias |         0.00959 |
+|              MaxNormQBias |          0.0557 |
+|              MinNormQBias |         0.00485 |
+|           AverageQBiasSqr |             131 |
+|               StdQBiasSqr |            69.3 |
+|               MaxQBiasSqr |             338 |
+|               MinQBiasSqr |            2.44 |
+|       AverageNormQBiasSqr |           0.404 |
+|           StdNormQBiasSqr |            0.21 |
+|           MaxNormQBiasSqr |            1.02 |
+|           MinNormQBiasSqr |         0.00758 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              18 |
+|         TotalEnvInteracts |         9.5e+04 |
+|                      Time |        1.15e+04 |
+|                       SPS |            8.26 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        3.13e+03 |
+|                  StdEpRet |            20.4 |
+|                  MaxEpRet |        3.16e+03 |
+|                  MinEpRet |        3.11e+03 |
+|                     EpLen |           1e+03 |
+|          AverageTestEpRet |        3.05e+03 |
+|              StdTestEpRet |           0.262 |
+|              MaxTestEpRet |        3.05e+03 |
+|              MinTestEpRet |        3.05e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             282 |
+|                 StdQ1Vals |            71.7 |
+|                 MaxQ1Vals |             346 |
+|                 MinQ1Vals |           -66.3 |
+|             AverageLossQ1 |             1.8 |
+|                 StdLossQ1 |            3.51 |
+|              AverageLogPi |           0.999 |
+|                  StdLogPi |            2.46 |
+|                  MaxLogPi |            27.8 |
+|                  MinLogPi |           -11.3 |
+|                    LossPi |            -157 |
+|              AverageAlpha |           0.135 |
+|                  StdAlpha |           0.011 |
+|                  MaxAlpha |           0.151 |
+|                  MinAlpha |           0.117 |
+|                 LossAlpha |        -0.00234 |
+|            AveragePreTanh |           0.934 |
+|                StdPreTanh |           0.758 |
+|                MaxPreTanh |            8.28 |
+|                MinPreTanh |        2.38e-07 |
+|        DynPIToD/ScoreMean |        1.16e+03 |
+|         DynPIToD/ScoreMin |            45.7 |
+|         DynPIToD/ScoreMax |        3.26e+03 |
+|         DynPIToD/ScoreStd |             822 |
+|          DynPIToD/Epsilon |             336 |
+|      DynPIToD/MeanStrikes |           0.211 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              19 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         4.5e+04 |
+|      DynPIToD/GroupAgeMax |           9e+04 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             294 |
+|               StdMCDisRet |            50.7 |
+|               MaxMCDisRet |             326 |
+|               MinMCDisRet |            4.73 |
+|        AverageMCDisRetEnt |             299 |
+|            StdMCDisRetEnt |            52.5 |
+|            MaxMCDisRetEnt |             331 |
+|            MinMCDisRetEnt |            4.73 |
+|              AverageQPred |             302 |
+|                  StdQPred |            46.1 |
+|                  MaxQPred |             323 |
+|                  MinQPred |            1.14 |
+|              AverageQBias |            2.84 |
+|                  StdQBias |            21.6 |
+|                  MaxQBias |             107 |
+|                  MinQBias |           -18.4 |
+|           AverageQBiasAbs |            11.5 |
+|               StdQBiasAbs |            18.5 |
+|               MaxQBiasAbs |             107 |
+|               MinQBiasAbs |          0.0262 |
+|          AverageNormQBias |          0.0537 |
+|              StdNormQBias |           0.109 |
+|              MaxNormQBias |           0.845 |
+|              MinNormQBias |        8.11e-05 |
+|           AverageQBiasSqr |             476 |
+|               StdQBiasSqr |        1.64e+03 |
+|               MaxQBiasSqr |        1.14e+04 |
+|               MinQBiasSqr |        0.000685 |
+|       AverageNormQBiasSqr |             2.3 |
+|           StdNormQBiasSqr |            8.04 |
+|           MaxNormQBiasSqr |            58.3 |
+|           MinNormQBiasSqr |        2.12e-06 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              19 |
+|         TotalEnvInteracts |           1e+05 |
+|                      Time |        1.18e+04 |
+|                       SPS |            8.49 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        3.09e+03 |
+|                  StdEpRet |            13.6 |
+|                  MaxEpRet |        3.12e+03 |
+|                  MinEpRet |        3.08e+03 |
+|                     EpLen |           1e+03 |
+|          AverageTestEpRet |        3.09e+03 |
+|              StdTestEpRet |            1.13 |
+|              MaxTestEpRet |         3.1e+03 |
+|              MinTestEpRet |        3.09e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             283 |
+|                 StdQ1Vals |            73.5 |
+|                 MaxQ1Vals |             346 |
+|                 MinQ1Vals |           -47.1 |
+|             AverageLossQ1 |           0.954 |
+|                 StdLossQ1 |            1.85 |
+|              AverageLogPi |            1.02 |
+|                  StdLogPi |            2.59 |
+|                  MaxLogPi |            27.6 |
+|                  MinLogPi |           -13.6 |
+|                    LossPi |            -101 |
+|              AverageAlpha |           0.141 |
+|                  StdAlpha |          0.0116 |
+|                  MaxAlpha |           0.158 |
+|                  MinAlpha |           0.117 |
+|                 LossAlpha |          0.0369 |
+|            AveragePreTanh |            0.95 |
+|                StdPreTanh |           0.772 |
+|                MaxPreTanh |            8.32 |
+|                MinPreTanh |        5.96e-08 |
+|        DynPIToD/ScoreMean |        1.38e+03 |
+|         DynPIToD/ScoreMin |            45.7 |
+|         DynPIToD/ScoreMax |        8.72e+03 |
+|         DynPIToD/ScoreStd |        1.96e+03 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |           0.158 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              19 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         4.5e+04 |
+|      DynPIToD/GroupAgeMax |           9e+04 |
+|     DynPIToD/NumRefreshed |              16 |
+| DynPIToD/RefreshWallclock |           0.705 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             312 |
+|               StdMCDisRet |            16.6 |
+|               MaxMCDisRet |             325 |
+|               MinMCDisRet |             245 |
+|        AverageMCDisRetEnt |             321 |
+|            StdMCDisRetEnt |            15.1 |
+|            MaxMCDisRetEnt |             334 |
+|            MinMCDisRetEnt |             260 |
+|              AverageQPred |             314 |
+|                  StdQPred |            15.6 |
+|                  MaxQPred |             326 |
+|                  MinQPred |             252 |
+|              AverageQBias |           -7.02 |
+|                  StdQBias |            2.78 |
+|                  MaxQBias |            1.26 |
+|                  MinQBias |           -13.2 |
+|           AverageQBiasAbs |            7.03 |
+|               StdQBiasAbs |            2.74 |
+|               MaxQBiasAbs |            13.2 |
+|               MinQBiasAbs |          0.0278 |
+|          AverageNormQBias |           0.022 |
+|              StdNormQBias |         0.00881 |
+|              MaxNormQBias |          0.0409 |
+|              MinNormQBias |        8.63e-05 |
+|           AverageQBiasSqr |              57 |
+|               StdQBiasSqr |            37.2 |
+|               MaxQBiasSqr |             174 |
+|               MinQBiasSqr |        0.000772 |
+|       AverageNormQBiasSqr |           0.179 |
+|           StdNormQBiasSqr |           0.118 |
+|           MaxNormQBiasSqr |           0.528 |
+|           MinNormQBiasSqr |         2.4e-06 |
+-----------------------------------------------
+
+  0%|          | 0/10 [00:00<?, ?it/s]
+ 10%|█         | 1/10 [00:00<00:01,  4.94it/s]
+ 20%|██        | 2/10 [00:00<00:01,  5.33it/s]
+ 30%|███       | 3/10 [00:00<00:01,  5.71it/s]
+ 40%|████      | 4/10 [00:00<00:01,  5.90it/s]
+ 50%|█████     | 5/10 [00:00<00:00,  5.99it/s]
+ 60%|██████    | 6/10 [00:01<00:00,  6.05it/s]
+ 70%|███████   | 7/10 [00:01<00:00,  6.09it/s]
+ 80%|████████  | 8/10 [00:01<00:00,  6.11it/s]
+ 90%|█████████ | 9/10 [00:01<00:00,  6.10it/s]
+100%|██████████| 10/10 [00:01<00:00,  6.28it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 144.37it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 195.67it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 133.28it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 131.99it/s]
+
+  0%|          | 0/302 [00:00<?, ?it/s]
+  0%|          | 1/302 [00:14<1:10:48, 14.11s/it]
+  1%|          | 2/302 [00:27<1:08:59, 13.80s/it]
+  1%|          | 3/302 [00:42<1:10:23, 14.12s/it]
+  1%|▏         | 4/302 [00:56<1:10:50, 14.26s/it]
+  2%|▏         | 5/302 [01:09<1:08:51, 13.91s/it]
+  2%|▏         | 6/302 [01:24<1:09:48, 14.15s/it]
+  2%|▏         | 7/302 [01:38<1:08:46, 13.99s/it]
+  3%|▎         | 8/302 [01:51<1:07:47, 13.84s/it]
+  3%|▎         | 9/302 [02:05<1:07:41, 13.86s/it]
+  3%|▎         | 10/302 [02:19<1:07:10, 13.80s/it]
+  4%|▎         | 11/302 [02:33<1:06:53, 13.79s/it]
+  4%|▍         | 12/302 [02:46<1:06:13, 13.70s/it]
+  4%|▍         | 13/302 [03:00<1:05:53, 13.68s/it]
+  5%|▍         | 14/302 [03:13<1:05:28, 13.64s/it]
+  5%|▍         | 15/302 [03:27<1:05:13, 13.64s/it]
+  5%|▌         | 16/302 [03:41<1:05:44, 13.79s/it]
+  6%|▌         | 17/302 [03:55<1:05:06, 13.71s/it]
+  6%|▌         | 18/302 [04:09<1:05:25, 13.82s/it]
+  6%|▋         | 19/302 [04:23<1:05:26, 13.87s/it]
+  7%|▋         | 20/302 [04:36<1:04:37, 13.75s/it]
+  7%|▋         | 21/302 [04:50<1:04:52, 13.85s/it]
+  7%|▋         | 22/302 [05:04<1:04:08, 13.74s/it]
+  8%|▊         | 23/302 [05:18<1:04:16, 13.82s/it]
+  8%|▊         | 24/302 [05:31<1:03:24, 13.68s/it]
+  8%|▊         | 25/302 [05:45<1:03:50, 13.83s/it]
+  9%|▊         | 26/302 [05:59<1:02:57, 13.69s/it]
+  9%|▉         | 27/302 [06:12<1:02:35, 13.66s/it]
+  9%|▉         | 28/302 [06:27<1:03:31, 13.91s/it]
+ 10%|▉         | 29/302 [06:41<1:03:22, 13.93s/it]
+ 10%|▉         | 30/302 [06:56<1:05:24, 14.43s/it]
+ 10%|█         | 31/302 [07:12<1:07:18, 14.90s/it]
+ 11%|█         | 32/302 [07:29<1:10:07, 15.58s/it]
+ 11%|█         | 33/302 [07:49<1:15:50, 16.92s/it]
+ 11%|█▏        | 34/302 [08:11<1:21:30, 18.25s/it]
+ 12%|█▏        | 35/302 [08:30<1:22:35, 18.56s/it]
+ 12%|█▏        | 36/302 [08:48<1:21:37, 18.41s/it]
+ 12%|█▏        | 37/302 [09:04<1:18:21, 17.74s/it]
+ 13%|█▎        | 38/302 [09:17<1:11:57, 16.35s/it]
+ 13%|█▎        | 39/302 [09:39<1:18:36, 17.93s/it]
+ 13%|█▎        | 40/302 [09:59<1:21:34, 18.68s/it]
+ 14%|█▎        | 41/302 [10:18<1:20:46, 18.57s/it]
+ 14%|█▍        | 42/302 [10:34<1:17:29, 17.88s/it]
+ 14%|█▍        | 43/302 [10:48<1:12:07, 16.71s/it]
+ 15%|█▍        | 44/302 [11:08<1:15:27, 17.55s/it]
+ 15%|█▍        | 45/302 [11:11<57:09, 13.35s/it]  
+ 15%|█▌        | 46/302 [11:15<44:31, 10.43s/it]
+ 16%|█▌        | 47/302 [11:19<36:12,  8.52s/it]
+ 16%|█▌        | 48/302 [11:23<30:12,  7.14s/it]
+ 16%|█▌        | 49/302 [11:26<25:30,  6.05s/it]
+ 17%|█▋        | 50/302 [11:30<22:12,  5.29s/it]
+ 17%|█▋        | 51/302 [11:34<21:09,  5.06s/it]
+ 17%|█▋        | 52/302 [11:38<19:08,  4.60s/it]
+ 18%|█▊        | 53/302 [11:41<17:40,  4.26s/it]
+ 18%|█▊        | 54/302 [11:45<17:00,  4.11s/it]
+ 18%|█▊        | 55/302 [11:49<17:11,  4.18s/it]
+ 19%|█▊        | 56/302 [11:53<16:14,  3.96s/it]
+ 19%|█▉        | 57/302 [11:56<15:36,  3.82s/it]
+ 19%|█▉        | 58/302 [12:00<15:51,  3.90s/it]
+ 20%|█▉        | 59/302 [12:14<27:49,  6.87s/it]
+ 20%|█▉        | 60/302 [12:28<36:16,  8.99s/it]
+ 20%|██        | 61/302 [12:42<41:56, 10.44s/it]
+ 21%|██        | 62/302 [12:56<45:45, 11.44s/it]
+ 21%|██        | 63/302 [13:09<48:17, 12.12s/it]
+ 21%|██        | 64/302 [13:23<50:15, 12.67s/it]
+ 22%|██▏       | 65/302 [13:37<51:10, 12.96s/it]
+ 22%|██▏       | 66/302 [13:51<51:43, 13.15s/it]
+ 22%|██▏       | 67/302 [14:04<51:57, 13.27s/it]
+ 23%|██▎       | 68/302 [14:18<52:18, 13.41s/it]
+ 23%|██▎       | 69/302 [14:32<52:24, 13.50s/it]
+ 23%|██▎       | 70/302 [14:45<52:18, 13.53s/it]
+ 24%|██▎       | 71/302 [14:59<52:17, 13.58s/it]
+ 24%|██▍       | 72/302 [15:13<52:07, 13.60s/it]
+ 24%|██▍       | 73/302 [16:01<1:31:46, 24.05s/it]
+ 25%|██▍       | 74/302 [16:49<1:58:30, 31.19s/it]
+ 25%|██▍       | 75/302 [17:37<2:17:31, 36.35s/it]
+ 25%|██▌       | 76/302 [18:25<2:30:17, 39.90s/it]
+ 25%|██▌       | 77/302 [19:14<2:39:14, 42.46s/it]
+ 26%|██▌       | 78/302 [20:02<2:44:53, 44.17s/it]
+ 26%|██▌       | 79/302 [20:51<2:49:18, 45.56s/it]
+ 26%|██▋       | 80/302 [21:39<2:51:26, 46.33s/it]
+ 27%|██▋       | 81/302 [22:27<2:52:42, 46.89s/it]
+ 27%|██▋       | 82/302 [23:15<2:52:36, 47.08s/it]
+ 27%|██▋       | 83/302 [24:03<2:53:22, 47.50s/it]
+ 28%|██▊       | 84/302 [24:50<2:52:21, 47.44s/it]
+ 28%|██▊       | 85/302 [25:38<2:52:15, 47.63s/it]
+ 28%|██▊       | 86/302 [26:26<2:51:06, 47.53s/it]
+ 29%|██▉       | 87/302 [27:14<2:51:04, 47.74s/it]
+ 29%|██▉       | 88/302 [27:42<2:28:49, 41.72s/it]
+ 29%|██▉       | 89/302 [28:10<2:14:16, 37.82s/it]
+ 30%|██▉       | 90/302 [28:37<2:01:49, 34.48s/it]
+ 30%|███       | 91/302 [29:04<1:52:53, 32.10s/it]
+ 30%|███       | 92/302 [29:31<1:47:46, 30.79s/it]
+ 31%|███       | 93/302 [29:58<1:43:23, 29.68s/it]
+ 31%|███       | 94/302 [30:26<1:40:08, 28.88s/it]
+ 31%|███▏      | 95/302 [30:53<1:38:33, 28.57s/it]
+ 32%|███▏      | 96/302 [31:20<1:36:05, 27.99s/it]
+ 32%|███▏      | 97/302 [31:48<1:35:32, 27.96s/it]
+ 32%|███▏      | 98/302 [32:16<1:34:44, 27.87s/it]
+ 33%|███▎      | 99/302 [32:44<1:34:49, 28.03s/it]
+ 33%|███▎      | 100/302 [33:11<1:33:21, 27.73s/it]
+ 33%|███▎      | 101/302 [33:38<1:32:24, 27.59s/it]
+ 34%|███▍      | 102/302 [34:05<1:31:22, 27.41s/it]
+ 34%|███▍      | 103/302 [34:31<1:29:18, 26.92s/it]
+ 34%|███▍      | 104/302 [34:57<1:27:44, 26.59s/it]
+ 35%|███▍      | 105/302 [35:24<1:27:28, 26.64s/it]
+ 35%|███▌      | 106/302 [35:50<1:26:43, 26.55s/it]
+ 35%|███▌      | 107/302 [36:16<1:26:13, 26.53s/it]
+ 36%|███▌      | 108/302 [36:42<1:24:36, 26.17s/it]
+ 36%|███▌      | 109/302 [37:08<1:24:01, 26.12s/it]
+ 36%|███▋      | 110/302 [37:34<1:24:11, 26.31s/it]
+ 37%|███▋      | 111/302 [38:01<1:24:01, 26.39s/it]
+ 37%|███▋      | 112/302 [38:28<1:23:45, 26.45s/it]
+ 37%|███▋      | 113/302 [38:54<1:23:26, 26.49s/it]
+ 38%|███▊      | 114/302 [39:22<1:24:10, 26.86s/it]
+ 38%|███▊      | 115/302 [39:49<1:23:39, 26.84s/it]
+ 38%|███▊      | 116/302 [40:35<1:40:53, 32.55s/it]
+ 39%|███▊      | 117/302 [41:19<1:51:15, 36.08s/it]
+ 39%|███▉      | 118/302 [42:05<2:00:01, 39.14s/it]
+ 39%|███▉      | 119/302 [42:50<2:04:45, 40.90s/it]
+ 40%|███▉      | 120/302 [43:34<2:06:53, 41.83s/it]
+ 40%|████      | 121/302 [44:19<2:08:49, 42.70s/it]
+ 40%|████      | 122/302 [45:05<2:11:20, 43.78s/it]
+ 41%|████      | 123/302 [45:49<2:10:12, 43.65s/it]
+ 41%|████      | 124/302 [46:32<2:08:50, 43.43s/it]
+ 41%|████▏     | 125/302 [47:16<2:09:26, 43.88s/it]
+ 42%|████▏     | 126/302 [48:02<2:10:09, 44.37s/it]
+ 42%|████▏     | 127/302 [48:47<2:10:20, 44.69s/it]
+ 42%|████▏     | 128/302 [49:32<2:09:38, 44.70s/it]
+ 43%|████▎     | 129/302 [50:18<2:09:38, 44.96s/it]
+ 43%|████▎     | 130/302 [51:05<2:10:48, 45.63s/it]
+ 43%|████▎     | 131/302 [51:33<1:55:26, 40.50s/it]
+ 44%|████▎     | 132/302 [52:02<1:44:35, 36.91s/it]
+ 44%|████▍     | 133/302 [52:30<1:36:34, 34.29s/it]
+ 44%|████▍     | 134/302 [52:59<1:31:31, 32.68s/it]
+ 45%|████▍     | 135/302 [53:28<1:27:45, 31.53s/it]
+ 45%|████▌     | 136/302 [53:56<1:24:45, 30.63s/it]
+ 45%|████▌     | 137/302 [54:24<1:21:44, 29.72s/it]
+ 46%|████▌     | 138/302 [54:52<1:20:02, 29.28s/it]
+ 46%|████▌     | 139/302 [55:22<1:19:50, 29.39s/it]
+ 46%|████▋     | 140/302 [55:51<1:18:52, 29.21s/it]
+ 47%|████▋     | 141/302 [56:20<1:18:24, 29.22s/it]
+ 47%|████▋     | 142/302 [56:49<1:17:31, 29.07s/it]
+ 47%|████▋     | 143/302 [57:18<1:17:16, 29.16s/it]
+ 48%|████▊     | 144/302 [57:47<1:16:29, 29.05s/it]
+ 48%|████▊     | 145/302 [57:59<1:03:04, 24.11s/it]
+ 48%|████▊     | 146/302 [58:13<54:14, 20.86s/it]  
+ 49%|████▊     | 147/302 [58:26<47:51, 18.53s/it]
+ 49%|████▉     | 148/302 [58:39<43:15, 16.86s/it]
+ 49%|████▉     | 149/302 [58:53<40:58, 16.07s/it]
+ 50%|████▉     | 150/302 [59:08<40:03, 15.81s/it]
+ 50%|█████     | 151/302 [59:21<37:36, 14.94s/it]
+ 50%|█████     | 152/302 [59:34<35:33, 14.22s/it]
+ 51%|█████     | 153/302 [59:48<35:32, 14.31s/it]
+ 51%|█████     | 154/302 [1:00:03<35:46, 14.50s/it]
+ 51%|█████▏    | 155/302 [1:00:15<33:38, 13.73s/it]
+ 52%|█████▏    | 156/302 [1:00:28<32:40, 13.43s/it]
+ 52%|█████▏    | 157/302 [1:00:40<31:21, 12.98s/it]
+ 52%|█████▏    | 158/302 [1:00:52<30:51, 12.86s/it]
+ 53%|█████▎    | 159/302 [1:01:07<32:09, 13.49s/it]
+ 53%|█████▎    | 160/302 [1:01:22<32:39, 13.80s/it]
+ 53%|█████▎    | 161/302 [1:01:36<32:52, 13.99s/it]
+ 54%|█████▎    | 162/302 [1:01:51<33:00, 14.15s/it]
+ 54%|█████▍    | 163/302 [1:02:05<32:40, 14.10s/it]
+ 54%|█████▍    | 164/302 [1:02:19<32:20, 14.06s/it]
+ 55%|█████▍    | 165/302 [1:02:33<32:02, 14.03s/it]
+ 55%|█████▍    | 166/302 [1:02:47<31:53, 14.07s/it]
+ 55%|█████▌    | 167/302 [1:03:01<31:47, 14.13s/it]
+ 56%|█████▌    | 168/302 [1:03:15<31:36, 14.15s/it]
+ 56%|█████▌    | 169/302 [1:03:30<31:32, 14.23s/it]
+ 56%|█████▋    | 170/302 [1:03:44<31:28, 14.31s/it]
+ 57%|█████▋    | 171/302 [1:03:58<31:03, 14.22s/it]
+ 57%|█████▋    | 172/302 [1:04:12<30:50, 14.24s/it]
+ 57%|█████▋    | 173/302 [1:04:27<30:37, 14.25s/it]
+ 58%|█████▊    | 174/302 [1:04:46<33:42, 15.80s/it]
+ 58%|█████▊    | 175/302 [1:05:07<36:42, 17.34s/it]
+ 58%|█████▊    | 176/302 [1:05:25<36:34, 17.42s/it]
+ 59%|█████▊    | 177/302 [1:05:44<37:37, 18.06s/it]
+ 59%|█████▉    | 178/302 [1:06:04<38:03, 18.42s/it]
+ 59%|█████▉    | 179/302 [1:06:23<38:14, 18.65s/it]
+ 60%|█████▉    | 180/302 [1:06:43<38:41, 19.03s/it]
+ 60%|█████▉    | 181/302 [1:07:02<38:24, 19.05s/it]
+ 60%|██████    | 182/302 [1:07:21<38:20, 19.17s/it]
+ 61%|██████    | 183/302 [1:07:40<37:45, 19.04s/it]
+ 61%|██████    | 184/302 [1:07:58<36:54, 18.77s/it]
+ 61%|██████▏   | 185/302 [1:08:17<36:53, 18.92s/it]
+ 62%|██████▏   | 186/302 [1:08:35<35:51, 18.55s/it]
+ 62%|██████▏   | 187/302 [1:08:55<36:24, 19.00s/it]
+ 62%|██████▏   | 188/302 [1:09:01<28:47, 15.16s/it]
+ 63%|██████▎   | 189/302 [1:09:08<24:00, 12.75s/it]
+ 63%|██████▎   | 190/302 [1:09:15<20:20, 10.90s/it]
+ 63%|██████▎   | 191/302 [1:09:21<17:23,  9.41s/it]
+ 64%|██████▎   | 192/302 [1:09:27<15:36,  8.51s/it]
+ 64%|██████▍   | 193/302 [1:09:33<13:42,  7.55s/it]
+ 64%|██████▍   | 194/302 [1:09:39<12:46,  7.10s/it]
+ 65%|██████▍   | 195/302 [1:09:45<12:22,  6.94s/it]
+ 65%|██████▍   | 196/302 [1:09:52<12:15,  6.94s/it]
+ 65%|██████▌   | 197/302 [1:09:58<11:28,  6.56s/it]
+ 66%|██████▌   | 198/302 [1:10:03<10:42,  6.18s/it]
+ 66%|██████▌   | 199/302 [1:10:10<10:58,  6.39s/it]
+ 66%|██████▌   | 200/302 [1:10:16<10:39,  6.27s/it]
+ 67%|██████▋   | 201/302 [1:10:22<10:38,  6.32s/it]
+ 67%|██████▋   | 202/302 [1:10:36<14:00,  8.41s/it]
+ 67%|██████▋   | 203/302 [1:10:49<16:29,  9.99s/it]
+ 68%|██████▊   | 204/302 [1:11:04<18:25, 11.28s/it]
+ 68%|██████▊   | 205/302 [1:11:17<19:14, 11.91s/it]
+ 68%|██████▊   | 206/302 [1:11:33<20:50, 13.02s/it]
+ 69%|██████▊   | 207/302 [1:11:50<22:43, 14.36s/it]
+ 69%|██████▉   | 208/302 [1:12:08<24:05, 15.38s/it]
+ 69%|██████▉   | 209/302 [1:12:22<23:04, 14.88s/it]
+ 70%|██████▉   | 210/302 [1:12:38<23:28, 15.31s/it]
+ 70%|██████▉   | 211/302 [1:12:52<22:35, 14.89s/it]
+ 70%|███████   | 212/302 [1:13:07<22:39, 15.10s/it]
+ 71%|███████   | 213/302 [1:13:23<22:34, 15.22s/it]
+ 71%|███████   | 214/302 [1:13:38<22:23, 15.27s/it]
+ 71%|███████   | 215/302 [1:13:55<22:57, 15.83s/it]
+ 72%|███████▏  | 216/302 [1:14:11<22:38, 15.80s/it]
+ 72%|███████▏  | 217/302 [1:14:40<27:57, 19.74s/it]
+ 72%|███████▏  | 218/302 [1:15:09<31:34, 22.56s/it]
+ 73%|███████▎  | 219/302 [1:15:38<33:53, 24.50s/it]
+ 73%|███████▎  | 220/302 [1:16:07<35:18, 25.83s/it]
+ 73%|███████▎  | 221/302 [1:16:36<36:11, 26.81s/it]
+ 74%|███████▎  | 222/302 [1:17:05<36:40, 27.51s/it]
+ 74%|███████▍  | 223/302 [1:17:34<36:44, 27.91s/it]
+ 74%|███████▍  | 224/302 [1:18:04<37:04, 28.51s/it]
+ 75%|███████▍  | 225/302 [1:18:34<36:55, 28.78s/it]
+ 75%|███████▍  | 226/302 [1:19:03<36:36, 28.91s/it]
+ 75%|███████▌  | 227/302 [1:19:32<36:08, 28.92s/it]
+ 75%|███████▌  | 228/302 [1:20:01<35:51, 29.08s/it]
+ 76%|███████▌  | 229/302 [1:20:30<35:24, 29.11s/it]
+ 76%|███████▌  | 230/302 [1:20:59<34:53, 29.08s/it]
+ 76%|███████▋  | 231/302 [1:21:48<41:22, 34.97s/it]
+ 77%|███████▋  | 232/302 [1:22:36<45:17, 38.82s/it]
+ 77%|███████▋  | 233/302 [1:23:25<48:01, 41.76s/it]
+ 77%|███████▋  | 234/302 [1:24:12<49:23, 43.58s/it]
+ 78%|███████▊  | 235/302 [1:25:01<50:21, 45.10s/it]
+ 78%|███████▊  | 236/302 [1:25:48<50:22, 45.80s/it]
+ 78%|███████▊  | 237/302 [1:26:37<50:33, 46.67s/it]
+ 79%|███████▉  | 238/302 [1:27:25<50:07, 47.00s/it]
+ 79%|███████▉  | 239/302 [1:28:13<49:46, 47.41s/it]
+ 79%|███████▉  | 240/302 [1:29:01<49:13, 47.63s/it]
+ 80%|███████▉  | 241/302 [1:29:50<48:43, 47.93s/it]
+ 80%|████████  | 242/302 [1:30:38<48:00, 48.01s/it]
+ 80%|████████  | 243/302 [1:31:27<47:32, 48.35s/it]
+ 81%|████████  | 244/302 [1:32:15<46:30, 48.11s/it]
+ 81%|████████  | 245/302 [1:32:41<39:19, 41.40s/it]
+ 81%|████████▏ | 246/302 [1:33:06<34:11, 36.63s/it]
+ 82%|████████▏ | 247/302 [1:33:32<30:34, 33.35s/it]
+ 82%|████████▏ | 248/302 [1:33:57<27:51, 30.96s/it]
+ 82%|████████▏ | 249/302 [1:34:22<25:45, 29.15s/it]
+ 83%|████████▎ | 250/302 [1:34:48<24:23, 28.14s/it]
+ 83%|████████▎ | 251/302 [1:35:14<23:18, 27.41s/it]
+ 83%|████████▎ | 252/302 [1:35:39<22:25, 26.91s/it]
+ 84%|████████▍ | 253/302 [1:36:05<21:42, 26.59s/it]
+ 84%|████████▍ | 254/302 [1:36:31<21:01, 26.28s/it]
+ 84%|████████▍ | 255/302 [1:36:57<20:29, 26.16s/it]
+ 85%|████████▍ | 256/302 [1:37:22<19:46, 25.79s/it]
+ 85%|████████▌ | 257/302 [1:37:47<19:18, 25.74s/it]
+ 85%|████████▌ | 258/302 [1:38:13<18:49, 25.68s/it]
+ 86%|████████▌ | 259/302 [1:38:38<18:23, 25.67s/it]
+ 86%|████████▌ | 260/302 [1:39:13<19:49, 28.32s/it]
+ 86%|████████▋ | 261/302 [1:39:50<21:13, 31.06s/it]
+ 87%|████████▋ | 262/302 [1:40:24<21:18, 31.96s/it]
+ 87%|████████▋ | 263/302 [1:41:06<22:40, 34.88s/it]
+ 87%|████████▋ | 264/302 [1:41:53<24:22, 38.48s/it]
+ 88%|████████▊ | 265/302 [1:42:31<23:40, 38.40s/it]
+ 88%|████████▊ | 266/302 [1:43:10<23:10, 38.63s/it]
+ 88%|████████▊ | 267/302 [1:43:49<22:34, 38.69s/it]
+ 89%|████████▊ | 268/302 [1:44:27<21:41, 38.29s/it]
+ 89%|████████▉ | 269/302 [1:45:09<21:48, 39.65s/it]
+ 89%|████████▉ | 270/302 [1:45:52<21:40, 40.64s/it]
+ 90%|████████▉ | 271/302 [1:46:34<21:05, 40.82s/it]
+ 90%|█████████ | 272/302 [1:47:12<19:58, 39.94s/it]
+ 90%|█████████ | 273/302 [1:47:55<19:49, 41.01s/it]
+ 91%|█████████ | 274/302 [1:48:04<14:41, 31.49s/it]
+ 91%|█████████ | 275/302 [1:48:16<11:27, 25.46s/it]
+ 91%|█████████▏| 276/302 [1:48:23<08:39, 19.98s/it]
+ 92%|█████████▏| 277/302 [1:48:32<06:57, 16.70s/it]
+ 92%|█████████▏| 278/302 [1:48:41<05:47, 14.46s/it]
+ 92%|█████████▏| 279/302 [1:48:49<04:48, 12.55s/it]
+ 93%|█████████▎| 280/302 [1:49:00<04:21, 11.87s/it]
+ 93%|█████████▎| 281/302 [1:49:10<03:58, 11.38s/it]
+ 93%|█████████▎| 282/302 [1:49:21<03:46, 11.32s/it]
+ 94%|█████████▎| 283/302 [1:49:32<03:31, 11.12s/it]
+ 94%|█████████▍| 284/302 [1:49:40<03:04, 10.24s/it]
+ 94%|█████████▍| 285/302 [1:49:49<02:47,  9.83s/it]
+ 95%|█████████▍| 286/302 [1:49:57<02:30,  9.43s/it]
+ 95%|█████████▌| 287/302 [1:50:06<02:19,  9.29s/it]
+ 95%|█████████▌| 288/302 [1:50:22<02:36, 11.17s/it]
+ 96%|█████████▌| 289/302 [1:50:37<02:42, 12.47s/it]
+ 96%|█████████▌| 290/302 [1:50:53<02:41, 13.47s/it]
+ 96%|█████████▋| 291/302 [1:51:09<02:36, 14.26s/it]
+ 97%|█████████▋| 292/302 [1:51:26<02:31, 15.13s/it]
+ 97%|█████████▋| 293/302 [1:51:43<02:19, 15.48s/it]
+ 97%|█████████▋| 294/302 [1:51:58<02:04, 15.61s/it]
+ 98%|█████████▊| 295/302 [1:52:14<01:49, 15.71s/it]
+ 98%|█████████▊| 296/302 [1:52:31<01:34, 15.83s/it]
+ 98%|█████████▊| 297/302 [1:52:47<01:20, 16.04s/it]
+ 99%|█████████▊| 298/302 [1:53:04<01:05, 16.29s/it]
+ 99%|█████████▉| 299/302 [1:53:20<00:48, 16.24s/it]
+ 99%|█████████▉| 300/302 [1:53:36<00:32, 16.28s/it]
+100%|█████████▉| 301/302 [1:53:52<00:16, 16.20s/it]
+100%|██████████| 302/302 [1:54:08<00:00, 16.12s/it]
+100%|██████████| 302/302 [1:54:08<00:00, 22.68s/it]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:38<00:00, 38.82s/it]
+100%|██████████| 1/1 [00:38<00:00, 38.82s/it]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:48<00:00, 48.94s/it]
+100%|██████████| 1/1 [00:48<00:00, 48.94s/it]
+-----------------------------------------------
+|                     Epoch |              20 |
+|         TotalEnvInteracts |        1.05e+05 |
+|                      Time |         1.9e+04 |
+|                       SPS |            5.53 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        2.88e+03 |
+|                  StdEpRet |             445 |
+|                  MaxEpRet |        3.18e+03 |
+|                  MinEpRet |         1.9e+03 |
+|                     EpLen |             911 |
+|          AverageTestEpRet |        3.17e+03 |
+|              StdTestEpRet |            1.31 |
+|              MaxTestEpRet |        3.17e+03 |
+|              MinTestEpRet |        3.17e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             282 |
+|                 StdQ1Vals |            73.7 |
+|                 MaxQ1Vals |             349 |
+|                 MinQ1Vals |           -75.1 |
+|             AverageLossQ1 |           0.925 |
+|                 StdLossQ1 |            1.57 |
+|              AverageLogPi |            1.01 |
+|                  StdLogPi |            2.55 |
+|                  MaxLogPi |              26 |
+|                  MinLogPi |             -15 |
+|                    LossPi |            -102 |
+|              AverageAlpha |            0.14 |
+|                  StdAlpha |           0.011 |
+|                  MaxAlpha |           0.155 |
+|                  MinAlpha |           0.121 |
+|                 LossAlpha |          0.0151 |
+|            AveragePreTanh |            0.93 |
+|                StdPreTanh |           0.762 |
+|                MaxPreTanh |            11.3 |
+|                MinPreTanh |        1.49e-08 |
+|        DynPIToD/ScoreMean |        1.29e+03 |
+|         DynPIToD/ScoreMin |            45.7 |
+|         DynPIToD/ScoreMax |        8.72e+03 |
+|         DynPIToD/ScoreStd |        1.88e+03 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |           0.143 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              21 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           5e+04 |
+|      DynPIToD/GroupAgeMax |           1e+05 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             321 |
+|               StdMCDisRet |            18.4 |
+|               MaxMCDisRet |             339 |
+|               MinMCDisRet |             248 |
+|        AverageMCDisRetEnt |             328 |
+|            StdMCDisRetEnt |            15.6 |
+|            MaxMCDisRetEnt |             344 |
+|            MinMCDisRetEnt |             264 |
+|              AverageQPred |             315 |
+|                  StdQPred |            14.8 |
+|                  MaxQPred |             327 |
+|                  MinQPred |             255 |
+|              AverageQBias |           -12.4 |
+|                  StdQBias |            3.31 |
+|                  MaxQBias |          -0.553 |
+|                  MinQBias |           -21.5 |
+|           AverageQBiasAbs |            12.4 |
+|               StdQBiasAbs |            3.31 |
+|               MaxQBiasAbs |            21.5 |
+|               MinQBiasAbs |           0.553 |
+|          AverageNormQBias |          0.0377 |
+|              StdNormQBias |         0.00962 |
+|              MaxNormQBias |          0.0629 |
+|              MinNormQBias |         0.00169 |
+|           AverageQBiasSqr |             164 |
+|               StdQBiasSqr |            81.1 |
+|               MaxQBiasSqr |             463 |
+|               MinQBiasSqr |           0.306 |
+|       AverageNormQBiasSqr |           0.497 |
+|           StdNormQBiasSqr |           0.237 |
+|           MaxNormQBiasSqr |            1.35 |
+|           MinNormQBiasSqr |        0.000937 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              21 |
+|         TotalEnvInteracts |         1.1e+05 |
+|                      Time |        1.93e+04 |
+|                       SPS |            5.71 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        2.49e+03 |
+|                  StdEpRet |             787 |
+|                  MaxEpRet |        3.19e+03 |
+|                  MinEpRet |        1.25e+03 |
+|                     EpLen |             772 |
+|          AverageTestEpRet |        3.17e+03 |
+|              StdTestEpRet |            1.76 |
+|              MaxTestEpRet |        3.17e+03 |
+|              MinTestEpRet |        3.17e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             283 |
+|                 StdQ1Vals |            71.6 |
+|                 MaxQ1Vals |             348 |
+|                 MinQ1Vals |           -82.6 |
+|             AverageLossQ1 |           0.902 |
+|                 StdLossQ1 |            1.86 |
+|              AverageLogPi |           0.994 |
+|                  StdLogPi |            2.54 |
+|                  MaxLogPi |            25.9 |
+|                  MinLogPi |           -12.4 |
+|                    LossPi |            -106 |
+|              AverageAlpha |           0.131 |
+|                  StdAlpha |          0.0099 |
+|                  MaxAlpha |           0.145 |
+|                  MinAlpha |           0.113 |
+|                 LossAlpha |         -0.0135 |
+|            AveragePreTanh |           0.928 |
+|                StdPreTanh |           0.761 |
+|                MaxPreTanh |            10.1 |
+|                MinPreTanh |        4.47e-07 |
+|        DynPIToD/ScoreMean |        1.06e+03 |
+|         DynPIToD/ScoreMin |            45.7 |
+|         DynPIToD/ScoreMax |        5.79e+03 |
+|         DynPIToD/ScoreStd |        1.38e+03 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              21 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           5e+04 |
+|      DynPIToD/GroupAgeMax |           1e+05 |
+|     DynPIToD/NumRefreshed |              16 |
+| DynPIToD/RefreshWallclock |           0.801 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             319 |
+|               StdMCDisRet |              18 |
+|               MaxMCDisRet |             333 |
+|               MinMCDisRet |             246 |
+|        AverageMCDisRetEnt |             326 |
+|            StdMCDisRetEnt |            16.8 |
+|            MaxMCDisRetEnt |             341 |
+|            MinMCDisRetEnt |             258 |
+|              AverageQPred |             315 |
+|                  StdQPred |            14.5 |
+|                  MaxQPred |             327 |
+|                  MinQPred |             256 |
+|              AverageQBias |           -11.4 |
+|                  StdQBias |            3.58 |
+|                  MaxQBias |              -2 |
+|                  MinQBias |           -20.3 |
+|           AverageQBiasAbs |            11.4 |
+|               StdQBiasAbs |            3.58 |
+|               MaxQBiasAbs |            20.3 |
+|               MinQBiasAbs |               2 |
+|          AverageNormQBias |          0.0347 |
+|              StdNormQBias |          0.0101 |
+|              MaxNormQBias |          0.0597 |
+|              MinNormQBias |         0.00774 |
+|           AverageQBiasSqr |             143 |
+|               StdQBiasSqr |            78.3 |
+|               MaxQBiasSqr |             410 |
+|               MinQBiasSqr |            3.98 |
+|       AverageNormQBiasSqr |           0.432 |
+|           StdNormQBiasSqr |           0.229 |
+|           MaxNormQBiasSqr |            1.21 |
+|           MinNormQBiasSqr |          0.0154 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              22 |
+|         TotalEnvInteracts |        1.15e+05 |
+|                      Time |        1.96e+04 |
+|                       SPS |            5.88 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.84e+03 |
+|                  StdEpRet |             876 |
+|                  MaxEpRet |        3.24e+03 |
+|                  MinEpRet |             812 |
+|                     EpLen |             559 |
+|          AverageTestEpRet |        3.19e+03 |
+|              StdTestEpRet |            1.83 |
+|              MaxTestEpRet |         3.2e+03 |
+|              MinTestEpRet |        3.19e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             282 |
+|                 StdQ1Vals |            70.3 |
+|                 MaxQ1Vals |             349 |
+|                 MinQ1Vals |           -95.5 |
+|             AverageLossQ1 |           0.969 |
+|                 StdLossQ1 |            1.82 |
+|              AverageLogPi |            1.01 |
+|                  StdLogPi |            2.56 |
+|                  MaxLogPi |            26.9 |
+|                  MinLogPi |           -12.2 |
+|                    LossPi |            -107 |
+|              AverageAlpha |           0.127 |
+|                  StdAlpha |         0.00453 |
+|                  MaxAlpha |           0.133 |
+|                  MinAlpha |           0.113 |
+|                 LossAlpha |          0.0201 |
+|            AveragePreTanh |           0.928 |
+|                StdPreTanh |           0.761 |
+|                MaxPreTanh |            9.53 |
+|                MinPreTanh |        2.98e-08 |
+|        DynPIToD/ScoreMean |             985 |
+|         DynPIToD/ScoreMin |            45.7 |
+|         DynPIToD/ScoreMax |        5.79e+03 |
+|         DynPIToD/ScoreStd |        1.34e+03 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              23 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         5.5e+04 |
+|      DynPIToD/GroupAgeMax |         1.1e+05 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             308 |
+|               StdMCDisRet |            26.7 |
+|               MaxMCDisRet |             331 |
+|               MinMCDisRet |             173 |
+|        AverageMCDisRetEnt |             313 |
+|            StdMCDisRetEnt |            27.8 |
+|            MaxMCDisRetEnt |             338 |
+|            MinMCDisRetEnt |             172 |
+|              AverageQPred |             315 |
+|                  StdQPred |            16.5 |
+|                  MaxQPred |             329 |
+|                  MinQPred |             218 |
+|              AverageQBias |             2.5 |
+|                  StdQBias |            20.2 |
+|                  MaxQBias |            78.7 |
+|                  MinQBias |           -16.1 |
+|           AverageQBiasAbs |            13.5 |
+|               StdQBiasAbs |            15.1 |
+|               MaxQBiasAbs |            78.7 |
+|               MinQBiasAbs |         0.00814 |
+|          AverageNormQBias |          0.0484 |
+|              StdNormQBias |          0.0679 |
+|              MaxNormQBias |           0.417 |
+|              MinNormQBias |        2.54e-05 |
+|           AverageQBiasSqr |             413 |
+|               StdQBiasSqr |        1.03e+03 |
+|               MaxQBiasSqr |        6.19e+03 |
+|               MinQBiasSqr |        6.62e-05 |
+|       AverageNormQBiasSqr |            1.67 |
+|           StdNormQBiasSqr |            4.67 |
+|           MaxNormQBiasSqr |            31.6 |
+|           MinNormQBiasSqr |        2.07e-07 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              23 |
+|         TotalEnvInteracts |         1.2e+05 |
+|                      Time |        1.98e+04 |
+|                       SPS |            6.05 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.32e+03 |
+|                  StdEpRet |             412 |
+|                  MaxEpRet |        2.46e+03 |
+|                  MinEpRet |             928 |
+|                     EpLen |             387 |
+|          AverageTestEpRet |        1.56e+03 |
+|              StdTestEpRet |            95.5 |
+|              MaxTestEpRet |        1.77e+03 |
+|              MinTestEpRet |        1.49e+03 |
+|                 TestEpLen |             455 |
+|             AverageQ1Vals |             279 |
+|                 StdQ1Vals |            73.3 |
+|                 MaxQ1Vals |             351 |
+|                 MinQ1Vals |           -52.5 |
+|             AverageLossQ1 |            1.01 |
+|                 StdLossQ1 |            2.03 |
+|              AverageLogPi |            1.02 |
+|                  StdLogPi |             2.6 |
+|                  MaxLogPi |              27 |
+|                  MinLogPi |           -11.7 |
+|                    LossPi |            -109 |
+|              AverageAlpha |           0.142 |
+|                  StdAlpha |         0.00631 |
+|                  MaxAlpha |           0.152 |
+|                  MinAlpha |           0.121 |
+|                 LossAlpha |          0.0333 |
+|            AveragePreTanh |           0.953 |
+|                StdPreTanh |           0.768 |
+|                MaxPreTanh |            10.4 |
+|                MinPreTanh |        1.19e-07 |
+|        DynPIToD/ScoreMean |             948 |
+|         DynPIToD/ScoreMin |            45.7 |
+|         DynPIToD/ScoreMax |        6.25e+03 |
+|         DynPIToD/ScoreStd |        1.41e+03 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              23 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         5.5e+04 |
+|      DynPIToD/GroupAgeMax |         1.1e+05 |
+|     DynPIToD/NumRefreshed |              16 |
+| DynPIToD/RefreshWallclock |            1.19 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             270 |
+|               StdMCDisRet |            68.3 |
+|               MaxMCDisRet |             325 |
+|               MinMCDisRet |             5.3 |
+|        AverageMCDisRetEnt |             269 |
+|            StdMCDisRetEnt |            69.6 |
+|            MaxMCDisRetEnt |             329 |
+|            MinMCDisRetEnt |             5.3 |
+|              AverageQPred |             286 |
+|                  StdQPred |            63.7 |
+|                  MaxQPred |             332 |
+|                  MinQPred |            26.7 |
+|              AverageQBias |            17.4 |
+|                  StdQBias |            16.7 |
+|                  MaxQBias |            56.7 |
+|                  MinQBias |           -7.62 |
+|           AverageQBiasAbs |            18.6 |
+|               StdQBiasAbs |            15.3 |
+|               MaxQBiasAbs |            56.7 |
+|               MinQBiasAbs |          0.0168 |
+|          AverageNormQBias |            0.11 |
+|              StdNormQBias |           0.224 |
+|              MaxNormQBias |             3.2 |
+|              MinNormQBias |        5.68e-05 |
+|           AverageQBiasSqr |             582 |
+|               StdQBiasSqr |             679 |
+|               MaxQBiasSqr |        3.22e+03 |
+|               MinQBiasSqr |        0.000283 |
+|       AverageNormQBiasSqr |             3.4 |
+|           StdNormQBiasSqr |            6.63 |
+|           MaxNormQBiasSqr |             102 |
+|           MinNormQBiasSqr |        9.56e-07 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              24 |
+|         TotalEnvInteracts |        1.25e+05 |
+|                      Time |        2.01e+04 |
+|                       SPS |            6.22 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.28e+03 |
+|                  StdEpRet |             237 |
+|                  MaxEpRet |        1.71e+03 |
+|                  MinEpRet |             827 |
+|                     EpLen |             381 |
+|          AverageTestEpRet |        3.21e+03 |
+|              StdTestEpRet |            3.42 |
+|              MaxTestEpRet |        3.22e+03 |
+|              MinTestEpRet |        3.21e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             278 |
+|                 StdQ1Vals |            73.6 |
+|                 MaxQ1Vals |             353 |
+|                 MinQ1Vals |             -60 |
+|             AverageLossQ1 |            1.08 |
+|                 StdLossQ1 |            2.43 |
+|              AverageLogPi |           0.995 |
+|                  StdLogPi |            2.55 |
+|                  MaxLogPi |            25.4 |
+|                  MinLogPi |           -14.1 |
+|                    LossPi |            -109 |
+|              AverageAlpha |           0.138 |
+|                  StdAlpha |         0.00612 |
+|                  MaxAlpha |            0.15 |
+|                  MinAlpha |            0.13 |
+|                 LossAlpha |        -0.00959 |
+|            AveragePreTanh |           0.937 |
+|                StdPreTanh |           0.758 |
+|                MaxPreTanh |             8.4 |
+|                MinPreTanh |        1.58e-06 |
+|        DynPIToD/ScoreMean |             919 |
+|         DynPIToD/ScoreMin |            45.7 |
+|         DynPIToD/ScoreMax |        6.25e+03 |
+|         DynPIToD/ScoreStd |        1.35e+03 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              25 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           6e+04 |
+|      DynPIToD/GroupAgeMax |         1.2e+05 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             284 |
+|               StdMCDisRet |            66.2 |
+|               MaxMCDisRet |             334 |
+|               MinMCDisRet |            4.76 |
+|        AverageMCDisRetEnt |             285 |
+|            StdMCDisRetEnt |            67.1 |
+|            MaxMCDisRetEnt |             338 |
+|            MinMCDisRetEnt |            4.76 |
+|              AverageQPred |             293 |
+|                  StdQPred |            60.7 |
+|                  MaxQPred |             331 |
+|                  MinQPred |           -5.73 |
+|              AverageQBias |            8.39 |
+|                  StdQBias |            15.1 |
+|                  MaxQBias |            51.2 |
+|                  MinQBias |           -15.5 |
+|           AverageQBiasAbs |            12.5 |
+|               StdQBiasAbs |            11.9 |
+|               MaxQBiasAbs |            51.2 |
+|               MinQBiasAbs |         0.00439 |
+|          AverageNormQBias |          0.0643 |
+|              StdNormQBias |           0.105 |
+|              MaxNormQBias |            1.11 |
+|              MinNormQBias |        1.47e-05 |
+|           AverageQBiasSqr |             297 |
+|               StdQBiasSqr |             515 |
+|               MaxQBiasSqr |        2.62e+03 |
+|               MinQBiasSqr |        1.92e-05 |
+|       AverageNormQBiasSqr |            1.66 |
+|           StdNormQBiasSqr |            3.88 |
+|           MaxNormQBiasSqr |            30.8 |
+|           MinNormQBiasSqr |        6.43e-08 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              25 |
+|         TotalEnvInteracts |         1.3e+05 |
+|                      Time |        2.04e+04 |
+|                       SPS |            6.38 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.81e+03 |
+|                  StdEpRet |        1.15e+03 |
+|                  MaxEpRet |        3.23e+03 |
+|                  MinEpRet |              20 |
+|                     EpLen |             556 |
+|          AverageTestEpRet |        3.25e+03 |
+|              StdTestEpRet |            10.4 |
+|              MaxTestEpRet |        3.26e+03 |
+|              MinTestEpRet |        3.23e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             277 |
+|                 StdQ1Vals |            74.4 |
+|                 MaxQ1Vals |             354 |
+|                 MinQ1Vals |           -56.2 |
+|             AverageLossQ1 |           0.836 |
+|                 StdLossQ1 |            1.42 |
+|              AverageLogPi |           0.986 |
+|                  StdLogPi |            2.53 |
+|                  MaxLogPi |            26.9 |
+|                  MinLogPi |           -12.6 |
+|                    LossPi |           -89.8 |
+|              AverageAlpha |           0.129 |
+|                  StdAlpha |         0.00786 |
+|                  MaxAlpha |           0.138 |
+|                  MinAlpha |           0.114 |
+|                 LossAlpha |         -0.0286 |
+|            AveragePreTanh |           0.921 |
+|                StdPreTanh |           0.755 |
+|                MaxPreTanh |            8.32 |
+|                MinPreTanh |        1.19e-07 |
+|        DynPIToD/ScoreMean |             765 |
+|         DynPIToD/ScoreMin |            18.4 |
+|         DynPIToD/ScoreMax |         3.8e+03 |
+|         DynPIToD/ScoreStd |             825 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              25 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           6e+04 |
+|      DynPIToD/GroupAgeMax |         1.2e+05 |
+|     DynPIToD/NumRefreshed |              16 |
+| DynPIToD/RefreshWallclock |           0.788 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             298 |
+|               StdMCDisRet |            65.8 |
+|               MaxMCDisRet |             340 |
+|               MinMCDisRet |            1.36 |
+|        AverageMCDisRetEnt |             301 |
+|            StdMCDisRetEnt |            67.6 |
+|            MaxMCDisRetEnt |             345 |
+|            MinMCDisRetEnt |            1.36 |
+|              AverageQPred |             310 |
+|                  StdQPred |            45.5 |
+|                  MaxQPred |             334 |
+|                  MinQPred |              16 |
+|              AverageQBias |            8.59 |
+|                  StdQBias |            39.5 |
+|                  MaxQBias |             278 |
+|                  MinQBias |           -15.1 |
+|           AverageQBiasAbs |            19.5 |
+|               StdQBiasAbs |            35.4 |
+|               MaxQBiasAbs |             278 |
+|               MinQBiasAbs |          0.0106 |
+|          AverageNormQBias |           0.445 |
+|              StdNormQBias |            2.93 |
+|              MaxNormQBias |            27.8 |
+|              MinNormQBias |        3.22e-05 |
+|           AverageQBiasSqr |        1.63e+03 |
+|               StdQBiasSqr |        8.93e+03 |
+|               MaxQBiasSqr |        7.75e+04 |
+|               MinQBiasSqr |        0.000113 |
+|       AverageNormQBiasSqr |             102 |
+|           StdNormQBiasSqr |             780 |
+|           MaxNormQBiasSqr |        7.75e+03 |
+|           MinNormQBiasSqr |        3.42e-07 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              26 |
+|         TotalEnvInteracts |        1.35e+05 |
+|                      Time |        2.07e+04 |
+|                       SPS |            6.53 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        2.19e+03 |
+|                  StdEpRet |             919 |
+|                  MaxEpRet |        3.23e+03 |
+|                  MinEpRet |        1.05e+03 |
+|                     EpLen |             669 |
+|          AverageTestEpRet |        3.25e+03 |
+|              StdTestEpRet |            1.24 |
+|              MaxTestEpRet |        3.26e+03 |
+|              MinTestEpRet |        3.25e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             283 |
+|                 StdQ1Vals |            73.5 |
+|                 MaxQ1Vals |             352 |
+|                 MinQ1Vals |           -77.9 |
+|             AverageLossQ1 |           0.919 |
+|                 StdLossQ1 |            2.76 |
+|              AverageLogPi |               1 |
+|                  StdLogPi |            2.55 |
+|                  MaxLogPi |            27.5 |
+|                  MinLogPi |           -13.1 |
+|                    LossPi |           -91.2 |
+|              AverageAlpha |            0.12 |
+|                  StdAlpha |         0.00528 |
+|                  MaxAlpha |           0.129 |
+|                  MinAlpha |           0.113 |
+|                 LossAlpha |         0.00161 |
+|            AveragePreTanh |           0.913 |
+|                StdPreTanh |           0.754 |
+|                MaxPreTanh |            8.35 |
+|                MinPreTanh |        1.49e-07 |
+|        DynPIToD/ScoreMean |             754 |
+|         DynPIToD/ScoreMin |            18.4 |
+|         DynPIToD/ScoreMax |         3.8e+03 |
+|         DynPIToD/ScoreStd |             797 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              27 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         6.5e+04 |
+|      DynPIToD/GroupAgeMax |         1.3e+05 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             324 |
+|               StdMCDisRet |            17.4 |
+|               MaxMCDisRet |             342 |
+|               MinMCDisRet |             251 |
+|        AverageMCDisRetEnt |             331 |
+|            StdMCDisRetEnt |            16.8 |
+|            MaxMCDisRetEnt |             350 |
+|            MinMCDisRetEnt |             263 |
+|              AverageQPred |             325 |
+|                  StdQPred |            15.7 |
+|                  MaxQPred |             337 |
+|                  MinQPred |             259 |
+|              AverageQBias |           -5.76 |
+|                  StdQBias |            5.89 |
+|                  MaxQBias |            18.4 |
+|                  MinQBias |           -15.5 |
+|           AverageQBiasAbs |             7.4 |
+|               StdQBiasAbs |            3.63 |
+|               MaxQBiasAbs |            18.4 |
+|               MinQBiasAbs |          0.0183 |
+|          AverageNormQBias |          0.0222 |
+|              StdNormQBias |          0.0106 |
+|              MaxNormQBias |          0.0583 |
+|              MinNormQBias |        5.47e-05 |
+|           AverageQBiasSqr |            67.9 |
+|               StdQBiasSqr |            56.6 |
+|               MaxQBiasSqr |             340 |
+|               MinQBiasSqr |        0.000335 |
+|       AverageNormQBiasSqr |           0.202 |
+|           StdNormQBiasSqr |           0.167 |
+|           MaxNormQBiasSqr |            1.07 |
+|           MinNormQBiasSqr |           1e-06 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              27 |
+|         TotalEnvInteracts |         1.4e+05 |
+|                      Time |        2.09e+04 |
+|                       SPS |            6.68 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.47e+03 |
+|                  StdEpRet |             693 |
+|                  MaxEpRet |        3.36e+03 |
+|                  MinEpRet |             944 |
+|                     EpLen |             436 |
+|          AverageTestEpRet |        3.24e+03 |
+|              StdTestEpRet |            3.59 |
+|              MaxTestEpRet |        3.25e+03 |
+|              MinTestEpRet |        3.24e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             282 |
+|                 StdQ1Vals |            73.1 |
+|                 MaxQ1Vals |             350 |
+|                 MinQ1Vals |           -61.2 |
+|             AverageLossQ1 |           0.826 |
+|                 StdLossQ1 |            1.56 |
+|              AverageLogPi |            1.01 |
+|                  StdLogPi |            2.59 |
+|                  MaxLogPi |            25.8 |
+|                  MinLogPi |           -12.8 |
+|                    LossPi |           -94.3 |
+|              AverageAlpha |           0.129 |
+|                  StdAlpha |         0.00388 |
+|                  MaxAlpha |           0.135 |
+|                  MinAlpha |           0.113 |
+|                 LossAlpha |          0.0273 |
+|            AveragePreTanh |           0.931 |
+|                StdPreTanh |           0.757 |
+|                MaxPreTanh |              12 |
+|                MinPreTanh |        5.96e-08 |
+|        DynPIToD/ScoreMean |             702 |
+|         DynPIToD/ScoreMin |            22.3 |
+|         DynPIToD/ScoreMax |        4.19e+03 |
+|         DynPIToD/ScoreStd |             935 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              27 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |         6.5e+04 |
+|      DynPIToD/GroupAgeMax |         1.3e+05 |
+|     DynPIToD/NumRefreshed |              16 |
+| DynPIToD/RefreshWallclock |            0.95 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             289 |
+|               StdMCDisRet |            60.1 |
+|               MaxMCDisRet |             336 |
+|               MinMCDisRet |             4.7 |
+|        AverageMCDisRetEnt |             292 |
+|            StdMCDisRetEnt |            63.3 |
+|            MaxMCDisRetEnt |             347 |
+|            MinMCDisRetEnt |             4.7 |
+|              AverageQPred |             306 |
+|                  StdQPred |            50.5 |
+|                  MaxQPred |             338 |
+|                  MinQPred |               5 |
+|              AverageQBias |            14.1 |
+|                  StdQBias |              25 |
+|                  MaxQBias |            82.9 |
+|                  MinQBias |           -13.5 |
+|           AverageQBiasAbs |              20 |
+|               StdQBiasAbs |            20.6 |
+|               MaxQBiasAbs |            82.9 |
+|               MinQBiasAbs |           0.031 |
+|          AverageNormQBias |          0.0918 |
+|              StdNormQBias |           0.122 |
+|              MaxNormQBias |           0.579 |
+|              MinNormQBias |        9.38e-05 |
+|           AverageQBiasSqr |             825 |
+|               StdQBiasSqr |        1.45e+03 |
+|               MaxQBiasSqr |        6.87e+03 |
+|               MinQBiasSqr |        0.000964 |
+|       AverageNormQBiasSqr |            3.99 |
+|           StdNormQBiasSqr |            7.46 |
+|           MaxNormQBiasSqr |              37 |
+|           MinNormQBiasSqr |        2.91e-06 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              28 |
+|         TotalEnvInteracts |        1.45e+05 |
+|                      Time |        2.12e+04 |
+|                       SPS |            6.83 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.46e+03 |
+|                  StdEpRet |             615 |
+|                  MaxEpRet |        3.23e+03 |
+|                  MinEpRet |        1.03e+03 |
+|                     EpLen |             431 |
+|          AverageTestEpRet |        3.24e+03 |
+|              StdTestEpRet |            1.81 |
+|              MaxTestEpRet |        3.24e+03 |
+|              MinTestEpRet |        3.24e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             280 |
+|                 StdQ1Vals |            73.8 |
+|                 MaxQ1Vals |             350 |
+|                 MinQ1Vals |           -63.3 |
+|             AverageLossQ1 |           0.803 |
+|                 StdLossQ1 |           0.919 |
+|              AverageLogPi |           0.995 |
+|                  StdLogPi |            2.58 |
+|                  MaxLogPi |            26.8 |
+|                  MinLogPi |           -12.1 |
+|                    LossPi |           -94.4 |
+|              AverageAlpha |           0.128 |
+|                  StdAlpha |         0.00651 |
+|                  MaxAlpha |           0.136 |
+|                  MinAlpha |           0.117 |
+|                 LossAlpha |          -0.011 |
+|            AveragePreTanh |           0.925 |
+|                StdPreTanh |           0.753 |
+|                MaxPreTanh |            8.57 |
+|                MinPreTanh |        2.38e-07 |
+|        DynPIToD/ScoreMean |             672 |
+|         DynPIToD/ScoreMin |            22.3 |
+|         DynPIToD/ScoreMax |        4.19e+03 |
+|         DynPIToD/ScoreStd |             909 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              29 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           7e+04 |
+|      DynPIToD/GroupAgeMax |         1.4e+05 |
+|     DynPIToD/NumRefreshed |               0 |
+| DynPIToD/RefreshWallclock |               0 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             306 |
+|               StdMCDisRet |              43 |
+|               MaxMCDisRet |             344 |
+|               MinMCDisRet |             101 |
+|        AverageMCDisRetEnt |             310 |
+|            StdMCDisRetEnt |            45.2 |
+|            MaxMCDisRetEnt |             352 |
+|            MinMCDisRetEnt |            97.4 |
+|              AverageQPred |             312 |
+|                  StdQPred |            35.1 |
+|                  MaxQPred |             336 |
+|                  MinQPred |             116 |
+|              AverageQBias |            2.02 |
+|                  StdQBias |            15.9 |
+|                  MaxQBias |            52.7 |
+|                  MinQBias |           -16.3 |
+|           AverageQBiasAbs |            12.6 |
+|               StdQBiasAbs |            9.86 |
+|               MaxQBiasAbs |            52.7 |
+|               MinQBiasAbs |          0.0164 |
+|          AverageNormQBias |          0.0464 |
+|              StdNormQBias |          0.0489 |
+|              MaxNormQBias |           0.323 |
+|              MinNormQBias |        4.92e-05 |
+|           AverageQBiasSqr |             256 |
+|               StdQBiasSqr |             405 |
+|               MaxQBiasSqr |        2.78e+03 |
+|               MinQBiasSqr |         0.00027 |
+|       AverageNormQBiasSqr |            1.04 |
+|           StdNormQBiasSqr |            1.98 |
+|           MaxNormQBiasSqr |            17.1 |
+|           MinNormQBiasSqr |        8.08e-07 |
+-----------------------------------------------
+-----------------------------------------------
+|                     Epoch |              29 |
+|         TotalEnvInteracts |         1.5e+05 |
+|                      Time |        2.15e+04 |
+|                       SPS |            6.98 |
+|                ReplayMode |   dynamic_pitod |
+|              AverageEpRet |        1.76e+03 |
+|                  StdEpRet |             643 |
+|                  MaxEpRet |        3.22e+03 |
+|                  MinEpRet |             943 |
+|                     EpLen |             523 |
+|          AverageTestEpRet |        3.27e+03 |
+|              StdTestEpRet |            1.63 |
+|              MaxTestEpRet |        3.27e+03 |
+|              MinTestEpRet |        3.26e+03 |
+|                 TestEpLen |           1e+03 |
+|             AverageQ1Vals |             284 |
+|                 StdQ1Vals |            72.2 |
+|                 MaxQ1Vals |             349 |
+|                 MinQ1Vals |           -49.4 |
+|             AverageLossQ1 |           0.832 |
+|                 StdLossQ1 |            1.16 |
+|              AverageLogPi |           0.988 |
+|                  StdLogPi |            2.56 |
+|                  MaxLogPi |            25.9 |
+|                  MinLogPi |           -14.5 |
+|                    LossPi |            -106 |
+|              AverageAlpha |            0.12 |
+|                  StdAlpha |         0.00803 |
+|                  MaxAlpha |           0.131 |
+|                  MinAlpha |           0.105 |
+|                 LossAlpha |         -0.0253 |
+|            AveragePreTanh |           0.923 |
+|                StdPreTanh |           0.754 |
+|                MaxPreTanh |            9.18 |
+|                MinPreTanh |               0 |
+|        DynPIToD/ScoreMean |             635 |
+|         DynPIToD/ScoreMin |            32.2 |
+|         DynPIToD/ScoreMax |        4.77e+03 |
+|         DynPIToD/ScoreStd |             901 |
+|          DynPIToD/Epsilon |          0.0001 |
+|      DynPIToD/MeanStrikes |               0 |
+|       DynPIToD/NumEvicted |               0 |
+|     DynPIToD/NewlyEvicted |               0 |
+|        DynPIToD/NumActive |              29 |
+| DynPIToD/BufferActiveFrac |               1 |
+|     DynPIToD/GroupAgeMean |           7e+04 |
+|      DynPIToD/GroupAgeMax |         1.4e+05 |
+|     DynPIToD/NumRefreshed |              16 |
+| DynPIToD/RefreshWallclock |           0.793 |
+|        DynPIToD/ScheduleK |           1e+04 |
+|        DynPIToD/ScheduleB |              16 |
+|   DynPIToD/PruningEnabled |               1 |
+|           AverageMCDisRet |             312 |
+|               StdMCDisRet |            40.9 |
+|               MaxMCDisRet |             344 |
+|               MinMCDisRet |            59.8 |
+|        AverageMCDisRetEnt |             314 |
+|            StdMCDisRetEnt |            41.9 |
+|            MaxMCDisRetEnt |             345 |
+|            MinMCDisRetEnt |              57 |
+|              AverageQPred |             312 |
+|                  StdQPred |            39.3 |
+|                  MaxQPred |             337 |
+|                  MinQPred |              60 |
+|              AverageQBias |           -2.18 |
+|                  StdQBias |            8.17 |
+|                  MaxQBias |            21.8 |
+|                  MinQBias |           -13.6 |
+|           AverageQBiasAbs |            7.15 |
+|               StdQBiasAbs |            4.51 |
+|               MaxQBiasAbs |            21.8 |
+|               MinQBiasAbs |          0.0152 |
+|          AverageNormQBias |          0.0241 |
+|              StdNormQBias |          0.0181 |
+|              MaxNormQBias |           0.128 |
+|              MinNormQBias |        5.24e-05 |
+|           AverageQBiasSqr |            71.4 |
+|               StdQBiasSqr |            75.8 |
+|               MaxQBiasSqr |             474 |
+|               MinQBiasSqr |        0.000232 |
+|       AverageNormQBiasSqr |           0.244 |
+|           StdNormQBiasSqr |           0.291 |
+|           MaxNormQBiasSqr |            2.43 |
+|           MinNormQBiasSqr |        7.98e-07 |
+-----------------------------------------------
+
+  0%|          | 0/10 [00:00<?, ?it/s]
+ 10%|█         | 1/10 [00:00<00:01,  5.20it/s]
+ 20%|██        | 2/10 [00:00<00:01,  5.72it/s]
+ 30%|███       | 3/10 [00:00<00:01,  5.94it/s]
+ 40%|████      | 4/10 [00:00<00:00,  6.04it/s]
+ 50%|█████     | 5/10 [00:00<00:00,  6.09it/s]
+ 60%|██████    | 6/10 [00:00<00:00,  6.13it/s]
+ 70%|███████   | 7/10 [00:01<00:00,  6.16it/s]
+ 80%|████████  | 8/10 [00:01<00:00,  6.17it/s]
+ 90%|█████████ | 9/10 [00:01<00:00,  6.17it/s]
+100%|██████████| 10/10 [00:01<00:00,  6.42it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 174.41it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 189.65it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 107.91it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s]
+100%|██████████| 1/1 [00:00<00:00, 108.57it/s]
+
+  0%|          | 0/302 [00:00<?, ?it/s]
+  0%|          | 1/302 [00:34<2:52:54, 34.47s/it]
+  1%|          | 2/302 [01:08<2:51:43, 34.34s/it]
+  1%|          | 3/302 [01:43<2:52:40, 34.65s/it]
+  1%|▏         | 4/302 [02:17<2:51:11, 34.47s/it]
+  2%|▏         | 5/302 [02:52<2:50:29, 34.44s/it]
+  2%|▏         | 6/302 [03:25<2:47:44, 34.00s/it]
+  2%|▏         | 7/302 [04:00<2:48:51, 34.34s/it]
+  3%|▎         | 8/302 [04:33<2:45:26, 33.76s/it]
+  3%|▎         | 9/302 [05:05<2:43:15, 33.43s/it]
+  3%|▎         | 10/302 [05:38<2:41:23, 33.16s/it]
+  4%|▎         | 11/302 [06:11<2:40:30, 33.09s/it]
+  4%|▍         | 12/302 [06:47<2:44:30, 34.04s/it]
+  4%|▍         | 13/302 [07:21<2:44:07, 34.08s/it]
+  5%|▍         | 14/302 [07:57<2:46:49, 34.76s/it]
+  5%|▍         | 15/302 [08:33<2:46:54, 34.89s/it]
+  5%|▌         | 16/302 [09:08<2:46:46, 34.99s/it]
+  6%|▌         | 17/302 [09:40<2:42:47, 34.27s/it]
+  6%|▌         | 18/302 [10:14<2:41:11, 34.06s/it]
+  6%|▋         | 19/302 [10:47<2:39:13, 33.76s/it]
+  7%|▋         | 20/302 [11:22<2:39:51, 34.01s/it]
+  7%|▋         | 21/302 [11:48<2:29:09, 31.85s/it]
+  7%|▋         | 22/302 [12:15<2:20:37, 30.14s/it]
+  8%|▊         | 23/302 [12:41<2:14:21, 28.89s/it]
+  8%|▊         | 24/302 [13:07<2:10:29, 28.16s/it]
+  8%|▊         | 25/302 [13:34<2:07:55, 27.71s/it]
+  9%|▊         | 26/302 [14:01<2:06:52, 27.58s/it]
+  9%|▉         | 27/302 [14:28<2:05:27, 27.37s/it]
+  9%|▉         | 28/302 [14:55<2:05:02, 27.38s/it]
+ 10%|▉         | 29/302 [15:23<2:05:24, 27.56s/it]
+ 10%|▉         | 30/302 [15:51<2:04:29, 27.46s/it]
+ 10%|█         | 31/302 [16:23<2:10:52, 28.98s/it]
+ 11%|█         | 32/302 [16:57<2:17:07, 30.47s/it]
+ 11%|█         | 33/302 [17:30<2:19:46, 31.18s/it]
+ 11%|█▏        | 34/302 [18:03<2:21:40, 31.72s/it]
+ 12%|█▏        | 35/302 [18:37<2:24:02, 32.37s/it]
+ 12%|█▏        | 36/302 [19:10<2:24:37, 32.62s/it]
+ 12%|█▏        | 37/302 [19:43<2:25:19, 32.90s/it]
+ 13%|█▎        | 38/302 [20:16<2:24:17, 32.79s/it]
+ 13%|█▎        | 39/302 [20:48<2:23:08, 32.66s/it]
+ 13%|█▎        | 40/302 [21:16<2:16:18, 31.21s/it]
+ 14%|█▎        | 41/302 [21:44<2:11:39, 30.27s/it]
+ 14%|█▍        | 42/302 [22:12<2:07:23, 29.40s/it]
+ 14%|█▍        | 43/302 [22:38<2:03:00, 28.50s/it]
+ 15%|█▍        | 44/302 [23:05<2:00:01, 27.91s/it]
+ 15%|█▍        | 45/302 [23:30<1:56:34, 27.22s/it]
+ 15%|█▌        | 46/302 [23:55<1:53:37, 26.63s/it]
+ 16%|█▌        | 47/302 [24:22<1:52:41, 26.51s/it]
+ 16%|█▌        | 48/302 [24:47<1:50:50, 26.18s/it]
+ 16%|█▌        | 49/302 [25:12<1:48:46, 25.80s/it]
+ 17%|█▋        | 50/302 [25:39<1:49:28, 26.07s/it]
+ 17%|█▋        | 51/302 [26:05<1:49:41, 26.22s/it]
+ 17%|█▋        | 52/302 [26:32<1:50:05, 26.42s/it]
+ 18%|█▊        | 53/302 [26:59<1:50:30, 26.63s/it]
+ 18%|█▊        | 54/302 [27:26<1:50:30, 26.74s/it]
+ 18%|█▊        | 55/302 [27:54<1:51:23, 27.06s/it]
+ 19%|█▊        | 56/302 [28:21<1:51:02, 27.08s/it]
+ 19%|█▉        | 57/302 [28:50<1:52:31, 27.56s/it]
+ 19%|█▉        | 58/302 [29:19<1:54:14, 28.09s/it]
+ 20%|█▉        | 59/302 [29:47<1:52:59, 27.90s/it]
+ 20%|█▉        | 60/302 [30:24<2:04:24, 30.85s/it]
+ 20%|██        | 61/302 [31:03<2:13:16, 33.18s/it]
+ 21%|██        | 62/302 [31:42<2:19:22, 34.84s/it]
+ 21%|██        | 63/302 [32:21<2:24:02, 36.16s/it]
+ 21%|██        | 64/302 [33:00<2:26:26, 36.92s/it]
+ 22%|██▏       | 65/302 [33:37<2:26:52, 37.18s/it]
+ 22%|██▏       | 66/302 [34:16<2:28:19, 37.71s/it]
+ 22%|██▏       | 67/302 [34:54<2:28:00, 37.79s/it]
+ 23%|██▎       | 68/302 [35:32<2:27:48, 37.90s/it]
+ 23%|██▎       | 69/302 [35:34<1:44:44, 26.97s/it]
+ 23%|██▎       | 70/302 [35:35<1:14:45, 19.33s/it]
+ 24%|██▎       | 71/302 [35:37<53:53, 14.00s/it]  
+ 24%|██▍       | 72/302 [35:39<39:49, 10.39s/it]
+ 24%|██▍       | 73/302 [35:43<31:56,  8.37s/it]
+ 25%|██▍       | 74/302 [35:44<24:17,  6.39s/it]
+ 25%|██▍       | 75/302 [35:46<19:11,  5.07s/it]
+ 25%|██▌       | 76/302 [35:48<15:06,  4.01s/it]
+ 25%|██▌       | 77/302 [35:49<12:11,  3.25s/it]
+ 26%|██▌       | 78/302 [35:51<10:13,  2.74s/it]
+ 26%|██▌       | 79/302 [36:23<42:23, 11.41s/it]
+ 26%|██▋       | 80/302 [36:55<1:05:45, 17.77s/it]
+ 27%|██▋       | 81/302 [37:27<1:20:48, 21.94s/it]
+ 27%|██▋       | 82/302 [37:57<1:28:53, 24.25s/it]
+ 27%|██▋       | 83/302 [38:25<1:33:09, 25.52s/it]
+ 28%|██▊       | 84/302 [38:54<1:36:06, 26.45s/it]
+ 28%|██▊       | 85/302 [39:25<1:41:18, 28.01s/it]
+ 28%|██▊       | 86/302 [39:56<1:43:39, 28.79s/it]
+ 29%|██▉       | 87/302 [40:26<1:44:50, 29.26s/it]
+ 29%|██▉       | 88/302 [40:54<1:42:41, 28.79s/it]
+ 29%|██▉       | 89/302 [41:09<1:27:05, 24.53s/it]
+ 30%|██▉       | 90/302 [41:23<1:16:03, 21.52s/it]
+ 30%|███       | 91/302 [41:38<1:08:53, 19.59s/it]
+ 30%|███       | 92/302 [41:54<1:04:49, 18.52s/it]
+ 31%|███       | 93/302 [42:10<1:01:46, 17.73s/it]
+ 31%|███       | 94/302 [42:27<1:00:19, 17.40s/it]
+ 31%|███▏      | 95/302 [42:43<58:41, 17.01s/it]  
+ 32%|███▏      | 96/302 [42:59<57:32, 16.76s/it]
+ 32%|███▏      | 97/302 [43:14<55:56, 16.37s/it]
+ 32%|███▏      | 98/302 [43:30<55:01, 16.19s/it]
+ 33%|███▎      | 99/302 [43:57<1:05:36, 19.39s/it]
+ 33%|███▎      | 100/302 [44:24<1:13:18, 21.78s/it]
+ 33%|███▎      | 101/302 [44:53<1:19:40, 23.78s/it]
+ 34%|███▍      | 102/302 [45:20<1:22:23, 24.72s/it]
+ 34%|███▍      | 103/302 [45:47<1:24:43, 25.54s/it]
+ 34%|███▍      | 104/302 [46:15<1:26:12, 26.12s/it]
+ 35%|███▍      | 105/302 [46:40<1:25:21, 26.00s/it]
+ 35%|███▌      | 106/302 [47:07<1:25:07, 26.06s/it]
+ 35%|███▌      | 107/302 [47:33<1:25:22, 26.27s/it]
+ 36%|███▌      | 108/302 [48:04<1:29:16, 27.61s/it]
+ 36%|███▌      | 109/302 [48:34<1:31:07, 28.33s/it]
+ 36%|███▋      | 110/302 [49:04<1:32:10, 28.80s/it]
+ 37%|███▋      | 111/302 [49:34<1:33:03, 29.23s/it]
+ 37%|███▋      | 112/302 [50:05<1:34:06, 29.72s/it]
+ 37%|███▋      | 113/302 [50:35<1:33:43, 29.75s/it]
+ 38%|███▊      | 114/302 [51:05<1:33:15, 29.77s/it]
+ 38%|███▊      | 115/302 [51:35<1:32:48, 29.78s/it]
+ 38%|███▊      | 116/302 [52:05<1:32:37, 29.88s/it]
+ 39%|███▊      | 117/302 [52:35<1:32:53, 30.13s/it]
+ 39%|███▉      | 118/302 [52:55<1:22:20, 26.85s/it]
+ 39%|███▉      | 119/302 [53:17<1:17:44, 25.49s/it]
+ 40%|███▉      | 120/302 [53:37<1:12:01, 23.74s/it]
+ 40%|████      | 121/302 [53:57<1:08:51, 22.82s/it]
+ 40%|████      | 122/302 [54:16<1:05:15, 21.75s/it]
+ 41%|████      | 123/302 [54:38<1:04:40, 21.68s/it]
+ 41%|████      | 124/302 [54:58<1:03:10, 21.29s/it]
+ 41%|████▏     | 125/302 [55:21<1:03:45, 21.61s/it]
+ 42%|████▏     | 126/302 [55:41<1:01:57, 21.12s/it]
+ 42%|████▏     | 127/302 [56:03<1:02:48, 21.53s/it]
+ 42%|████▏     | 128/302 [56:34<1:10:47, 24.41s/it]
+ 43%|████▎     | 129/302 [57:06<1:16:51, 26.65s/it]
+ 43%|████▎     | 130/302 [57:38<1:20:29, 28.08s/it]
+ 43%|████▎     | 131/302 [58:09<1:22:44, 29.03s/it]
+ 44%|████▎     | 132/302 [58:41<1:24:32, 29.84s/it]
+ 44%|████▍     | 133/302 [59:12<1:25:29, 30.35s/it]
+ 44%|████▍     | 134/302 [59:43<1:25:43, 30.62s/it]
+ 45%|████▍     | 135/302 [1:00:15<1:25:46, 30.82s/it]
+ 45%|████▌     | 136/302 [1:00:46<1:25:49, 31.02s/it]
+ 45%|████▌     | 137/302 [1:01:26<1:32:57, 33.80s/it]
+ 46%|████▌     | 138/302 [1:02:07<1:37:40, 35.73s/it]
+ 46%|████▌     | 139/302 [1:02:49<1:42:14, 37.63s/it]
+ 46%|████▋     | 140/302 [1:03:31<1:45:35, 39.11s/it]
+ 47%|████▋     | 141/302 [1:04:12<1:46:05, 39.54s/it]
+ 47%|████▋     | 142/302 [1:04:53<1:47:05, 40.16s/it]
+ 47%|████▋     | 143/302 [1:05:34<1:47:01, 40.39s/it]
+ 48%|████▊     | 144/302 [1:06:15<1:46:36, 40.48s/it]
+ 48%|████▊     | 145/302 [1:06:57<1:46:41, 40.78s/it]
+ 48%|████▊     | 146/302 [1:07:38<1:46:49, 41.08s/it]
+ 49%|████▊     | 147/302 [1:08:13<1:40:56, 39.08s/it]
+ 49%|████▉     | 148/302 [1:08:45<1:34:45, 36.92s/it]
+ 49%|████▉     | 149/302 [1:09:17<1:30:23, 35.45s/it]
+ 50%|████▉     | 150/302 [1:09:50<1:28:29, 34.93s/it]
+ 50%|█████     | 151/302 [1:10:23<1:25:52, 34.12s/it]
+ 50%|█████     | 152/302 [1:10:57<1:25:19, 34.13s/it]
+ 51%|█████     | 153/302 [1:11:30<1:23:51, 33.77s/it]
+ 51%|█████     | 154/302 [1:12:03<1:23:13, 33.74s/it]
+ 51%|█████▏    | 155/302 [1:12:37<1:22:47, 33.79s/it]
+ 52%|█████▏    | 156/302 [1:13:11<1:22:14, 33.80s/it]
+ 52%|█████▏    | 157/302 [1:13:34<1:13:48, 30.54s/it]
+ 52%|█████▏    | 158/302 [1:13:57<1:07:52, 28.28s/it]
+ 53%|█████▎    | 159/302 [1:14:20<1:03:44, 26.74s/it]
+ 53%|█████▎    | 160/302 [1:14:43<1:00:46, 25.68s/it]
+ 53%|█████▎    | 161/302 [1:15:06<58:00, 24.68s/it]  
+ 54%|█████▎    | 162/302 [1:15:29<56:38, 24.27s/it]
+ 54%|█████▍    | 163/302 [1:15:52<55:37, 24.01s/it]
+ 54%|█████▍    | 164/302 [1:16:16<54:39, 23.76s/it]
+ 55%|█████▍    | 165/302 [1:16:39<53:49, 23.57s/it]
+ 55%|█████▍    | 166/302 [1:17:03<53:39, 23.67s/it]
+ 55%|█████▌    | 167/302 [1:17:47<1:07:16, 29.90s/it]
+ 56%|█████▌    | 168/302 [1:18:33<1:17:22, 34.65s/it]
+ 56%|█████▌    | 169/302 [1:19:18<1:23:28, 37.66s/it]
+ 56%|█████▋    | 170/302 [1:20:02<1:27:39, 39.85s/it]
+ 57%|█████▋    | 171/302 [1:20:48<1:31:00, 41.68s/it]
+ 57%|█████▋    | 172/302 [1:21:34<1:32:55, 42.89s/it]
+ 57%|█████▋    | 173/302 [1:22:20<1:33:52, 43.66s/it]
+ 58%|█████▊    | 174/302 [1:23:06<1:34:45, 44.41s/it]
+ 58%|█████▊    | 175/302 [1:23:51<1:34:42, 44.75s/it]
+ 58%|█████▊    | 176/302 [1:23:57<1:09:08, 32.93s/it]
+ 59%|█████▊    | 177/302 [1:24:02<51:11, 24.57s/it]  
+ 59%|█████▉    | 178/302 [1:24:06<38:26, 18.60s/it]
+ 59%|█████▉    | 179/302 [1:24:12<30:09, 14.71s/it]
+ 60%|█████▉    | 180/302 [1:24:17<23:48, 11.71s/it]
+ 60%|█████▉    | 181/302 [1:24:21<19:18,  9.57s/it]
+ 60%|██████    | 182/302 [1:24:27<16:43,  8.36s/it]
+ 61%|██████    | 183/302 [1:24:31<14:19,  7.22s/it]
+ 61%|██████    | 184/302 [1:24:36<12:44,  6.48s/it]
+ 61%|██████▏   | 185/302 [1:24:41<11:57,  6.13s/it]
+ 62%|██████▏   | 186/302 [1:25:13<26:51, 13.89s/it]
+ 62%|██████▏   | 187/302 [1:25:46<37:20, 19.49s/it]
+ 62%|██████▏   | 188/302 [1:26:19<44:28, 23.41s/it]
+ 63%|██████▎   | 189/302 [1:26:50<48:53, 25.96s/it]
+ 63%|██████▎   | 190/302 [1:27:24<52:24, 28.08s/it]
+ 63%|██████▎   | 191/302 [1:27:56<54:09, 29.28s/it]
+ 64%|██████▎   | 192/302 [1:28:28<55:30, 30.28s/it]
+ 64%|██████▍   | 193/302 [1:29:01<56:25, 31.06s/it]
+ 64%|██████▍   | 194/302 [1:29:33<56:32, 31.42s/it]
+ 65%|██████▍   | 195/302 [1:30:07<57:08, 32.04s/it]
+ 65%|██████▍   | 196/302 [1:30:30<51:56, 29.40s/it]
+ 65%|██████▌   | 197/302 [1:30:54<48:23, 27.65s/it]
+ 66%|██████▌   | 198/302 [1:31:17<45:52, 26.46s/it]
+ 66%|██████▌   | 199/302 [1:31:41<43:57, 25.61s/it]
+ 66%|██████▌   | 200/302 [1:32:04<42:16, 24.87s/it]
+ 67%|██████▋   | 201/302 [1:32:28<41:28, 24.64s/it]
+ 67%|██████▋   | 202/302 [1:32:52<40:41, 24.42s/it]
+ 67%|██████▋   | 203/302 [1:33:16<40:02, 24.26s/it]
+ 68%|██████▊   | 204/302 [1:33:39<39:06, 23.94s/it]
+ 68%|██████▊   | 205/302 [1:34:11<42:22, 26.21s/it]
+ 68%|██████▊   | 206/302 [1:34:41<43:57, 27.48s/it]
+ 69%|██████▊   | 207/302 [1:35:11<44:49, 28.31s/it]
+ 69%|██████▉   | 208/302 [1:35:41<45:00, 28.72s/it]
+ 69%|██████▉   | 209/302 [1:36:12<45:24, 29.29s/it]
+ 70%|██████▉   | 210/302 [1:36:42<45:23, 29.61s/it]
+ 70%|██████▉   | 211/302 [1:37:12<45:06, 29.74s/it]
+ 70%|███████   | 212/302 [1:37:43<44:56, 29.96s/it]
+ 71%|███████   | 213/302 [1:38:13<44:42, 30.14s/it]
+ 71%|███████   | 214/302 [1:38:44<44:30, 30.34s/it]
+ 71%|███████   | 215/302 [1:39:16<44:32, 30.72s/it]
+ 72%|███████▏  | 216/302 [1:39:47<44:29, 31.04s/it]
+ 72%|███████▏  | 217/302 [1:40:20<44:41, 31.55s/it]
+ 72%|███████▏  | 218/302 [1:40:52<44:18, 31.64s/it]
+ 73%|███████▎  | 219/302 [1:41:24<44:03, 31.84s/it]
+ 73%|███████▎  | 220/302 [1:41:57<44:01, 32.22s/it]
+ 73%|███████▎  | 221/302 [1:42:29<43:16, 32.06s/it]
+ 74%|███████▎  | 222/302 [1:43:01<42:36, 31.96s/it]
+ 74%|███████▍  | 223/302 [1:43:33<42:19, 32.14s/it]
+ 74%|███████▍  | 224/302 [1:44:05<41:38, 32.03s/it]
+ 75%|███████▍  | 225/302 [1:44:37<40:53, 31.87s/it]
+ 75%|███████▍  | 226/302 [1:45:09<40:40, 32.11s/it]
+ 75%|███████▌  | 227/302 [1:45:40<39:42, 31.77s/it]
+ 75%|███████▌  | 228/302 [1:46:11<38:56, 31.57s/it]
+ 76%|███████▌  | 229/302 [1:46:43<38:27, 31.61s/it]
+ 76%|███████▌  | 230/302 [1:47:14<37:38, 31.37s/it]
+ 76%|███████▋  | 231/302 [1:47:45<36:56, 31.22s/it]
+ 77%|███████▋  | 232/302 [1:48:17<36:39, 31.43s/it]
+ 77%|███████▋  | 233/302 [1:48:48<36:05, 31.39s/it]
+ 77%|███████▋  | 234/302 [1:49:20<35:40, 31.48s/it]
+ 78%|███████▊  | 235/302 [1:49:35<29:54, 26.78s/it]
+ 78%|███████▊  | 236/302 [1:49:51<25:40, 23.34s/it]
+ 78%|███████▊  | 237/302 [1:50:05<22:25, 20.70s/it]
+ 79%|███████▉  | 238/302 [1:50:19<19:57, 18.71s/it]
+ 79%|███████▉  | 239/302 [1:50:34<18:13, 17.35s/it]
+ 79%|███████▉  | 240/302 [1:50:48<16:55, 16.37s/it]
+ 80%|███████▉  | 241/302 [1:51:02<15:59, 15.73s/it]
+ 80%|████████  | 242/302 [1:51:16<15:13, 15.22s/it]
+ 80%|████████  | 243/302 [1:51:30<14:36, 14.85s/it]
+ 81%|████████  | 244/302 [1:52:16<23:20, 24.15s/it]
+ 81%|████████  | 245/302 [1:53:02<29:17, 30.83s/it]
+ 81%|████████▏ | 246/302 [1:53:48<33:06, 35.48s/it]
+ 82%|████████▏ | 247/302 [1:54:34<35:20, 38.56s/it]
+ 82%|████████▏ | 248/302 [1:55:21<36:54, 41.01s/it]
+ 82%|████████▏ | 249/302 [1:56:06<37:24, 42.34s/it]
+ 83%|████████▎ | 250/302 [1:56:52<37:27, 43.22s/it]
+ 83%|████████▎ | 251/302 [1:57:38<37:35, 44.23s/it]
+ 83%|████████▎ | 252/302 [1:58:25<37:26, 44.93s/it]
+ 84%|████████▍ | 253/302 [1:59:11<37:01, 45.34s/it]
+ 84%|████████▍ | 254/302 [1:59:34<30:52, 38.59s/it]
+ 84%|████████▍ | 255/302 [1:59:59<27:05, 34.59s/it]
+ 85%|████████▍ | 256/302 [2:00:24<24:19, 31.74s/it]
+ 85%|████████▌ | 257/302 [2:00:49<22:13, 29.64s/it]
+ 85%|████████▌ | 258/302 [2:01:12<20:20, 27.75s/it]
+ 86%|████████▌ | 259/302 [2:01:38<19:19, 26.96s/it]
+ 86%|████████▌ | 260/302 [2:02:02<18:15, 26.08s/it]
+ 86%|████████▋ | 261/302 [2:02:26<17:31, 25.66s/it]
+ 87%|████████▋ | 262/302 [2:02:51<16:53, 25.33s/it]
